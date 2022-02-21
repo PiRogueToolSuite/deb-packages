@@ -1,0 +1,13 @@
+Source: pirogue-flow-inspector
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-flow-inspector
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, nfstream, influxdb, python3-influxdb, python3-pip
+Description: Provision PiRogue DPI

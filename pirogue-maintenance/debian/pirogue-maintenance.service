@@ -1,0 +1,7 @@
+[Unit]
+Description=Run PiRogue maintenance
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh /usr/share/pirogue/pirogue-maintenance.sh
+ExecStop=

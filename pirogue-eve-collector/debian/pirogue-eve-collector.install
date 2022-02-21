@@ -1,0 +1,2 @@
+src/pirogue-eve-collector.py usr/share/pirogue
+src/suricata.yml etc/suricata
