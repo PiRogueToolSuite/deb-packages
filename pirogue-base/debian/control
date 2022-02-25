@@ -1,0 +1,14 @@
+Source: pirogue-base
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-base
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, pirogue-dashboard, pirogue-eve-collector, pirogue-flow-inspector, pirogue-maintenance, pirogue-screen-st7789-240x240
+Description: Install all PiRogue packages
+
