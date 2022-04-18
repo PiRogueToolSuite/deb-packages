@@ -8,6 +8,6 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-maintenance
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, suricata
+Architecture: all
+Depends: ${misc:Depends}, suricata
 Description: Provision PiRogue maintenance scripts

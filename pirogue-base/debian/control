@@ -8,7 +8,7 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-base
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, pirogue-dashboard, pirogue-eve-collector, pirogue-flow-inspector, pirogue-maintenance, pirogue-screen-st7789-240x240
+Architecture: all
+Depends: ${misc:Depends}, pirogue-dashboard, pirogue-eve-collector, pirogue-flow-inspector, pirogue-maintenance, pirogue-screen-st7789-240x240
 Description: Install all PiRogue packages
 

@@ -8,6 +8,6 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-eve-collector
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, suricata, python3-influxdb
+Architecture: all
+Depends: ${misc:Depends}, suricata, python3-influxdb
 Description: Provision PiRogue Suricata alarm collector

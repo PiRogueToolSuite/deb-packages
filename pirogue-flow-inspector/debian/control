@@ -8,6 +8,6 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-flow-inspector
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, influxdb, python3-influxdb, python3-pip
+Architecture: all
+Depends: ${misc:Depends}, influxdb, python3-influxdb, python3-pip
 Description: Provision PiRogue DPI

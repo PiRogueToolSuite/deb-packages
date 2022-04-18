@@ -3,17 +3,14 @@ Upstream-Name: pirogue-flow-inspector
 Upstream-Contact: U+039b hello@pts-project.org
 Source: https://github.com/PiRogueToolSuite/deb-packages
 
-Files: *
-Copyright: 2022   U+039b <hello@pts-project.org>
-                  Defensive Lab Agency <contact@defensive-lab.agency>
-                  
-License: GPL-3.0+
-
 Files: src/GeoLite2-city.mmdb
 Copyright: 2022   MaxMind https://www.maxmind.com
-
 License: GeoLite2 end-user license agreement
 
+Files: *
+Copyright: 2022   U+039b <hello@pts-project.org>
+                  Defensive Lab Agency <contact@defensive-lab.agency>             
+License: GPL-3.0+
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or

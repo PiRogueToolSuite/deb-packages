@@ -1,5 +1,6 @@
 [Unit]
 Description=Run PiRogue maintenance
+Wants=suricata.service
 
 [Service]
 Type=oneshot

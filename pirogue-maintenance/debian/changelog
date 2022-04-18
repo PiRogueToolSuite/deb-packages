@@ -1,3 +1,9 @@
+pirogue-maintenance (1.0.1) unstable; urgency=medium
+
+  * Fix service dependencies. 
+
+ -- U+039b <hello@pts-project.org>  Mon, 18 Apr 2022 12:58:26 +0200
+
 pirogue-maintenance (1.0.0) unstable; urgency=medium
 
   * Initial Release.

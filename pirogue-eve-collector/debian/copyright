@@ -5,10 +5,8 @@ Source: https://github.com/PiRogueToolSuite/deb-packages
 
 Files: *
 Copyright: 2022   U+039b <hello@pts-project.org>
-                  Defensive Lab Agency <contact@defensive-lab.agency>
-                  
+                  Defensive Lab Agency <contact@defensive-lab.agency>   
 License: GPL-3.0+
-
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
  the Free Software Foundation, either version 3 of the License, or
