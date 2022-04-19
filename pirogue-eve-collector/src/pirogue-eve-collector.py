@@ -6,7 +6,9 @@ import base64
 
 from influxdb import InfluxDBClient
 
-socket_path = '/var/run/suricata.socket'
+socket_path = '/run/suricata.socket'
+if os.path.exists(socket_path):
+    os.remove(socket_path)
 
 
 def _flatten_dict_gen(d, parent_key, sep):

@@ -1,14 +1,14 @@
 [Unit]
 Description=PiRogue collector for Suricata alerts
-Wants=influxdb.service suricata.service
+Wants=influxdb.service 
+Before=suricata.service
 
 [Service]
 ExecStart=/usr/bin/python3 /usr/share/pirogue/pirogue-eve-collector.py
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
-RestartSec=2
+RestartSec=4
 Type=notify
 
 [Install]
 WantedBy=default.target
-Also=pirogue-eve-collector.socket

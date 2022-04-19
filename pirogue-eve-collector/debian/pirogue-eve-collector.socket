@@ -1,8 +1,0 @@
-[Unit]
-Description=PiRogue socket for Suricata alerts i/o
-
-[Socket]
-ListenDatagram=/var/run/suricata.socket
-
-[Install]
-WantedBy=sockets.target

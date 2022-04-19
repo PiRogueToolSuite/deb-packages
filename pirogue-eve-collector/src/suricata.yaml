@@ -78,7 +78,7 @@ outputs:
   - eve-log:
       enabled: yes
       filetype: unix_dgram
-      filename: /var/run/suricata.socket
+      filename: /run/suricata.socket
       level: Info
       #Alert, Critical, Error, Warning, Notice, Info, Debug
       metadata: yes 
