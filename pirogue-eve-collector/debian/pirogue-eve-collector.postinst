@@ -2,5 +2,15 @@
 
 set -e
 
-deb-systemd-invoke restart suricata
+# Install suricata configuration
+if ! cmp -s /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml; then
+   cp /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml
+   deb-systemd-invoke restart suricata
+fi
 
+suricata-update --no-check-certificate update-sources
+suricata-update --no-check-certificate enable-source et/open || true
+suricata-update --no-check-certificate enable-source oisf/trafficid || true
+suricata-update --no-check-certificate enable-source sslbl/ssl-fp-blacklist || true
+suricata-update add-source PTS https://piroguetoolsuite.github.io/suricata-rules/suricata.rules || true
+suricata-update --no-check-certificate 

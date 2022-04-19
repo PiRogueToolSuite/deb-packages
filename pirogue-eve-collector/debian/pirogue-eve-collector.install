@@ -1,2 +1,5 @@
 src/pirogue-eve-collector.py usr/share/pirogue
-src/suricata.yaml etc/suricata
+src/suricata.yaml usr/share/pirogue/suricata
+
+
+# src/influxdb-overrides/autorestart.conf /etc/systemd/system/influxdb.service.d/autorestart.conf

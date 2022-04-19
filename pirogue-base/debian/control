@@ -9,6 +9,32 @@ Rules-Requires-Root: no
 
 Package: pirogue-base
 Architecture: all
-Depends: ${misc:Depends}, pirogue-dashboard, pirogue-eve-collector, pirogue-flow-inspector, pirogue-maintenance, pirogue-screen-st7789-240x240
+Depends: ${misc:Depends},
+# autoconf,
+# automake,
+# bison,
+# flex,
+# gettext,
+# libatlas-base-dev,
+# libbluetooth-dev,
+# libdbus-glib-1-dev,
+# libfontconfig1,
+# libjson-c-dev,
+# libnl-genl-3-dev,
+# libopenjp2-7,
+# libtiff5,
+# libtool,
+# libusb-1.0-0-dev,
+# pkg-config,
+ python3-pip,
+ python3-systemd,
+ pirogue-tools, 
+ pirogue-ap, 
+ pirogue-hat, 
+ pirogue-dashboard, 
+ pirogue-eve-collector, 
+ pirogue-flow-inspector, 
+ pirogue-maintenance, 
+ pirogue-screen-st7789-240x240,
 Description: Install all PiRogue packages
 

@@ -9,5 +9,6 @@ Rules-Requires-Root: no
 
 Package: pirogue-maintenance
 Architecture: all
-Depends: ${misc:Depends}, suricata
+Depends: ${misc:Depends},
+ suricata,
 Description: Provision PiRogue maintenance scripts

@@ -9,5 +9,7 @@ Rules-Requires-Root: no
 
 Package: pirogue-dashboard
 Architecture: all
-Depends: ${misc:Depends}, grafana, influxdb
+Depends: ${misc:Depends},
+ grafana,
+ influxdb,
 Description: Provision PiRogue dashboards

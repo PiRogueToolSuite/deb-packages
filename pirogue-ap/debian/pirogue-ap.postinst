@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e
+
+deb-systemd-invoke unmask hostapd
+deb-systemd-invoke enable hostapd
+
+deb-systemd-invoke enable pirogue-rfkill
+deb-systemd-invoke start pirogue-rfkill
+
+
+# Install hostapd configuration
+if ! cmp -s /usr/share/pirogue/ap/hostapd.conf /etc/hostapd.conf; then
+   cp /usr/share/pirogue/ap/hostapd.conf /etc/hostapd/hostapd.conf
+   deb-systemd-invoke restart hostapd
+fi
+
+
+# Install dnsmasq configuration
+if ! cmp -s /usr/share/pirogue/ap/dnsmasq.conf /etc/dnsmasq.conf; then
+   cp /usr/share/pirogue/ap/dnsmasq.conf /etc/dnsmasq.conf
+   deb-systemd-invoke restart dnsmasq
+fi
+
+
+# Install dhcpcd configuration
+if ! cmp -s /usr/share/pirogue/ap/dhcpcd.conf /etc/dhcpcd.conf; then
+   cp /usr/share/pirogue/ap/dhcpcd.conf /etc/dhcpcd.conf
+   deb-systemd-invoke restart dhcpcd
+fi

@@ -10,5 +10,7 @@ Rules-Requires-Root: no
 Package: pirogue-screen-st7789-240x240
 Architecture: all
 Provides: pirogue-screen-controller
-Depends: ${misc:Depends}, python3-influxdb, influxdb
+Depends: ${misc:Depends},
+ python3-influxdb,
+ influxdb,
 Description: Provision PiRogue 240x240px ST7789 screen driver

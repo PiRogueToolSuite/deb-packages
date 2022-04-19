@@ -4,5 +4,5 @@ Wants=suricata.service
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh /usr/share/pirogue/pirogue-maintenance.sh
+ExecStart=/usr/share/pirogue/pirogue-maintenance.sh
 ExecStop=

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+
+ensure_conf_line () {
+    if ! grep -q "^$1" "$2"; then
+        echo $1 >> $2
+    fi
+}
+
+
+ensure_conf_line "dtparam=i2c_arm=on" "/boot/config.txt"
+ensure_conf_line "dtparam=spi=on" "/boot/config.txt"
+ensure_conf_line "dtoverlay=i2c-rtc,ds3231" "/boot/config.txt"
+ensure_conf_line "dtoverlay=gpio-fan,gpiopin=13,temp=37000" "/boot/config.txt"
+
+ensure_conf_line "rtc-ds3231" "/etc/modules"

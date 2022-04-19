@@ -9,5 +9,9 @@ Rules-Requires-Root: no
 
 Package: pirogue-flow-inspector
 Architecture: all
-Depends: ${misc:Depends}, influxdb, python3-influxdb, python3-pip
+Depends: ${misc:Depends},
+ influxdb,
+ python3-influxdb,
+ python3-pip,
+ python3-nfstream,
 Description: Provision PiRogue DPI

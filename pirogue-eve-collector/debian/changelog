@@ -1,6 +1,6 @@
 pirogue-eve-collector (1.0.1) unstable; urgency=medium
 
-  * Fix postinst script.
+  * Fix installation scripts.
 
  -- U+039b <hello@pts-project.org>  Mon, 18 Apr 2022 13:03:11 +0200
 

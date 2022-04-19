@@ -6,7 +6,7 @@ import base64
 
 from influxdb import InfluxDBClient
 
-socket_path = '/tmp/suri.sock'
+socket_path = '/var/run/suricata.socket'
 
 
 def _flatten_dict_gen(d, parent_key, sep):
@@ -50,8 +50,6 @@ def convert_to_influxdb_format(eve_obj):
 if __name__ == '__main__':
     import systemd.daemon
     buf_size = 4096
-    if os.path.exists(socket_path):
-        os.remove(socket_path)
     db = 'suricata'
     client = InfluxDBClient('127.0.0.1', 8086, '', '', db)
     client.create_database(db)
@@ -80,6 +78,3 @@ if __name__ == '__main__':
     server.close()
 
     systemd.daemon.notify('STOPPING=1')
-
-    if os.path.exists(socket_path):
-        os.remove(socket_path)

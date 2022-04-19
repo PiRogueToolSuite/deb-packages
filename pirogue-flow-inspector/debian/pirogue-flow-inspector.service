@@ -6,6 +6,7 @@ Wants=influxdb.service
 ExecStart=/usr/bin/python3 /usr/share/pirogue/pirogue-flow-inspector.py
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
+RestartSec=2
 Type=notify
 
 [Install]
