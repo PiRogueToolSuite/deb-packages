@@ -17,5 +17,6 @@ Depends: ${misc:Depends}, python3-pip,
  htop,
  jq,
  adb,
+ python3-mvt,
 Description: Install all PiRogue additional tools
 
