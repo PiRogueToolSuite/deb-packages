@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: pirogue-tools
 Architecture: all
-Depends: ${misc:Depends}, python3-pip,
+Depends: ${misc:Depends},
  tcpdump,
  vim, 
  git,
