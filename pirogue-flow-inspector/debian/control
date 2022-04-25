@@ -12,7 +12,6 @@ Architecture: all
 Depends: ${misc:Depends},
  influxdb,
  python3-influxdb,
- python3-pip,
  python3-nfstream,
  python3-numpy (>= 1:1.22),
  python3-communityid,
