@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -e
-
-pip3 install geoip2==4.5.0
