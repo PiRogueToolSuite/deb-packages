@@ -19,5 +19,6 @@ Depends: ${misc:Depends}, python3-pip,
  adb,
  python3-mvt,
  mitmproxy,
+ frida,
 Description: Install all PiRogue additional tools
 
