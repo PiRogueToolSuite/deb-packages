@@ -13,6 +13,7 @@ Provides: pirogue-screen-controller
 Depends: ${misc:Depends},
  ${python3:Depends},
  influxdb,
+ net-tools,
  python3-influxdb,
  python3-numpy,
  python3-pil,
