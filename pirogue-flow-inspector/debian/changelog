@@ -1,3 +1,17 @@
+pirogue-flow-inspector (1.0.1) UNRELEASED; urgency=medium
+
+  * Ship the daemon under /usr/sbin, without its .py suffix, and with the
+    usual python3 shebang.
+  * Replace calling pip in preinst with the following dependencies, now
+    available in our PPA (under pirogue-third-party/):
+     - python3-numpy (>= 1:1.22);
+     - python3-communityid;
+     - python3-geoip2 (>= 4.5.0).
+  * Delete python3-pip from dependencies accordingly.
+  * Fix missing dependency on python3-systemd.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Tue, 26 Apr 2022 21:59:47 +0200
+
 pirogue-flow-inspector (1.0.0) unstable; urgency=medium
 
   * Initial Release.
