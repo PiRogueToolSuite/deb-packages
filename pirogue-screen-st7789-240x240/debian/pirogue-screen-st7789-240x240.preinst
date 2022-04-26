@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -e
-
-pip3 install Adafruit-Blinka==6.17.0
