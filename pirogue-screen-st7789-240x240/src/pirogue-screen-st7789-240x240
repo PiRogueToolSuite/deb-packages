@@ -16,8 +16,6 @@ if __name__ == '__main__':
 
     import ST7789 as TFT
 
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
 
     def get_latest_alert():
         q = 'SELECT "alert_severity", "alert_signature", "dest_ip" FROM "alert" ORDER BY time DESC LIMIT 1'
