@@ -2,3 +2,6 @@
 
 %:
 	dh $@ --with python3
+
+override_dh_shlibdeps:
+	@echo "Disable dependency detection (dirty pip bundle)."
