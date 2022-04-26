@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 for i in `find . -maxdepth 1 -type d -name "pirogue-*"`; do
     cd $i;
