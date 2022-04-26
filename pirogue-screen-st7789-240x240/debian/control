@@ -12,8 +12,8 @@ Architecture: any
 Provides: pirogue-screen-controller
 Depends: ${misc:Depends},
  ${python3:Depends},
- python3-influxdb,
  influxdb,
+ python3-influxdb,
  python3-numpy,
  python3-pil,
  python3-systemd,
