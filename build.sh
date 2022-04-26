@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-for i in `find . -maxdepth 1 -type d -name "pirogue-*"`; do
-    cd $i;
+for source in `find . -maxdepth 1 -type d -name "pirogue-*"`; do
+    cd $source;
         dpkg-buildpackage -b -tc -uc -us -ui
     cd ..
 done
