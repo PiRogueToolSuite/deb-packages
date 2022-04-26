@@ -8,7 +8,7 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-screen-st7789-240x240
-Architecture: all
+Architecture: any
 Provides: pirogue-screen-controller
 Depends: ${misc:Depends},
  ${python3:Depends},
