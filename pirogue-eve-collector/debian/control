@@ -2,7 +2,9 @@ Source: pirogue-eve-collector
 Section: misc
 Priority: optional
 Maintainer: U+039b <hello@pts-project.org>
-Build-Depends: debhelper-compat (= 13)
+Build-Depends:
+ debhelper-compat (= 13),
+ dh-python,
 Standards-Version: 4.5.1
 Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
@@ -10,6 +12,7 @@ Rules-Requires-Root: no
 Package: pirogue-eve-collector
 Architecture: all
 Depends: ${misc:Depends},
+ ${python3:Depends},
  suricata,
  influxdb,
  chronograf,
