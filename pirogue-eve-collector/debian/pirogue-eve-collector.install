@@ -1,4 +1,4 @@
-src/pirogue-eve-collector.py usr/share/pirogue
+src/pirogue-eve-collector usr/sbin
 src/suricata.yaml usr/share/pirogue/suricata
 
 
