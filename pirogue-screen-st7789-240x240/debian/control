@@ -14,6 +14,7 @@ Depends: ${misc:Depends},
  ${python3:Depends},
  python3-influxdb,
  influxdb,
+ python3-numpy,
  python3-pil,
  python3-systemd,
 Description: Provision PiRogue 240x240px ST7789 screen driver
