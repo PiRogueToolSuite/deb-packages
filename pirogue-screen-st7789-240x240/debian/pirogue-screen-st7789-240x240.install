@@ -1,4 +1,6 @@
-src/B612-Regular.ttf usr/share/pirogue/screen-st7789-240x240
-src/infos.bmp usr/share/pirogue/screen-st7789-240x240
-src/pirogue-screen.py usr/share/pirogue/screen-st7789-240x240
-src/ST7789.py usr/share/pirogue/screen-st7789-240x240
+src/pirogue-screen-st7789-240x240 usr/sbin
+src/B612-Regular.ttf              usr/share/pirogue/screen-st7789-240x240
+src/infos.bmp                     usr/share/pirogue/screen-st7789-240x240
+
+${DEB_HOST_ARCH}/*                usr/lib/pirogue/screen-st7789-240x240
+src/ST7789.py                     usr/lib/pirogue/screen-st7789-240x240

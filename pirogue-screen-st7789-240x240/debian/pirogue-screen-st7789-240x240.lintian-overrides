@@ -1,0 +1,7 @@
+# We know we're doing nasty things, silence lintian a little:
+pirogue-screen-st7789-240x240: binary-from-other-architecture
+pirogue-screen-st7789-240x240: debug-suffix-not-dbg
+pirogue-screen-st7789-240x240: hardening-no-pie
+pirogue-screen-st7789-240x240: missing-dependency-on-libc
+pirogue-screen-st7789-240x240: package-installs-python-pycache-dir
+pirogue-screen-st7789-240x240: unusual-interpreter

@@ -3,7 +3,7 @@ Description=PiRogue DPI flow inspection
 Wants=influxdb.service
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/share/pirogue/pirogue-flow-inspector.py
+ExecStart=/usr/sbin/pirogue-flow-inspector
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
 RestartSec=2

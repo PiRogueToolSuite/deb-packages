@@ -8,9 +8,14 @@ Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
 Package: pirogue-screen-st7789-240x240
-Architecture: all
+Architecture: any
 Provides: pirogue-screen-controller
 Depends: ${misc:Depends},
- python3-influxdb,
+ ${python3:Depends},
  influxdb,
+ net-tools,
+ python3-influxdb,
+ python3-numpy,
+ python3-pil,
+ python3-systemd,
 Description: Provision PiRogue 240x240px ST7789 screen driver
