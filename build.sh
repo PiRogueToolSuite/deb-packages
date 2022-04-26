@@ -26,7 +26,7 @@ gzip -k -f Packages
 apt-ftparchive release . > Release.tmp
 mv Release.tmp Release
 
-gpg --default-key "6D49D146B9D61919B96044C43A5B3B14BD040926" -abs -o - Release > Release.gpg
+gpg --local-user "6D49D146B9D61919B96044C43A5B3B14BD040926" -abs -o - Release > Release.gpg
 
 cd ../..
 
