@@ -5,6 +5,7 @@ Wants=influxdb.service
 
 [Service]
 ExecStart=/usr/sbin/pirogue-screen-st7789-240x240
+Environment=PYTHONPATH=/usr/lib/pirogue/screen-st7789-240x240
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
 Type=notify
