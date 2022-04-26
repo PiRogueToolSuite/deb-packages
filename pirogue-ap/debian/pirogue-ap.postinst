@@ -8,6 +8,7 @@ deb-systemd-invoke enable hostapd
 deb-systemd-invoke enable pirogue-rfkill
 deb-systemd-invoke start pirogue-rfkill
 
+#DEBHELPER#
 
 # Install hostapd configuration
 if ! cmp -s /usr/share/pirogue/ap/hostapd.conf /etc/hostapd.conf; then

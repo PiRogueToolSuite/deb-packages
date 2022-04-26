@@ -6,6 +6,7 @@ for i in `find . -maxdepth 1 -type d -name "pirogue-*"`; do
     cd ..
 done
 
+rm -rf dist/pirogue
 mkdir -p dist/pirogue
 dcmd --deb mv *changes dist/pirogue 
 

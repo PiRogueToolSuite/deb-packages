@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 
     def get_latest_alert():
-        q = 'SELECT "alert_severity", "alert_signature", "dest_ip" FROM "alert" ORDER BY time DESC LIMIT 1'
+        q = 'SELECT "alert_severity", "alert_signature", "dest_ip" FROM "alert" WHERE alert_severity<3 ORDER BY time DESC LIMIT 1'
         try:
             client = InfluxDBClient('127.0.0.1', 8086, '', '', 'suricata')
             r = client.query(q, raise_errors=False)

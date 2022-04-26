@@ -2,6 +2,8 @@
 
 set -e
 
+#DEBHELPER#
+
 # Install suricata configuration
 if ! cmp -s /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml; then
    cp /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml

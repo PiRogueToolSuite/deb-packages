@@ -2,6 +2,7 @@
 
 set -e
 
+#DEBHELPER#
 
 ensure_conf_line () {
     if ! grep -q "^$1" "$2"; then

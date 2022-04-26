@@ -2,6 +2,8 @@
 
 set -e
 
+#DEBHELPER#
+
 # Install grafana configuration
 if ! cmp -s /usr/share/pirogue/grafana/grafana.ini /etc/grafana/grafana.ini; then
    cp /usr/share/pirogue/grafana/grafana.ini /etc/grafana/grafana.ini
