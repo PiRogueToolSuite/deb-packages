@@ -1,4 +1,4 @@
-pirogue-tools (1.0.1) UNRELEASED; urgency=medium
+pirogue-tools (1.0.1) bullseye; urgency=medium
 
   * Replace calling pip in preinst with the following dependencies:
      - frida (available in our PPA);
@@ -8,7 +8,7 @@ pirogue-tools (1.0.1) UNRELEASED; urgency=medium
     modules.
   * Delete python3-pip from dependencies accordingly.
 
- -- Cyril Brulebois <cyril@debamax.com>  Tue, 26 Apr 2022 22:32:52 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 27 Apr 2022 21:48:34 +0200
 
 pirogue-tools (1.0.0) unstable; urgency=medium
 
