@@ -1,10 +1,10 @@
-pirogue-eve-collector (1.0.2) UNRELEASED; urgency=medium
+pirogue-eve-collector (1.0.2) bullseye; urgency=medium
 
   * Ship the daemon under /usr/sbin, without its .py suffix, and with the
     usual python3 shebang.
   * Enable the python3 dh add-on to get appropriate Python dependencies.
 
- -- Cyril Brulebois <cyril@debamax.com>  Tue, 26 Apr 2022 22:53:53 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 27 Apr 2022 21:50:34 +0200
 
 pirogue-eve-collector (1.0.1) unstable; urgency=medium
 
