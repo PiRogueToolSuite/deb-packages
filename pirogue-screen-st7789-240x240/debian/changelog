@@ -1,4 +1,4 @@
-pirogue-screen-st7789-240x240 (1.0.2) UNRELEASED; urgency=medium
+pirogue-screen-st7789-240x240 (1.0.2) bullseye; urgency=medium
 
   * To avoid installing a bunch of packages on the target via pip, a quick and
     dirty “bundle everything” approach was chosen. It's not perfect, but this
@@ -29,7 +29,7 @@ pirogue-screen-st7789-240x240 (1.0.2) UNRELEASED; urgency=medium
   * Since we're shipping everything we need for Adafruit-Blinka, delete pip from
     preinst, and python3-pip from Depends.
 
- -- Cyril Brulebois <cyril@debamax.com>  Tue, 26 Apr 2022 22:06:34 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 27 Apr 2022 21:53:04 +0200
 
 pirogue-screen-st7789-240x240 (1.0.1) unstable; urgency=medium
 
