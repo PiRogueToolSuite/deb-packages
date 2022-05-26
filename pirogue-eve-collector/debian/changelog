@@ -1,8 +1,16 @@
-pirogue-eve-collector (1.0.2) unstable; urgency=medium
+pirogue-eve-collector (1.0.3) unstable; urgency=medium
 
   * Fix missing dependency
 
  -- U+039b <hello@pts-project.org>  Wed, 25 May 2022 18:05:36 +0200
+
+pirogue-eve-collector (1.0.2) bullseye; urgency=medium
+
+  * Ship the daemon under /usr/sbin, without its .py suffix, and with the
+    usual python3 shebang.
+  * Enable the python3 dh add-on to get appropriate Python dependencies.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 27 Apr 2022 21:50:34 +0200
 
 pirogue-eve-collector (1.0.1) unstable; urgency=medium
 

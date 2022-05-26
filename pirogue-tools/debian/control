@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: pirogue-tools
 Architecture: all
-Depends: ${misc:Depends}, python3-pip,
+Depends: ${misc:Depends},
  tcpdump,
  vim, 
  git,
@@ -17,5 +17,8 @@ Depends: ${misc:Depends}, python3-pip,
  htop,
  jq,
  adb,
+ python3-mvt,
+ mitmproxy,
+ frida,
 Description: Install all PiRogue additional tools
 

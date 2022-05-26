@@ -1,2 +1,2 @@
-src/pirogue-flow-inspector.py usr/share/pirogue
+src/pirogue-flow-inspector usr/sbin
 src/GeoLite2-City.mmdb usr/share/pirogue

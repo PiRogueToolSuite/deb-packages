@@ -1,6 +1,18 @@
+pirogue-tools (1.0.1) bullseye; urgency=medium
+
+  * Replace calling pip in preinst with the following dependencies:
+     - frida (available in our PPA);
+     - mitmproxy (available in Debian).
+     - python3-mvt (available in our PPA);
+  * It was also decided not to try and package the pyshark and objection
+    modules.
+  * Delete python3-pip from dependencies accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 27 Apr 2022 21:48:34 +0200
+
 pirogue-tools (1.0.0) unstable; urgency=medium
 
-  * Initial copmmit.
+  * Initial commit.
 
  -- U+039b <hello@pts-project.org>  Sun, 17 Apr 2022 21:01:19 +0200
  

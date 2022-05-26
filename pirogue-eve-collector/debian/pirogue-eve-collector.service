@@ -4,7 +4,7 @@ Wants=influxdb.service
 Before=suricata.service
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/share/pirogue/pirogue-eve-collector.py
+ExecStart=/usr/sbin/pirogue-eve-collector
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
 RestartSec=4

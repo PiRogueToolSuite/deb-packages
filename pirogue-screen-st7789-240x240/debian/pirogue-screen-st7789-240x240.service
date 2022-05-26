@@ -4,7 +4,8 @@ Description=PiRogue screen
 Wants=influxdb.service
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/share/pirogue/screen-st7789-240x240/pirogue-screen.py
+ExecStart=/usr/sbin/pirogue-screen-st7789-240x240
+Environment=PYTHONPATH=/usr/lib/pirogue/screen-st7789-240x240
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
 Type=notify
