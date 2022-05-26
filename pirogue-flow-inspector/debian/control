@@ -14,4 +14,5 @@ Depends: ${misc:Depends},
  python3-influxdb,
  python3-pip,
  python3-nfstream,
+ python3-systemd,
 Description: Provision PiRogue DPI

@@ -17,3 +17,4 @@ ensure_conf_line "dtoverlay=i2c-rtc,ds3231" "/boot/config.txt"
 ensure_conf_line "dtoverlay=gpio-fan,gpiopin=13,temp=37000" "/boot/config.txt"
 
 ensure_conf_line "rtc-ds3231" "/etc/modules"
+ensure_conf_line "i2c-dev" "/etc/modules"

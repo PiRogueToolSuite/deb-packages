@@ -1,3 +1,9 @@
+pirogue-flow-inspector (1.0.1) unstable; urgency=medium
+
+  * Fix missing dependency
+
+ -- U+039b <hello@pts-project.org>  Wed, 25 May 2022 18:07:18 +0200
+
 pirogue-flow-inspector (1.0.0) unstable; urgency=medium
 
   * Initial Release.

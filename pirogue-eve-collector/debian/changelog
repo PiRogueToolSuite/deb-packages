@@ -1,3 +1,9 @@
+pirogue-eve-collector (1.0.2) unstable; urgency=medium
+
+  * Fix missing dependency
+
+ -- U+039b <hello@pts-project.org>  Wed, 25 May 2022 18:05:36 +0200
+
 pirogue-eve-collector (1.0.1) unstable; urgency=medium
 
   * Fix installation scripts.

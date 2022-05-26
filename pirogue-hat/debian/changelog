@@ -1,3 +1,9 @@
+pirogue-hat (1.0.1) unstable; urgency=medium
+
+  * Fix missing module for I2C support
+
+ -- U+039b <hello@pts-project.org>  Wed, 25 May 2022 18:00:13 +0200
+
 pirogue-hat (1.0.0) unstable; urgency=medium
 
   * Initial commit.

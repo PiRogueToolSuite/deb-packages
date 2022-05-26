@@ -13,4 +13,5 @@ Provides: pirogue-screen-controller
 Depends: ${misc:Depends},
  python3-influxdb,
  influxdb,
+ python3-systemd,
 Description: Provision PiRogue 240x240px ST7789 screen driver
