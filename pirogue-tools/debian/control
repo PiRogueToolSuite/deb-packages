@@ -20,5 +20,6 @@ Depends: ${misc:Depends},
  python3-mvt,
  mitmproxy,
  frida,
+ libimobiledevice-utils,
 Description: Install all PiRogue additional tools
 
