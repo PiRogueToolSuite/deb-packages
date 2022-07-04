@@ -1,7 +1,7 @@
 src/dnsmasq.conf usr/share/pirogue/ap
 src/dhcpcd.conf usr/share/pirogue/ap
 src/hostapd.conf usr/share/pirogue/ap
-src/rules.v4 etc/iptables
-src/rules.v6 etc/iptables
+src/rules.v4 usr/share/pirogue/ap
+src/rules.v6 usr/share/pirogue/ap
 src/routed-ap.conf etc/sysctl.d
 src/pirogue-rfkill.service lib/systemd/system

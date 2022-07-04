@@ -20,4 +20,5 @@ Depends: ${misc:Depends},
  python3-communityid,
  python3-geoip2 (>= 4.5.0),
  python3-systemd,
+ python3-netifaces,
 Description: Provision PiRogue DPI

@@ -1,3 +1,9 @@
+pirogue-flow-inspector (1.0.3) UNRELEASED; urgency=medium
+
+  * Automatically detect network interfaces
+
+ -- U+039b <hello@pts-project.org>  Mon, 04 Jul 2022 19:28:11 +0200
+
 pirogue-flow-inspector (1.0.2) unstable; urgency=medium
 
   * Fix missing dependency

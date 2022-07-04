@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+# Modify files according to system network interfaces
+eth_iface=$(ip route get 1.1.1.1 | awk -- '{printf $5}')
+wlan_iface=$(find /sys/class/net/ -mindepth 1 -maxdepth 1 | while read interface; do
+  if [ -e "$interface/wireless" ]; then
+    echo $(basename $interface)
+  fi
+done)
+
+deb-systemd-invoke enable pirogue-flow-inspector@${wlan_iface}
+deb-systemd-invoke start pirogue-flow-inspector@${wlan_iface}

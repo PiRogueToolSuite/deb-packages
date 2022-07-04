@@ -1,0 +1,22 @@
+Source: pirogue-base-nogpio
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-base-nogpio
+Architecture: all
+Depends: ${misc:Depends},
+ python3-pip,
+ python3-systemd,
+ pirogue-tools, 
+ pirogue-ap, 
+ pirogue-dashboard, 
+ pirogue-eve-collector, 
+ pirogue-flow-inspector, 
+ pirogue-maintenance, 
+Description: Install all PiRogue packages for regular PCs
+

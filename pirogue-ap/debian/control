@@ -14,4 +14,5 @@ Depends: ${misc:Depends},
  iptables-persistent,
  hostapd,
  dnsmasq,
+ rfkill,
 Description: Install PiRogue wi-fi AP configuration

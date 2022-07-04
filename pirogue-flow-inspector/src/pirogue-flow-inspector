@@ -8,7 +8,17 @@ if __name__ == '__main__':
     import communityid
     import geoip2.database
     import base64
+    import sys
+    import netifaces
 
+    iface = 'wlan0'
+    for i in netifaces.interfaces():
+        if i.startswith('wl'):
+            iface = i
+            break
+
+    if len(sys.argv) == 2:
+        iface = sys.argv[1]
 
     db = 'flows'
     client = InfluxDBClient('127.0.0.1', 8086, '', '', db)
@@ -16,7 +26,7 @@ if __name__ == '__main__':
     client.create_retention_policy(f'{db}_5d', '5d', 1, database=db, default=True)
 
 
-    online_streamer = NFStreamer(source="wlan0", active_timeout=4*60)
+    online_streamer = NFStreamer(source=iface, active_timeout=4*60)
     reader = geoip2.database.Reader('/usr/share/pirogue/GeoLite2-City.mmdb')
     cid = communityid.CommunityID()
 
