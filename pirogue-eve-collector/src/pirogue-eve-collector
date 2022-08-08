@@ -44,8 +44,8 @@ def convert_to_influxdb_format(eve_obj):
         }
     }
     for k, v in eve_obj.items():
-        if type(v) == str:
-            obj['fields'][k] = v
+        if type(v) == dict or type(v) == list:
+            continue
         else:
             obj['fields'][k] = v
     return obj
