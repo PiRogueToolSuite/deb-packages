@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bahsh
 
 set -e
 
@@ -10,30 +10,34 @@ deb-systemd-invoke start pirogue-rfkill
 
 #DEBHELPER#
 
-
 # Load default values
 WIFI_NETWORK_NAME=PiRogue1
 WIFI_NETWORK_KEY=superlongkey
 WIFI_COUNTRY_CODE=FR
+ETH_IFACE=eth0
+WLAN_IFACE=wlan0
 
-# Modify files according to system network interfaces
-ETH_IFACE=$(ip route get 1.1.1.1 | awk -- '{printf $5}')
-WLAN_IFACE=$(find /sys/class/net/ -mindepth 1 -maxdepth 1 | while read interface; do
-  if [ -e "$interface/wireless" ]; then
-    echo $(basename $interface)
-  fi
-done)
+if [[ -z "${PIROGUE_IMAGE_BUILD}" ]]
+then
+   # Modify files according to system network interfaces
+   ETH_IFACE=$(ip route get 1.1.1.1 | awk -- '{printf $5}')
+   WLAN_IFACE=$(find /sys/class/net/ -mindepth 1 -maxdepth 1 | while read interface; do
+   if [ -e "$interface/wireless" ]; then
+      echo $(basename $interface)
+   fi
+   done)
 
-# First, try to get the current configuration from the pirogue-ctl tool
-# If the command is not found, try to load the configuration from the PiRogue configuration file
-if command -v /usr/bin/pirogue-ctl &> /dev/null
-then
-    echo "Get information from PiRogue configuration tool"
-    source <(/usr/bin/pirogue-ctl config show --raw)
-elif [ -f "/usr/share/pirogue/config/pirogue.env" ]
-then
-    echo "Get information from PiRogue configuration file"
-    source /usr/share/pirogue/config/pirogue.env
+   # First, try to get the current configuration from the pirogue-ctl tool
+   # If the command is not found, try to load the configuration from the PiRogue configuration file
+   if /usr/bin/pirogue-ctl config show --raw &> /dev/null
+   then
+      echo "Get information from PiRogue configuration tool"
+      source <(/usr/bin/pirogue-ctl config show --raw)
+   elif [ -f "/usr/share/pirogue/config/pirogue.user.env" ]
+   then
+      echo "Get information from PiRogue configuration file"
+      source /usr/share/pirogue/config/pirogue.user.env
+   fi
 fi
 
 
