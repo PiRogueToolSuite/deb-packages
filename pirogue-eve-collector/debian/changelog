@@ -1,3 +1,9 @@
+pirogue-eve-collector (1.0.5) unstable; urgency=medium
+
+  * Load configuration either from pirogue-ctl or the configuration file to prevent losing current configuration 
+
+ -- U+039b <hello@pts-project.org>  Thu, 11 Aug 2022 15:39:17 +0200
+
 pirogue-eve-collector (1.0.4) unstable; urgency=medium
 
   * Automatically detect network interfaces

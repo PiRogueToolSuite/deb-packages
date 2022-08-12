@@ -15,4 +15,5 @@ Depends: ${misc:Depends},
  hostapd,
  dnsmasq,
  rfkill,
+ dhcpcd5,
 Description: Install PiRogue wi-fi AP configuration

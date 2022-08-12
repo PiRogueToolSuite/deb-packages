@@ -12,6 +12,7 @@ Architecture: all
 Depends: ${misc:Depends},
  python3-pip,
  python3-systemd,
+ pirogue-cli, 
  pirogue-tools, 
  pirogue-ap, 
  pirogue-hat, 

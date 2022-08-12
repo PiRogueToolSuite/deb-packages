@@ -4,16 +4,33 @@ set -e
 
 #DEBHELPER#
 
+# Load default values
+WIFI_NETWORK_NAME=PiRogue1
+WIFI_NETWORK_KEY=superlongkey
+WIFI_COUNTRY_CODE=FR
+
 # Modify files according to system network interfaces
-eth_iface=$(ip route get 1.1.1.1 | awk -- '{printf $5}')
-wlan_iface=$(find /sys/class/net/ -mindepth 1 -maxdepth 1 | while read interface; do
+ETH_IFACE=$(ip route get 1.1.1.1 | awk -- '{printf $5}')
+WLAN_IFACE=$(find /sys/class/net/ -mindepth 1 -maxdepth 1 | while read interface; do
   if [ -e "$interface/wireless" ]; then
     echo $(basename $interface)
   fi
 done)
 
-sed -i "s/ETH_IFACE/${eth_iface}/g" /usr/share/pirogue/suricata/suricata.yaml
-sed -i "s/WLAN_IFACE/${wlan_iface}/g" /usr/share/pirogue/suricata/suricata.yaml
+# First, try to get the current configuration from the pirogue-ctl tool
+# If the command is not found, try to load the configuration from the PiRogue configuration file
+if command -v /usr/bin/pirogue-ctl &> /dev/null
+then
+    echo "Get information from PiRogue configuration tool"
+    source <(/usr/bin/pirogue-ctl config show --raw)
+elif [ -f "/usr/share/pirogue/config/pirogue.env" ]
+then
+    echo "Get information from PiRogue configuration file"
+    source /usr/share/pirogue/config/pirogue.env
+fi
+
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/suricata/suricata.yaml
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/suricata/suricata.yaml
 
 # Install suricata configuration
 if ! cmp -s /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml; then

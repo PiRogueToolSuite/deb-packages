@@ -2,9 +2,9 @@
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
--A INPUT -i WLAN_IFACE -p udp -m udp --dport 67:68 -j ACCEPT
--A INPUT -i WLAN_IFACE -p udp -m udp --dport 53 -j ACCEPT
--A INPUT -i WLAN_IFACE -j DROP
+-A INPUT -i WLAN_IFACE -p udp -m udp --dport 67:68 -j ACCEPT -m comment --comment "PTS[1] MANAGED"
+-A INPUT -i WLAN_IFACE -p udp -m udp --dport 53 -j ACCEPT -m comment --comment "PTS[2] MANAGED"
+-A INPUT -i WLAN_IFACE -j DROP -m comment --comment "PTS[3] MANAGED"
 -A FORWARD -p udp -m multiport --dports 80,443 -j DROP
 COMMIT
 
@@ -13,5 +13,5 @@ COMMIT
 :INPUT ACCEPT [240:19925]
 :OUTPUT ACCEPT [2205:133813]
 :POSTROUTING ACCEPT [2161:130673]
--A POSTROUTING -o ETH_IFACE -j MASQUERADE
+-A POSTROUTING -o ETH_IFACE -j MASQUERADE -m comment --comment "PTS[4] MANAGED"
 COMMIT
