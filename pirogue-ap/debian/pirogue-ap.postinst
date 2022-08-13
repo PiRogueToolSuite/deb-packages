@@ -43,50 +43,34 @@ fi
 
 echo "Installing the AP on ${WLAN_IFACE}, routing to ${ETH_IFACE}"
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/ap/hostapd.conf
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/ap/hostapd.conf
-sed -i "s/WIFI_NETWORK_NAME/${WIFI_NETWORK_NAME}/g" /usr/share/pirogue/ap/hostapd.conf
-sed -i "s/WIFI_NETWORK_KEY/${WIFI_NETWORK_KEY}/g" /usr/share/pirogue/ap/hostapd.conf
-sed -i "s/WIFI_COUNTRY_CODE/${WIFI_COUNTRY_CODE}/g" /usr/share/pirogue/ap/hostapd.conf
+# hostapd
+cat /usr/share/pirogue/ap/hostapd.conf > /etc/hostapd.conf
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/hostapd.conf
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/hostapd.conf
+sed -i "s/WIFI_NETWORK_NAME/${WIFI_NETWORK_NAME}/g" /etc/hostapd.conf
+sed -i "s/WIFI_NETWORK_KEY/${WIFI_NETWORK_KEY}/g" /etc/hostapd.conf
+sed -i "s/WIFI_COUNTRY_CODE/${WIFI_COUNTRY_CODE}/g" /etc/hostapd.conf
+deb-systemd-invoke restart hostapd
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/ap/dnsmasq.conf
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/ap/dnsmasq.conf
+# dnsmasq
+cat /usr/share/pirogue/ap/dnsmasq.conf > /etc/dnsmasq.conf
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/dnsmasq.conf 
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/dnsmasq.conf 
+deb-systemd-invoke restart dnsmasq
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/ap/dhcpcd.conf
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/ap/dhcpcd.conf
+# dhcpcd
+cat /usr/share/pirogue/ap/dhcpcd.conf > /etc/dhcpcd.conf
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/dhcpcd.conf
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/dhcpcd.conf
+deb-systemd-invoke restart dhcpcd
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/ap/rules.v4
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/ap/rules.v4
+# iptables
+cat /usr/share/pirogue/ap/rules.v4 > /etc/iptables/rules.v4
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v4
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v4
+iptables-restore < /etc/iptables/rules.v4
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/ap/rules.v6
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/ap/rules.v6
-
-
-# Install hostapd configuration
-if ! cmp -s /usr/share/pirogue/ap/hostapd.conf /etc/hostapd.conf; then
-   cp /usr/share/pirogue/ap/hostapd.conf /etc/hostapd/hostapd.conf
-   deb-systemd-invoke restart hostapd
-fi
-
-
-# Install dnsmasq configuration
-if ! cmp -s /usr/share/pirogue/ap/dnsmasq.conf /etc/dnsmasq.conf; then
-   cp /usr/share/pirogue/ap/dnsmasq.conf /etc/dnsmasq.conf
-   deb-systemd-invoke restart dnsmasq
-fi
-
-
-# Install dhcpcd configuration
-if ! cmp -s /usr/share/pirogue/ap/dhcpcd.conf /etc/dhcpcd.conf; then
-   cp /usr/share/pirogue/ap/dhcpcd.conf /etc/dhcpcd.conf
-   deb-systemd-invoke restart dhcpcd
-fi
-
-
-# Install iptables configuration
-if ! cmp -s /usr/share/pirogue/ap/rules.v4 /etc/iptables/rules.v4; then
-   cp /usr/share/pirogue/ap/rules.v4 /etc/iptables/rules.v4
-fi
-if ! cmp -s /usr/share/pirogue/ap/rules.v6 /etc/iptables/rules.v6; then
-   cp /usr/share/pirogue/ap/rules.v6 /etc/iptables/rules.v6
-fi
+cat /usr/share/pirogue/ap/rules.v6 > /etc/iptables/rules.v6
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v6
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v6
+ip6tables-restore < /etc/iptables/rules.v6

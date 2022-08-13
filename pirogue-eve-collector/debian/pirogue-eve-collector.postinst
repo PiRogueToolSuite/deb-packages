@@ -34,14 +34,10 @@ then
    fi
 fi
 
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /usr/share/pirogue/suricata/suricata.yaml
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /usr/share/pirogue/suricata/suricata.yaml
-
-# Install suricata configuration
-if ! cmp -s /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml; then
-   cp /usr/share/pirogue/suricata/suricata.yaml /etc/suricata/suricata.yaml
-   deb-systemd-invoke restart suricata
-fi
+cat /usr/share/pirogue/suricata/suricata.yaml > /etc/suricata/suricata.yaml
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/suricata/suricata.yaml
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/suricata/suricata.yaml
+deb-systemd-invoke restart suricata
 
 suricata-update --no-check-certificate update-sources
 suricata-update --no-check-certificate enable-source et/open || true
