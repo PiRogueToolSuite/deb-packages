@@ -1,3 +1,9 @@
+pirogue-ap (1.0.3) unstable; urgency=medium
+
+  * Improve wi-fi performance and stability
+
+ -- U+039b <hello@pts-project.org>  Mon, 15 Aug 2022 23:55:13 +0200
+
 pirogue-ap (1.0.2) unstable; urgency=medium
 
   * Load configuration either from pirogue-ctl or the configuration file to prevent losing current configuration
