@@ -44,12 +44,12 @@ fi
 echo "Installing the AP on ${WLAN_IFACE}, routing to ${ETH_IFACE}"
 
 # hostapd
-cat /usr/share/pirogue/ap/hostapd.conf > /etc/hostapd.conf
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/hostapd.conf
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/hostapd.conf
-sed -i "s/WIFI_NETWORK_NAME/${WIFI_NETWORK_NAME}/g" /etc/hostapd.conf
-sed -i "s/WIFI_NETWORK_KEY/${WIFI_NETWORK_KEY}/g" /etc/hostapd.conf
-sed -i "s/WIFI_COUNTRY_CODE/${WIFI_COUNTRY_CODE}/g" /etc/hostapd.conf
+cat /usr/share/pirogue/ap/hostapd.conf > /etc/hostapd/hostapd.conf
+sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/hostapd/hostapd.conf
+sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/hostapd/hostapd.conf
+sed -i "s/WIFI_NETWORK_NAME/${WIFI_NETWORK_NAME}/g" /etc/hostapd/hostapd.conf
+sed -i "s/WIFI_NETWORK_KEY/${WIFI_NETWORK_KEY}/g" /etc/hostapd/hostapd.conf
+sed -i "s/WIFI_COUNTRY_CODE/${WIFI_COUNTRY_CODE}/g" /etc/hostapd/hostapd.conf
 deb-systemd-invoke restart hostapd
 
 # dnsmasq
