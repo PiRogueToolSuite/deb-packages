@@ -1,4 +1,4 @@
-Source: pirogue-base-nogpio
+Source: pirogue-base-pc
 Section: misc
 Priority: optional
 Maintainer: U+039b <hello@pts-project.org>
@@ -7,7 +7,7 @@ Standards-Version: 4.5.1
 Homepage: https://github.com/PiRogueToolSuite/deb-packages
 Rules-Requires-Root: no
 
-Package: pirogue-base-nogpio
+Package: pirogue-base-pc
 Architecture: all
 Depends: ${misc:Depends},
  python3-pip,
