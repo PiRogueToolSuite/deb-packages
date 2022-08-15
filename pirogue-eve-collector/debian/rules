@@ -2,3 +2,6 @@
 
 %:
 	dh $@ --with python3
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
