@@ -19,7 +19,7 @@ then
    if [ -e "$interface/wireless" ]; then
       echo $(basename $interface)
    fi
-   done)
+   done | head -n1)
 
    # First, try to get the current configuration from the pirogue-ctl tool
    # If the command is not found, try to load the configuration from the PiRogue configuration file
@@ -27,10 +27,10 @@ then
    then
       echo "Get information from PiRogue configuration tool"
       source <(/usr/bin/pirogue-ctl config show --raw)
-   elif [ -f "/usr/share/pirogue/config/pirogue.user.env" ]
+   elif [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
    then
       echo "Get information from PiRogue configuration file"
-      source /usr/share/pirogue/config/pirogue.user.env
+      source /var/lib/pirogue/config/pirogue.user.env
    fi
 fi
 
