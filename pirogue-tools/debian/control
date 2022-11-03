@@ -24,6 +24,5 @@ Depends: ${misc:Depends},
  frida,
  libimobiledevice-utils,
  apktool,
- scrcpy,
 Description: Install all PiRogue additional tools
 
