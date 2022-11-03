@@ -23,5 +23,6 @@ Depends: ${misc:Depends},
  mitmproxy,
  frida,
  libimobiledevice-utils,
+ apktool,
 Description: Install all PiRogue additional tools
 
