@@ -101,7 +101,7 @@ if __name__ == '__main__':
 
         # Date & time
         now = datetime.now()
-        draw.text((35, 13), now.strftime("%y/%m/%d %H:%M:%S"), font=font, fill=(21, 21, 21))
+        draw.text((35, 13), now.strftime("%y/%m/%d %H:%M"), font=font, fill=(21, 21, 21))
 
         # Temperature 
         draw.text((194, 13), get_temperature(), font=font, fill=(21, 21, 21))
@@ -140,4 +140,4 @@ if __name__ == '__main__':
             pos_y += inc
         disp.display(image=im)
 
-        time.sleep(0.2)
+        time.sleep(1.0)
