@@ -1,3 +1,9 @@
+pirogue-dashboard (1.0.2) unstable; urgency=medium
+
+  * Fix device list, only list IP addresses starting with 10.8.0.*
+
+ -- U+039b <hello@pts-project.org>  Wed, 18 Jan 2023 11:45:07 +0100
+
 pirogue-dashboard (1.0.1) unstable; urgency=medium
 
   * Fix post installation actions
