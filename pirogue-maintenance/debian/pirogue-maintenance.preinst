@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+# Disable Suricata features if the installed RAM is lower than 1500000000 bytes (1.5GB)
+# Set the override only during the first installation of the package
+if [[ "$1" = "install" && "$2" = "" ]]; then
+    mkdir -p /etc/systemd/system/pirogue-maintenance.timer.d
+    echo -e "[Unit]\nConditionMemory=>1500000000" > /etc/systemd/system/pirogue-maintenance.timer.d/override.conf
+    mkdir -p /etc/systemd/system/pirogue-maintenance.service.d
+    echo -e "[Unit]\nConditionMemory=>1500000000" > /etc/systemd/system/pirogue-maintenance.service.d/override.conf
+fi

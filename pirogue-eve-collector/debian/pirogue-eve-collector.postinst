@@ -34,14 +34,23 @@ then
    fi
 fi
 
+phymem=$(awk '/MemTotal/{print $2}' /proc/meminfo) # in kB
+minmem=1500000
+
 cat /usr/share/pirogue/suricata/suricata.yaml > /etc/suricata/suricata.yaml
 sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/suricata/suricata.yaml
 sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/suricata/suricata.yaml
-deb-systemd-invoke restart suricata
+
+if [ "$phymem" -gt "$minmem" ] ; then
+   deb-systemd-invoke restart suricata
+fi
 
 suricata-update --no-check-certificate update-sources
 suricata-update --no-check-certificate enable-source et/open || true
 suricata-update --no-check-certificate enable-source oisf/trafficid || true
 suricata-update --no-check-certificate enable-source sslbl/ssl-fp-blacklist || true
 suricata-update add-source PTS https://piroguetoolsuite.github.io/suricata-rules/suricata.rules || true
-suricata-update --no-check-certificate 
+
+if [ "$phymem" -gt "$minmem" ] ; then
+   suricata-update --no-check-certificate 
+fi
