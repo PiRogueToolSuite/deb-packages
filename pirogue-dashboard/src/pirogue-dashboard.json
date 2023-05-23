@@ -1597,7 +1597,7 @@
             ]
           },
           "datasource": null,
-          "definition": "SELECT DISTINCT \"src_ip\" FROM \"flow\" WHERE (\"src_ip\" =~ /10.8.0.*/) AND (\"src_ip\" !~ /10.8.0.1/) GROUP BY src_ip",
+          "definition": "SELECT DISTINCT \"src_ip\" FROM \"flow\" WHERE (\"src_ip\" =~ /10.8.0.*/) AND (\"src_ip\" !~ /10.8.0.1$/) GROUP BY src_ip",
           "description": null,
           "error": null,
           "hide": 0,
@@ -1606,7 +1606,7 @@
           "multi": true,
           "name": "client_ip",
           "options": [],
-          "query": "SELECT DISTINCT \"src_ip\" FROM \"flow\" WHERE (\"src_ip\" =~ /10.8.0.*/) AND (\"src_ip\" !~ /10.8.0.1/) GROUP BY src_ip",
+          "query": "SELECT DISTINCT \"src_ip\" FROM \"flow\" WHERE (\"src_ip\" =~ /10.8.0.*/) AND (\"src_ip\" !~ /10.8.0.1$/) GROUP BY src_ip",
           "refresh": 1,
           "regex": "",
           "skipUrlSync": false,
