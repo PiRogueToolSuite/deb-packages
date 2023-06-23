@@ -1,3 +1,9 @@
+pirogue-dashboard (1.1.0) UNRELEASED; urgency=medium
+
+  * New upstream release, targeting Debian 12.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:49:13 +0200
+
 pirogue-dashboard (1.0.3) unstable; urgency=medium
 
   * Fix issue bad regex on device IP addresses

@@ -1,3 +1,9 @@
+pirogue-flow-inspector (1.1.0) UNRELEASED; urgency=medium
+
+  * New upstream release, targeting Debian 12.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:49:47 +0200
+
 pirogue-flow-inspector (1.0.4) unstable; urgency=medium
 
   * Load configuration either from pirogue-ctl or the configuration file to prevent losing current configuration 
