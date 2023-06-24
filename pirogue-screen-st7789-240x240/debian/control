@@ -11,7 +11,9 @@ Rules-Requires-Root: no
 
 Package: pirogue-screen-st7789-240x240
 Architecture: all
-Provides: pirogue-screen-controller
+Provides: pirogue-screen
+Conflicts: pirogue-screen
+Replaces: pirogue-screen
 Depends: ${misc:Depends},
  ${python3:Depends},
  influxdb,

@@ -6,6 +6,8 @@ pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
   * Switch Architecture back from any to all accordingly.
   * Add python3-libgpiod and python3-spidev to Depends for the upcoming
     rewrite using standard tools.
+  * Add Conflicts and Replaces alongside Provides, and switch to a slightly
+    shorter package name: pirogue-screen (#13).
 
  -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:50:48 +0200
 
