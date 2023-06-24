@@ -20,6 +20,6 @@ Depends: ${misc:Depends},
  pirogue-eve-collector, 
  pirogue-flow-inspector, 
  pirogue-maintenance, 
- pirogue-screen-st7789-240x240,
+ pirogue-screen-st7789-240x240 | pirogue-screen,
 Description: Install all PiRogue packages
 
