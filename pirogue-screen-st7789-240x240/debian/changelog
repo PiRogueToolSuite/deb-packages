@@ -1,6 +1,7 @@
 pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
 
   * New upstream release, targeting Debian 12.
+  * Stop bundling Adafruit Blinka and friends.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:50:48 +0200
 
