@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+#DEBHELPER#
+
+# Detect Raspberry Pi hardware
+if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
+then
+   echo "Raspberry Pi hardware detected"
+   touch /var/lib/pirogue/hardware/is_raspberrypi
+fi
+
+# Detect Raspberry Pi OS
+if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
+then
+   echo "Raspberry Pi OS detected"
+   touch /var/lib/pirogue/hardware/is_raspberrypi_os
+fi
+
+# Detect Debian mainline OS
+if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
+then
+   echo "Debian mainline OS detected"
+   touch /var/lib/pirogue/hardware/is_debian_os
+fi
