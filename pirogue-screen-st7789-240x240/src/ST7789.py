@@ -3,13 +3,12 @@ import numbers
 import time
 import random
 
-import digitalio
+import spidev
+import gpiod
+
 import numpy as np
 from PIL import Image
 from PIL import ImageDraw
-from board import D24, D25, D5, D6
-from busio import SPI
-from digitalio import DigitalInOut
 
 SPI_CLOCK_HZ = 120000000  # 120 MHz
 
@@ -140,34 +139,44 @@ def image_to_data(image):
 class ST7789(object):
     """Representation of an ST7789 IPS LCD."""
 
-    #def __init__(self, spi: SPI, rst: DigitalInOut = D24, dc: DigitalInOut = D25, mode=0b11, spi_baudrate=SPI_CLOCK_HZ,
-    def __init__(self, spi: SPI, rst: DigitalInOut = D5, dc: DigitalInOut = D6, mode=0b11, spi_baudrate=SPI_CLOCK_HZ,
+    def __init__(self, spi_bus: int=0, spi_device: int=0, rst_pin: int = 5, dc_pin: int = 6, mode=0b11,
+                 spi_baudrate=SPI_CLOCK_HZ, chip_id: str = 'pinctrl-bcm2711',
                  width=ST7789_TFTWIDTH, height=ST7789_TFTHEIGHT):
         """Create an instance of the display using SPI communication.  Must
         provide the GPIO pin number for the D/C pin and the SPI driver.  Can
         optionally provide the GPIO pin number for the reset pin as the rst
         parameter.
+
+        Chip ID:
+            * Pi4: pinctrl-bcm2711
+            * Pi3: pinctrl-bcm2835
+        To get the chip ID:
+        $ xargs -0 < /proc/device-tree/compatible
+        > raspberrypi,4-model-b brcm,bcm2711
+        > raspberrypi,3-model-b-plus brcm,bcm2837
+        $ root@rpi4-20230620:/sys/class/gpio# cat gpiochip454/label
+        > pinctrl-bcm2711
+        $ root@rpi4-20230620:/sys/class/gpio# cat gpiochip446/label
+        > raspberrypi-exp-gpio
+
         """
-        self._spi = spi
-        self._mode = mode
-        self._baudrate = spi_baudrate
-        # Setup the RESET pin
-        self._rst = digitalio.DigitalInOut(rst)
-        self._rst.direction = digitalio.Direction.OUTPUT
-        # Setup the DATA/COMMAND pin
-        self._dc = digitalio.DigitalInOut(dc)
-        self._dc.direction = digitalio.Direction.OUTPUT
+        # SPI configuration
+        self._spi = spidev.SpiDev()
+        self._spi.open(spi_bus, spi_device)
+        self._spi.mode = mode
+        self._spi.max_speed_hz = spi_baudrate
+        self._spi.no_cs = True
+        # GPIO configuration
+        self._gpio_chip = gpiod.Chip(chip_id)
+        ## Setup the RESET pin
+        self._rst = self._gpio_chip.get_line(rst_pin)
+        self._rst.request(consumer='PiRogue', type=gpiod.LINE_REQ_DIR_OUT)
+        ## Setup the DATA/COMMAND pin
+        self._dc = self._gpio_chip.get_line(dc_pin)
+        self._dc.request(consumer='PiRogue', type=gpiod.LINE_REQ_DIR_OUT)
         # Screen size
         self.width = width
         self.height = height
-        # Set SPI to mode
-        # see https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Mode_numbers
-        polarity = 0b01 & self._mode
-        phase = 0b10 & self._mode
-        while not self._spi.try_lock():
-            pass
-        self._spi.configure(self._baudrate, polarity, phase, 8)
-        self._spi.unlock()
         # Create an image buffer
         self.buffer = Image.new('RGB', (width, height))
 
@@ -178,15 +187,13 @@ class ST7789(object):
         single SPI transaction, with a default of 4096.
         """
         # Set DC low for command, high for data.
-        self._dc.value = is_data
+        self._dc.set_value(1 if is_data else 0)
 
         # Convert scalar argument to list so either can be passed as parameter.
         if isinstance(data, numbers.Number):
             data = [data & 0xFF]
-        # Write data a chunk at a time.
-        for start in range(0, len(data), chunk_size):
-            end = min(start + chunk_size, len(data))
-            self._spi.write(data[start:end])
+        # Write data
+        self._spi.writebytes2(data)
 
     def command(self, data):
         """Write a byte or array of bytes to the display as command data."""
@@ -199,15 +206,12 @@ class ST7789(object):
     def reset(self):
         """Reset the display, if reset pin is connected."""
         if self._rst is not None:
-            self._rst.value = 1
-            # self._gpio.set_high(self._rst)
-            time.sleep(0.100)
-            self._rst.value = 0
-            # self._gpio.set_low(self._rst)
-            time.sleep(0.100)
-            self._rst.value = 1
-            # self._gpio.set_high(self._rst)
-            time.sleep(0.100)
+            self._rst.set_value(1)
+            time.sleep(0.0100)
+            self._rst.set_value(0)
+            time.sleep(0.0100)
+            self._rst.set_value(1)
+            time.sleep(0.0100)
 
     def _init(self):
         # Initialize the display.  Broken out as a separate function so it can
@@ -215,7 +219,7 @@ class ST7789(object):
 
         time.sleep(0.010)
         self.command(0x11)
-        time.sleep(0.150)
+        time.sleep(0.0150)
 
         self.command(0x36)
         self.data(0x00)
@@ -287,7 +291,7 @@ class ST7789(object):
         self.data(0x3F)
         self.command(0x29)
 
-        time.sleep(0.100)  # 100 ms
+        time.sleep(0.0100)  # 100 ms
 
     def begin(self):
         """Initialize the display.  Should be called once before other calls that
@@ -363,9 +367,9 @@ class ST7789(object):
             textdraw.text((0, 0), '0,0', fill=(255, 255, 0))
             textdraw.text((199, 230), '240,240', fill=(255, 255, 0))
             textdraw.text((20, 100), 'Super text \o/', fill=(255, 155, 80))
-            #if duration > 0:
-            #    textdraw.text((29, 0), f'{1/duration:.3f} FPS', fill=(255, 255, 255))
+            if duration > 0:
+               textdraw.text((29, 0), f'{1/duration:.3f} FPS', fill=(255, 255, 255))
             self.display(black_image)
             stop = time.time()
             duration = stop - start
-            time.sleep(0.5)
+            # time.sleep(0.5)
