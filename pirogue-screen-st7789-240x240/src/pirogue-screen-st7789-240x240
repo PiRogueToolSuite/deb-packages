@@ -11,9 +11,6 @@ if __name__ == '__main__':
     from datetime import datetime
     from PIL import Image, ImageDraw, ImageFont
 
-    from board import SCK, MOSI, MISO, CE0, D24, D25, D4, D11, D5, D6
-    from busio import SPI
-
     import ST7789 as TFT
 
 
