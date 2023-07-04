@@ -37,3 +37,6 @@ case "$arch" in
     touch /var/lib/pirogue/hardware/is_debian_os
   ;;
 esac
+
+# Initial deployment of custom DTBs if needed:
+/etc/kernel/postinst.d/z51-pirogue-hardware-detection

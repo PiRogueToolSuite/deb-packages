@@ -25,3 +25,6 @@ official `linux-image` package.
 This hook is deployed on all systems, and uses flag files set by the postinst to
 determine whether to act, making its future removal easy (no longer shipping it
 should be sufficient).
+
+It is also called from postinst during configuration to ensure custom DTBs are
+deployed during installation.
