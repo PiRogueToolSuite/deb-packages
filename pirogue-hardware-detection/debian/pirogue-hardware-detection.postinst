@@ -4,23 +4,36 @@ set -e
 
 #DEBHELPER#
 
-# Detect Raspberry Pi hardware
-if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
-then
-   echo "Raspberry Pi hardware detected"
-   touch /var/lib/pirogue/hardware/is_raspberrypi
-fi
+mkdir -p /var/lib/pirogue/hardware
 
-# Detect Raspberry Pi OS
-if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
-then
-   echo "Raspberry Pi OS detected"
-   touch /var/lib/pirogue/hardware/is_raspberrypi_os
-fi
+arch=$(dpkg --print-architecture)
+case "$arch" in
+  arm*)
+    # On ARM systems, we need to check both hardware and software.
 
-# Detect Debian mainline OS
-if [ -f "/var/lib/pirogue/config/pirogue.user.env" ]
-then
-   echo "Debian mainline OS detected"
-   touch /var/lib/pirogue/hardware/is_debian_os
-fi
+    # Hardware: Raspberry or some other system.
+    if grep -qs '^raspberrypi,[34]-model' /proc/device-tree/compatible 2>/dev/null; then
+      echo "I: Raspberry Pi hardware detected"
+      touch /var/lib/pirogue/hardware/is_raspberrypi_hw
+    else
+      echo "E: Unsupported ARM-based system"
+    fi
+
+    # Software: Debian or Raspberry OS. Use raspi-firmware's presence since
+    # os-release isn't modified in Raspberry OS.
+    if dpkg-query -s raspi-firmware >/dev/null 2>&1; then
+      echo "I: Debian mainline OS detected"
+      touch /var/lib/pirogue/hardware/is_debian_os
+    else
+      echo "I: Raspberry Pi OS detected"
+      touch /var/lib/pirogue/hardware/is_raspberrypi_os
+    fi
+  ;;
+
+  *)
+    # On other (assumed PC) systems, assuming Debian is fine, as there are no
+    # hardware-specific components anyway.
+    echo "I: Debian mainline OS assumed"
+    touch /var/lib/pirogue/hardware/is_debian_os
+  ;;
+esac

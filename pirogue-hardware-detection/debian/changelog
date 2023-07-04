@@ -1,5 +1,12 @@
 pirogue-hardware-detection (1.1.0) bookworm; urgency=medium
 
   * Initial Release.
+  * Deploy flag files under /var/lib/pirogue/hardware/ based on hardware
+    and software detection:
+     - is_raspberrypi_hw when a supported Raspberry Pi model is spotted.
+     - is_raspberrypi_os on ARM systems when raspi-firmware is not
+       installed.
+     - is_debian_os on ARM systems when raspi-firmware is installed, and
+       on non-ARM systems.
 
  -- U+039b <hello@pts-project.org>  Mon, 03 Jul 2023 15:36:19 +0200
