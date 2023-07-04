@@ -8,5 +8,8 @@ pirogue-hardware-detection (1.1.0) bookworm; urgency=medium
        installed.
      - is_debian_os on ARM systems when raspi-firmware is installed, and
        on non-ARM systems.
+  * Ship Raspberry Pi 3 and 4 DTBs built from src:linux as found in Debian
+    12, with mainline commits 3cdba279c5e9 and e925743edc0d cherry-picked,
+    so that they're built with -@, making it easier to apply DTBOs.
 
  -- U+039b <hello@pts-project.org>  Mon, 03 Jul 2023 15:36:19 +0200
