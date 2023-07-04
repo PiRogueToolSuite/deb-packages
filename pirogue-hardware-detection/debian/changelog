@@ -11,5 +11,9 @@ pirogue-hardware-detection (1.1.0) bookworm; urgency=medium
   * Ship Raspberry Pi 3 and 4 DTBs built from src:linux as found in Debian
     12, with mainline commits 3cdba279c5e9 and e925743edc0d cherry-picked,
     so that they're built with -@, making it easier to apply DTBOs.
+  * Deploy a z51-pirogue-hardware-detection hook to make sure custom DTBs
+    override mainline DTBs as deployed via the z50-raspi-firmware hook
+    (only acting on Debian mainline systems running on Raspberry Pi 3 or
+    4, on arm64).
 
  -- U+039b <hello@pts-project.org>  Mon, 03 Jul 2023 15:36:19 +0200

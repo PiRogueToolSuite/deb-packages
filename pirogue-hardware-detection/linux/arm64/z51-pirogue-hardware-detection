@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+# Deploy custom DTBs when needed, performing additional checks to be
+# on the safe side, but not erroring out in case some weird situation
+# is spotted.
+if [ -f /var/lib/pirogue/hardware/is_raspberrypi_hw ] &&
+   [ -f /var/lib/pirogue/hardware/is_debian_os ]; then
+
+  # Check architecture:
+  arch=$(dpkg --print-architecture)
+  if [ "$arch" != "arm64" ]; then
+    echo "E: unexpected architecture $arch (expected: arm64), exiting" >&2
+    exit 0
+  fi
+
+  # Check layout:
+  if [ ! -d /boot/firmware ]; then
+    echo "E: missing /boot/firmware directory, exiting" >&2
+    exit 0
+  fi
+
+  # Copy DTBs:
+  echo "I: deploying custom DTBs" >&2
+  # shellcheck disable=SC2162 # no backslashes in DTB filenames
+  find /usr/share/pirogue-hardware-detection/linux/arm64/ -name '*.dtb' | \
+    while read dtb; do cp -v "$dtb" /boot/firmware; done
+fi

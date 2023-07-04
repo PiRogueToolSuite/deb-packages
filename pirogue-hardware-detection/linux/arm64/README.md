@@ -1,5 +1,7 @@
 # Custom DTBs
 
+## What and why
+
 The PiRogue Tool Suite project supports Raspberry Pi 3 and 4. The PiRogue hat
 requires enabling some hardware features, implemented via DTBOs. To apply
 successfully, some of them require finding references in the base DTB files,
@@ -12,3 +14,14 @@ initially).
 
 Hopefully those commits will make it into the official Debian package for some
 12.x point release, and we'll be able to drop our custom DTBs after a while.
+
+
+## How
+
+Additionally, we ship a kernel hook running after the raspi-firmware one
+(`z50-raspi-firmware`), making sure we override the DTBs it deploys from the
+official `linux-image` package.
+
+This hook is deployed on all systems, and uses flag files set by the postinst to
+determine whether to act, making its future removal easy (no longer shipping it
+should be sufficient).
