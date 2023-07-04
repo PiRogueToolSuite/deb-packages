@@ -2,6 +2,8 @@
 [Unit]
 Description=PiRogue screen
 Wants=influxdb.service
+ConditionPathExists=/var/lib/pirogue/hardware/is_raspberrypi_hw
+ConditionPathExists=/dev/spidev0.0
 
 [Service]
 ExecStart=/usr/sbin/pirogue-screen-st7789-240x240
