@@ -24,4 +24,5 @@ Depends: ${misc:Depends},
  python3-pil,
  python3-spidev,
  python3-systemd,
+ pirogue-hardware-detection,
 Description: Provision PiRogue 240x240px ST7789 screen driver

@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+  if [ -f /var/lib/pirogue/hardware/is_raspberrypi_hw ]; then
+    # Supported Raspberry models are assumed to have a hat connected,
+    # featuring the screen this package supports.
+    if [ -f /var/lib/pirogue/hardware/is_debian_os ]; then
+      # TODO: Copy DTBO, enable dtoverlay via raspi-firmware.
+      :
+    elif [ -f /var/lib/pirogue/hardware/is_raspberrypi_os ]; then
+      # TODO: Enable DTBO via config.txt
+      :
+    fi
+  fi
+fi
+
+# Include debhelper-generated code in all cases.
+#
+# As of 1.1.0, only dh_installsystemd generates code (to enable and to start the
+# service unit), but we could be missing other things in the future, so it seems
+# best to keep everything, and rely on conditions in the service unit to have it
+# skipped on non-Raspberry Pi hardware.
+
+#DEBHELPER#
