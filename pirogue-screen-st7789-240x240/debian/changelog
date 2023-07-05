@@ -1,5 +1,6 @@
 pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
 
+  [ Cyril Brulebois ]
   * New upstream release, targeting Debian 12.
   * Stop bundling Adafruit Blinka and friends.
   * Delete dh overrides accordingly.
@@ -8,6 +9,9 @@ pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
     rewrite using standard tools.
   * Add Conflicts and Replaces alongside Provides, and switch to a slightly
     shorter package name: pirogue-screen (#13).
+
+  [ U+039b ]
+  * Port code to the standard libgpiod and spidev modules (#10).
 
  -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:50:48 +0200
 
