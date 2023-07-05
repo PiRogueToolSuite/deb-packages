@@ -1,0 +1,15 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@0 {
+		target = <&i2c1>;
+		compatible = "brcm,bcm2835";
+		__overlay__ {
+			rtc@68 {
+				compatible = "maxim,ds3231";
+				reg = <0x68>;
+			};
+		};
+	};
+};
