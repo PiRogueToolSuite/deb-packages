@@ -1,16 +1,44 @@
 #!/bin/sh
 set -e
 
+ensure_conf_line () {
+  if ! grep -q "^$1" "$2"; then
+    echo "$1" >> "$2"
+  fi
+}
+
+DATA=/usr/share/pirogue/screen-st7789-240x240/linux/arm64/
+
 if [ "$1" = "configure" ]; then
   if [ -f /var/lib/pirogue/hardware/is_raspberrypi_hw ]; then
     # Supported Raspberry models are assumed to have a hat connected,
     # featuring the screen this package supports.
     if [ -f /var/lib/pirogue/hardware/is_debian_os ]; then
-      # TODO: Copy DTBO, enable dtoverlay via raspi-firmware.
-      :
+      # Debian needs copying and enabling a DTBO, plus a udev rule to make sure
+      # we get /dev/spidev0.0 created in userspace since spidev in DTBs is now
+      # forbidden (fffc84fd87d963a2ea77a125b8a6f5a3c9f3192d in mainline), and
+      # refreshing everything raspi-firmware is responsible for.
+      cp $DATA/pirogue-screen.dtbo /boot/firmware
+      ensure_conf_line 'dtoverlay=pirogue-screen' /etc/default/raspi-firmware-custom
+
+      # Only create/refresh when needed:
+      ETC_RULES=/etc/udev/rules.d/80-pirogue-screen.rules
+      PKG_RULES=$DATA/80-pirogue-screen.rules
+      if [ ! -e $ETC_RULES ] || ! cmp -s $ETC_RULES $PKG_RULES; then
+        cp $PKG_RULES $ETC_RULES
+        update-initramfs -u -k "$(uname -r)"
+      fi
+
+      # Refresh config.txt and redeploy DTBs in any case. The first one is not
+      # supposed to go away, the second one is only temporary.
+      /etc/kernel/postinst.d/z50-raspi-firmware
+      if [ -x /etc/kernel/postinst.d/z51-pirogue-hardware-detection ]; then
+        /etc/kernel/postinst.d/z51-pirogue-hardware-detection
+      fi
     elif [ -f /var/lib/pirogue/hardware/is_raspberrypi_os ]; then
-      # TODO: Enable DTBO via config.txt
-      :
+      # Raspberry OS only needs SPI enabled, since they reverted the mainline
+      # change (551971ef5dc7f32a6e6e903e45e1732eaa1479bc in raspberrypi/linux).
+      ensure_conf_line 'dtparam=spi=on' /boot/config.txt
     fi
   fi
 fi

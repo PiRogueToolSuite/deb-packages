@@ -9,6 +9,12 @@ pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
     rewrite using standard tools.
   * Add Conflicts and Replaces alongside Provides, and switch to a slightly
     shorter package name: pirogue-screen (#13).
+  * When running on a supported Raspberry Pi, with Debian arm64, deploy
+    our custom DTBO, enable it, add a udev rule to create /dev/spidev0.0
+    from userland also refreshing the initramfs if needed, and run hooks
+    to refresh config.txt and redeploy DTBs.
+  * When running on a supported Raspberry Pi, with Raspberry OS, enable
+    the vendor-shipped SPI DTBO.
 
   [ U+039b ]
   * Port code to the standard libgpiod and spidev modules (#10).
