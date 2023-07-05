@@ -5,3 +5,4 @@ src/infos.bmp                     usr/share/pirogue/screen-st7789-240x240
 src/ST7789.py                     usr/lib/pirogue/screen-st7789-240x240
 
 linux/arm64/*.dtbo                  usr/share/pirogue/screen-st7789-240x240/linux/arm64
+linux/arm64/80-pirogue-screen.rules usr/share/pirogue/screen-st7789-240x240/linux/arm64
