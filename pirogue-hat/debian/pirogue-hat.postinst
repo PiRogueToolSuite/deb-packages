@@ -16,7 +16,7 @@ if [ "$1" = "configure" ]; then
     exit 0
   fi
 
-  if [ ! -f /var/lib/pirogue/hardware/is_debian_os ]; then
+  if [ -f /var/lib/pirogue/hardware/is_debian_os ]; then
     # Debian needs copying and enabling a DTBO, then refreshing everything
     # raspi-firmware is responsible for.
     mkdir -p /boot/firmware/overlays
