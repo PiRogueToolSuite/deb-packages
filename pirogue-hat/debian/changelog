@@ -1,6 +1,13 @@
 pirogue-hat (1.1.0) UNRELEASED; urgency=medium
 
   * New upstream release, targeting Debian 12.
+  * Add a pirogue-hat DTBO to be used on Debian mainline, merging a usual
+    I2C/RTC overlay and a modified version of the gpio-fan overlay found
+    in the rpi-6.1.y branch.
+  * When running on a supported Raspberry Pi, with Debian arm64, deploy
+    the custom DTBO, enable it, and refresh config.txt and redeploy DTBs.
+  * When running on a supported Raspberry Pi, with Raspberry OS, set the
+    required DT params and overlays (as before).
 
  -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:49:58 +0200
 

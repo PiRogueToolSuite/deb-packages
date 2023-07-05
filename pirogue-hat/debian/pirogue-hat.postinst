@@ -10,11 +10,35 @@ ensure_conf_line () {
   fi
 }
 
+if [ "$1" = "configure" ]; then
+  # Only do something on supported Raspberry hardware:
+  if [ ! -f /var/lib/pirogue/hardware/is_raspberrypi_hw ]; then
+    exit 0
+  fi
 
-ensure_conf_line "dtparam=i2c_arm=on" "/boot/config.txt"
-ensure_conf_line "dtparam=spi=on" "/boot/config.txt"
-ensure_conf_line "dtoverlay=i2c-rtc,ds3231" "/boot/config.txt"
-ensure_conf_line "dtoverlay=gpio-fan,gpiopin=13,temp=37000" "/boot/config.txt"
+  if [ ! -f /var/lib/pirogue/hardware/is_debian_os ]; then
+    # Debian needs copying and enabling a DTBO, then refreshing everything
+    # raspi-firmware is responsible for.
+    mkdir -p /boot/firmware/overlays
+    cp /usr/share/pirogue-hat/linux/arm64/pirogue-hat.dtbo /boot/firmware/overlays
+    ensure_conf_line 'dtoverlay=pirogue-hat,gpiopin=13,temp=37000' /etc/default/raspi-firmware-custom
 
-ensure_conf_line "rtc-ds3231" "/etc/modules"
-ensure_conf_line "i2c-dev" "/etc/modules"
+    # Refresh config.txt and redeploy DTBs in any case. The first one is not
+    # supposed to go away, the second one is only temporary.
+    /etc/kernel/postinst.d/z50-raspi-firmware
+    if [ -x /etc/kernel/postinst.d/z51-pirogue-hardware-detection ]; then
+      /etc/kernel/postinst.d/z51-pirogue-hardware-detection
+    fi
+  fi
+
+  if [ -f /var/lib/pirogue/hardware/is_raspberrypi_os ]; then
+    # Raspberry OS needs some DT params and overlays set up:
+    ensure_conf_line 'dtparam=i2c_arm=on'                       /boot/config.txt
+    ensure_conf_line 'dtoverlay=i2c-rtc,ds3231'                 /boot/config.txt
+    ensure_conf_line 'dtoverlay=gpio-fan,gpiopin=13,temp=37000' /boot/config.txt
+
+    # Keep legacy code, loading some modules manually:
+    ensure_conf_line 'rtc-ds3231' /etc/modules
+    ensure_conf_line 'i2c-dev'    /etc/modules
+  fi
+fi
