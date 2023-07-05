@@ -18,7 +18,8 @@ if [ "$1" = "configure" ]; then
       # we get /dev/spidev0.0 created in userspace since spidev in DTBs is now
       # forbidden (fffc84fd87d963a2ea77a125b8a6f5a3c9f3192d in mainline), and
       # refreshing everything raspi-firmware is responsible for.
-      cp $DATA/pirogue-screen.dtbo /boot/firmware
+      mkdir -p /boot/firmware/overlays
+      cp $DATA/pirogue-screen.dtbo /boot/firmware/overlays
       ensure_conf_line 'dtoverlay=pirogue-screen' /etc/default/raspi-firmware-custom
 
       # Only create/refresh when needed:
