@@ -13,4 +13,5 @@ Conflicts: fake-hwclock
 Replaces: fake-hwclock
 Depends: ${misc:Depends},
  i2c-tools,
+ pirogue-hardware-detection,
 Description: Install PiRogue's hat requirements
