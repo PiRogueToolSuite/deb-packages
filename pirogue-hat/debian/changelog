@@ -8,6 +8,8 @@ pirogue-hat (1.1.0) UNRELEASED; urgency=medium
     the custom DTBO, enable it, and refresh config.txt and redeploy DTBs.
   * When running on a supported Raspberry Pi, with Raspberry OS, set the
     required DT params and overlays (as before).
+  * Delete 85-hwclock.rules, this shouldn't be needed for any Linux
+    versions after v5.7-rc1 (f9b2a4d6a5f1 in mainline).
 
  -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:49:58 +0200
 

@@ -1,2 +1,1 @@
-src/85-hwclock.rules lib/udev/rules.d
 linux/arm64/*.dtbo   usr/share/pirogue-hat/linux/arm64/
