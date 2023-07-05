@@ -25,7 +25,7 @@ if [ "$1" = "configure" ]; then
 
     # Refresh config.txt and redeploy DTBs in any case. The first one is not
     # supposed to go away, the second one is only temporary.
-    /etc/kernel/postinst.d/z50-raspi-firmware
+    /etc/kernel/postinst.d/z50-raspi-firmware configure
     if [ -x /etc/kernel/postinst.d/z51-pirogue-hardware-detection ]; then
       /etc/kernel/postinst.d/z51-pirogue-hardware-detection
     fi
