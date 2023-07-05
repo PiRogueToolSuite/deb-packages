@@ -5,9 +5,9 @@ set -e
 #DEBHELPER#
 
 ensure_conf_line () {
-    if ! grep -q "^$1" "$2"; then
-        echo $1 >> $2
-    fi
+  if ! grep -q "^$1" "$2"; then
+    echo "$1" >> "$2"
+  fi
 }
 
 
