@@ -15,7 +15,6 @@
 			};
 		};
 	};
-};
 
 
 /* Adapted from gpio-fan-overlay.dts found in the rpi-6.1.y branch.

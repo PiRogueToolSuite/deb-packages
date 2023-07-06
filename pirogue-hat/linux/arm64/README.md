@@ -9,4 +9,4 @@ with matching `target-path` ones, making the missing labels a non-issue.
 To build the DTBO:
 
     sudo apt-get install device-tree-compiler
-    dtc -Idts -Odtb i2c-rtc-overlay.dts > pirogue-hat.dtbo
+    dtc -Idts -Odtb pirogue-hat-overlay.dts > pirogue-hat.dtbo
