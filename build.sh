@@ -4,17 +4,7 @@ set -e
 # Build packages
 for source in `find . -maxdepth 1 -type d -name "pirogue-*"`; do
     cd $source;
-    case "$source" in
-        ./pirogue-screen-st7789-240x240)
-            # Architecture: any = 2 specific builds
-            # dpkg-buildpackage -b -tc -uc -us -ui -aarmhf
-            # dpkg-buildpackage -b -tc -uc -us -ui -aarm64
-        ;;
-        *)
-            # Architecture: all = 1 generic build
-            dpkg-buildpackage -b -tc -uc -us -ui
-        ;;
-    esac
+    dpkg-buildpackage -b -tc -uc -us -ui
     cd ..
 done
 

@@ -2,11 +2,8 @@
 
 set -e
 
-deb-systemd-invoke unmask hostapd
-deb-systemd-invoke enable hostapd
-
-deb-systemd-invoke enable pirogue-rfkill
-deb-systemd-invoke start pirogue-rfkill
+systemctl unmask hostapd || true
+systemctl enable hostapd || true
 
 #DEBHELPER#
 
@@ -64,17 +61,42 @@ sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/dhcpcd.conf
 sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/dhcpcd.conf
 deb-systemd-invoke restart dhcpcd
 
-# iptables
-cat /usr/share/pirogue/ap/rules.v4 > /etc/iptables/rules.v4
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v4
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v4
-
-cat /usr/share/pirogue/ap/rules.v6 > /etc/iptables/rules.v6
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v6
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v6
-
-if [[ -z "${PIROGUE_IMAGE_BUILD}" ]]
+# firewall
+if update-alternatives --query iptables 2>/dev/null|grep -qs '^Value: /usr/sbin/iptables-legacy$'
 then
-   iptables-restore < /etc/iptables/rules.v4
-   ip6tables-restore < /etc/iptables/rules.v6
+   echo "OS configured to use iptables legacy"
+   cat /usr/share/pirogue/ap/rules.v4 > /etc/iptables/rules.v4
+   sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v4
+   sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v4
+
+   cat /usr/share/pirogue/ap/rules.v6 > /etc/iptables/rules.v6
+   sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/iptables/rules.v6
+   sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/iptables/rules.v6
+
+   if [[ -z "${PIROGUE_IMAGE_BUILD}" ]]
+   then
+      iptables-restore < /etc/iptables/rules.v4
+      ip6tables-restore < /etc/iptables/rules.v6
+   fi
+else
+   echo "OS configured to use nftables"
+   cat /usr/share/pirogue/ap/nftables-pirogue.conf > /etc/nftables-pirogue.conf
+   sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/nftables-pirogue.conf
+   sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/nftables-pirogue.conf
+
+   # Force nfstable to use /etc/nftables-pirogue.conf instead of /etc/nftables.conf
+   mkdir -p /etc/systemd/system/nftables.service.d
+   echo "[Service]" > /etc/systemd/system/nftables.service.d/override.conf
+   echo "ExecStart=" >> /etc/systemd/system/nftables.service.d/override.conf
+   echo "ExecReload=" >> /etc/systemd/system/nftables.service.d/override.conf
+   echo "ExecStart=/usr/sbin/nft -f /etc/nftables-pirogue.conf" >> /etc/systemd/system/nftables.service.d/override.conf
+   echo "ExecReload=/usr/sbin/nft -f /etc/nftables-pirogue.conf" >> /etc/systemd/system/nftables.service.d/override.conf
+
+   systemctl daemon-reload || true
+   systemctl enable nftables.service || true
+
+   if [[ -z "${PIROGUE_IMAGE_BUILD}" ]]
+   then
+      deb-systemd-invoke start nftables.service
+   fi
 fi

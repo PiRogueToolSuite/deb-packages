@@ -25,4 +25,6 @@ Depends: ${misc:Depends},
  python3-spidev,
  python3-systemd,
  pirogue-hardware-detection,
+Recommends:
+ raspi-vcgencmd,
 Description: Provision PiRogue 240x240px ST7789 screen driver
