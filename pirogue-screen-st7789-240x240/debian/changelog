@@ -1,4 +1,4 @@
-pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
+pirogue-screen-st7789-240x240 (1.1.0) bookworm; urgency=medium
 
   [ Cyril Brulebois ]
   * New upstream release, targeting Debian 12.
@@ -19,7 +19,7 @@ pirogue-screen-st7789-240x240 (1.1.0) UNRELEASED; urgency=medium
   [ U+039b ]
   * Port code to the standard libgpiod and spidev modules (#10).
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:50:48 +0200
+ -- U+039b <hello@pts-project.org>  Tue, 29 Aug 2023 13:08:23 +0200
 
 pirogue-screen-st7789-240x240 (1.0.3) unstable; urgency=medium
 

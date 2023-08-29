@@ -56,6 +56,16 @@ if __name__ == '__main__':
             return "not configured"
         return port
 
+    def get_chip_name():
+        # Returns the predicted pinctrl label
+        with open('/proc/device-tree/compatible') as f:
+            model = f.read()
+        if 'raspberrypi,4-model' in model:
+            return 4, 'bcm2711'
+        elif 'raspberrypi,3-model' in model:
+            return 3, 'bcm2835'
+        return -1, ''
+        
     def text_wrap(text, font, max_width):
             lines = []
             if font.getsize(text)[0]  <= max_width:
@@ -76,7 +86,14 @@ if __name__ == '__main__':
 
 
     SPI_SPEED_HZ = 120000000
-    disp = TFT.ST7789(spi_baudrate=SPI_SPEED_HZ)
+
+    model, chip_name = get_chip_name()
+    disp = None
+
+    if model != -1:
+        disp = TFT.ST7789(spi_baudrate=SPI_SPEED_HZ, chip_id=f'pinctrl-{chip_name}')
+    else:
+        raise Exception('Unsupported hardware model')
 
     # Initialize display.
     disp.begin()

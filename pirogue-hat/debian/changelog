@@ -1,4 +1,4 @@
-pirogue-hat (1.1.0) UNRELEASED; urgency=medium
+pirogue-hat (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
   * Add a pirogue-hat DTBO to be used on Debian mainline, merging a usual
@@ -13,7 +13,7 @@ pirogue-hat (1.1.0) UNRELEASED; urgency=medium
   * Delete 85-hwclock.rules, this shouldn't be needed for any Linux
     versions after v5.7-rc1 (f9b2a4d6a5f1 in mainline).
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:49:58 +0200
+ -- U+039b <hello@pts-project.org>  Tue, 29 Aug 2023 13:08:23 +0200
 
 pirogue-hat (1.0.1) unstable; urgency=medium
 

@@ -1,4 +1,4 @@
-pirogue-base (1.1.0) UNRELEASED; urgency=medium
+pirogue-base (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
   * Adjust pirogue-screen-st7789-240x240 dependency, accepting
@@ -7,7 +7,7 @@ pirogue-base (1.1.0) UNRELEASED; urgency=medium
     making it possible to switch to a different package later on, that
     would also provide the pirogue-screen virtual package.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:47:29 +0200
+ -- U+039b <hello@pts-project.org>  Tue, 29 Aug 2023 13:08:23 +0200
 
 pirogue-base (1.0.2) unstable; urgency=medium
 

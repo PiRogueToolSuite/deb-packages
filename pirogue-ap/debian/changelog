@@ -1,8 +1,8 @@
-pirogue-ap (1.1.0) UNRELEASED; urgency=medium
+pirogue-ap (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Jun 2023 01:45:10 +0200
+ -- U+039b <hello@pts-project.org>  Tue, 29 Aug 2023 13:08:23 +0200
 
 pirogue-ap (1.0.3) unstable; urgency=medium
 
