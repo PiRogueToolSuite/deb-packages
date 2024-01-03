@@ -1,2 +1,4 @@
 linux/arm64/*.dtb                          usr/share/pirogue-hardware-detection/linux/arm64/
+linux/arm64/z51-pirogue-hardware-detection etc/initramfs/post-update.d/
 linux/arm64/z51-pirogue-hardware-detection etc/kernel/postinst.d/
+linux/arm64/z51-pirogue-hardware-detection etc/kernel/postrm.d/

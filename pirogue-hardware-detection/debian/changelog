@@ -1,3 +1,19 @@
+pirogue-hardware-detection (1.1.1) bookworm; urgency=medium
+
+  * Fix DTB support: deploy the z51-pirogue-hardware-detection hook not
+    only in the /etc/kernel/postinst.d/ directory (so that it gets called
+    alongside the initramfs-tools and z50-raspi-firmware hooks when
+    a linux-image package is set up), but also:
+     - in /etc/initramfs/post-update.d/z50-raspi-firmware, since the
+       initramfs-tools trigger can be activated on its own, which would
+       result in z50-raspi-firmware only getting called, leaving the
+       unpatched DTBs in place (closes #21). This problem has been
+       witnessed during dist-upgrades that pull a new linux-image package.
+     - in /etc/kernel/postrm.d/, to be on the safe side: (auto)removing
+       older kernels might lead to similar situations.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 03 Jan 2024 11:05:36 +0100
+
 pirogue-hardware-detection (1.1.0) bookworm; urgency=medium
 
   * Initial Release.
