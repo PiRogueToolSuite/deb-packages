@@ -1,0 +1,43 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+interfaces=$(ip l | awk '/^[0-9]+/ {print $2}' | sed 's/:$//' | xargs | sed 's/ /, /g')
+
+# Phase 1: check existing config if any
+db_get pirogue-routing/wired_interface || true
+WIRED="$RET"
+db_get pirogue-routing/wireless_interface || true
+WIRELESS="$RET"
+
+# Phase 2: detect default settings if needed
+if [ -z "$WIRED" ]; then
+   # FIXME: use heuristics
+   WIRED=virbr0
+fi
+if [ -z "$WIRELESS" ]; then
+   # FIXME: use heuristics
+   WIRELESS=wlo1
+fi
+
+# Phase 3: inject default settings/interfaces, ask questions
+db_subst     pirogue-routing/wired_interface CHOICES "$interfaces"
+db_set       pirogue-routing/wired_interface "$WIRED"
+db_input low pirogue-routing/wired_interface || true
+db_go || true
+
+db_subst     pirogue-routing/wireless_interface CHOICES "$interfaces"
+db_set       pirogue-routing/wireless_interface "$WIRELESS"
+db_input low pirogue-routing/wireless_interface || true
+db_go || true
+
+# Phase 4: use answers to set everything up
+db_get pirogue-routing/wired_interface || true
+WIRED="$RET"
+db_get pirogue-routing/wireless_interface || true
+WIRELESS="$RET"
+
+echo "Do something with wired=$WIRED and wireless=$WIRELESS"
+
+exit 0

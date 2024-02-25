@@ -1,0 +1,15 @@
+Source: pirogue-routing
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-routing
+Architecture: all
+Depends: ${misc:Depends},
+ iproute2,
+Description: Configure routing
+

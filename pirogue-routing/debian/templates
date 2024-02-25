@@ -1,0 +1,11 @@
+Template: pirogue-routing/wired_interface
+Type: select
+Choices: ${CHOICES}
+Description: Wired interface
+ Let's explain what this choice is about, the wired edition.
+
+Template: pirogue-routing/wireless_interface
+Type: select
+Choices: ${CHOICES}
+Description: Wired interface
+ Let's explain what this choice is about, the wireless edition.
