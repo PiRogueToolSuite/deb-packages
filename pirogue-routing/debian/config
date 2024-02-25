@@ -3,6 +3,8 @@ set -e
 
 . /usr/share/debconf/confmodule
 
+CONFIG_FILE=/tmp/pirogue-routing.ini
+
 interfaces=$(ip l | awk '/^[0-9]+/ {print $2}' | sed 's/:$//' | xargs | sed 's/ /, /g')
 
 # Phase 1: check existing config if any
@@ -21,15 +23,22 @@ if [ -z "$WIRELESS" ]; then
    WIRELESS=wlo1
 fi
 
+# Phase 2 bis: determine whether questions need to be asked
+if [ -f $CONFIG_FILE ]; then
+   priority=low
+else
+   priority=high
+fi
+
 # Phase 3: inject default settings/interfaces, ask questions
 db_subst     pirogue-routing/wired_interface CHOICES "$interfaces"
 db_set       pirogue-routing/wired_interface "$WIRED"
-db_input low pirogue-routing/wired_interface || true
+db_input $priority pirogue-routing/wired_interface || true
 db_go || true
 
 db_subst     pirogue-routing/wireless_interface CHOICES "$interfaces"
 db_set       pirogue-routing/wireless_interface "$WIRELESS"
-db_input low pirogue-routing/wireless_interface || true
+db_input $priority pirogue-routing/wireless_interface || true
 db_go || true
 
 # Phase 4: use answers to set everything up
@@ -38,6 +47,6 @@ WIRED="$RET"
 db_get pirogue-routing/wireless_interface || true
 WIRELESS="$RET"
 
-echo "Do something with wired=$WIRED and wireless=$WIRELESS"
+echo "Do something with wired=$WIRED and wireless=$WIRELESS" > $CONFIG_FILE
 
 exit 0
