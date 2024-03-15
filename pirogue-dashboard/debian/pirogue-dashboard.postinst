@@ -12,6 +12,4 @@ if ! cmp -s /usr/share/pirogue/grafana/grafana.ini /etc/grafana/grafana.ini; the
    deb-systemd-invoke restart grafana-server
 fi
 
-# Install required grafana plugins
-grafana-cli plugins install grafana-worldmap-panel
 deb-systemd-invoke restart grafana-server
