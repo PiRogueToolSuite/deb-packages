@@ -1,3 +1,9 @@
+pirogue-dashboard (1.1.1) bookworm; urgency=medium
+
+  * Remove the dependency on world map plugin which has been replaced by geomap (built-in)
+
+ -- U+039b <hello@pts-project.org>  Fri, 15 Mar 2024 10:02:49 +0100
+
 pirogue-dashboard (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
