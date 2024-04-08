@@ -1,4 +1,21 @@
 #!/usr/bin/make -f
 
+# FIXME: pick the first package automatically or hardcode the destination.
+export PACKAGE := $(shell dh_listpackages | head -1)
+export TOKEN := telemetry-token.json
+export TOKEN_DIR := var/lib/$(PACKAGE)
+
 %:
 	dh "$@"
+
+execute_after_dh_auto_build:
+	gpg --batch --output $(TOKEN) --decrypt $(TOKEN).asc || true
+
+execute_after_dh_install:
+	if [ -f $(TOKEN) ]; then \
+		mkdir -p debian/$(PACKAGE)/$(TOKEN_DIR) && \
+		cp $(TOKEN) debian/$(PACKAGE)/$(TOKEN_DIR); \
+	fi
+
+execute_after_dh_clean:
+	rm -f $(TOKEN)
