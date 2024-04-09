@@ -3,5 +3,5 @@
 *.buildinfo
 *.dsc
 *.tar.xz
-
+.idea
 notes

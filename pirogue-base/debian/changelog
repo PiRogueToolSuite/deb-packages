@@ -1,3 +1,9 @@
+pirogue-base (1.1.1) bookworm; urgency=medium
+
+  * Add the PiRogue telemetry
+
+ -- U+039b <hello@pts-project.org>  Tue, 09 Apr 2024 17:25:07 +0200
+
 pirogue-base (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
