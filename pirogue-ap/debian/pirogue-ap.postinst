@@ -68,7 +68,7 @@ if [ "$1" = configure ]; then
   ENI=/etc/network/interfaces.d/wlan0
   if [ -n "$2" ] && dpkg --compare-versions "$2" '<<' 1.1.2; then
     if [ -f $ENI ]; then
-      echo "I: archiving existing $ENI configuration"
+      echo "I: archiving existing $ENI configuration" >&2
       mv -v $ENI /root/e-n-i-$(basename $ENI).bak
     fi
 
