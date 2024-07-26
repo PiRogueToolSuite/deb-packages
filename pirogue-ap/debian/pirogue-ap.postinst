@@ -65,7 +65,7 @@ deb-systemd-invoke restart dnsmasq
 if [ "$1" = configure ] && [ -n "$2" ] && dpkg --compare-versions "$2" '<<' 1.1.2; then
   ENI=/etc/network/interfaces.d/wlan0
   if [ -f $ENI ]; then
-    echo "I: renaming $ENI into $ENI.bak"
+    echo "I: renaming existing $ENI configuration"
     mv -v $ENI $ENI.bak
   fi
 
