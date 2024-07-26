@@ -55,12 +55,6 @@ sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/dnsmasq.conf
 sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/dnsmasq.conf 
 deb-systemd-invoke restart dnsmasq
 
-# dhcpcd
-cat /usr/share/pirogue/ap/dhcpcd.conf > /etc/dhcpcd.conf
-sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/dhcpcd.conf
-sed -i "s/WLAN_IFACE/${WLAN_IFACE}/g" /etc/dhcpcd.conf
-deb-systemd-invoke restart dhcpcd
-
 # firewall
 if update-alternatives --query iptables 2>/dev/null|grep -qs '^Value: /usr/sbin/iptables-legacy$'
 then
