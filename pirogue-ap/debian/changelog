@@ -1,4 +1,4 @@
-pirogue-ap (1.1.1) bookwork; urgency=medium
+pirogue-ap (1.1.1) bookworm; urgency=medium
 
   * Improve firewalling by blocking traffic from the Wi-Fi network to the LAN network.
 
