@@ -15,7 +15,6 @@ Depends: ${misc:Depends},
  hostapd,
  dnsmasq,
  rfkill,
- dhcpcd5,
 Provides: pirogue-network-routing
 Conflicts: pirogue-network-routing
 Description: Install PiRogue wi-fi AP configuration
