@@ -1,5 +1,4 @@
 src/dnsmasq.conf usr/share/pirogue/ap
-src/dhcpcd.conf usr/share/pirogue/ap
 src/hostapd.conf usr/share/pirogue/ap
 src/rules.v4 usr/share/pirogue/ap
 src/rules.v6 usr/share/pirogue/ap

@@ -6,6 +6,7 @@ pirogue-ap (1.1.2) UNRELEASED; urgency=medium
     experimental support for Raspberry Pi 5), and is likely responsible
     for some reported connection losses, possibly by racing against
     dhclient.
+  * Stop shipping dhcpcd.conf accordingly.
 
  -- Cyril Brulebois <cyril@debamax.com>  Fri, 26 Jul 2024 14:56:55 +0200
 
