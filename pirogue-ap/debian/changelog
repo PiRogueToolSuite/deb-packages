@@ -11,6 +11,7 @@ pirogue-ap (1.1.2) UNRELEASED; urgency=medium
   * Adjust /etc/network/interfaces.d/wlan0:
      - If it still exists, move it aside (whatever its contents).
      - Write a static configuration for wlan0: IPv4 = 10.8.0.1/24.
+     - Only do that when upgrading from (strictly) before 1.1.2.
 
  -- Cyril Brulebois <cyril@debamax.com>  Fri, 26 Jul 2024 14:56:55 +0200
 

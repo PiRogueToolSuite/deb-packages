@@ -59,22 +59,27 @@ deb-systemd-invoke restart dnsmasq
 #  - Debian ships an all-comments file, which seems OK to get rid of.
 #  - Local admins might have tweaked it.
 #  - In any case, move it aside and write our own.
-ENI=/etc/network/interfaces.d/wlan0
-if [ -f $ENI ]; then
-  echo "I: renaming $ENI into $ENI.bak"
-  mv -v $ENI $ENI.bak
-fi
+#
+# Only do that (and only once) when upgrading from version strictly before
+# 1.1.2:
+if [ "$1" = configure ] && [ -n "$2" ] && dpkg --compare-versions "$2" '<<' 1.1.2; then
+  ENI=/etc/network/interfaces.d/wlan0
+  if [ -f $ENI ]; then
+    echo "I: renaming $ENI into $ENI.bak"
+    mv -v $ENI $ENI.bak
+  fi
 
-echo "I: writing PiRogue configuration to $ENI" >&2
-cat > $ENI <<EOF
+  echo "I: writing PiRogue configuration to $ENI" >&2
+  cat > $ENI <<EOF
 # Written by pirogue-ap.postinst:
 auto wlan0
 iface wlan0 inet static
   address 10.8.0.1/24
 EOF
-echo "I: stopping, disabling, masking dhcpcd -- feel free to purge the package" >&2
-systemctl stop --now dhcpcd || true
-systemctl mask dhcpcd || true
+  echo "I: stopping, disabling, masking dhcpcd -- feel free to purge the package" >&2
+  systemctl stop --now dhcpcd || true
+  systemctl mask dhcpcd || true
+fi
 
 # firewall
 if update-alternatives --query iptables 2>/dev/null|grep -qs '^Value: /usr/sbin/iptables-legacy$'
