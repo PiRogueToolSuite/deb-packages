@@ -9,6 +9,8 @@ Rules-Requires-Root: no
 
 Package: pirogue-base
 Architecture: all
+Pre-Depends:
+ debconf,
 Depends: ${misc:Depends},
  python3-pip,
  python3-systemd,
