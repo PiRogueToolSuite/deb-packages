@@ -75,6 +75,12 @@ if [ "$1" = configure ]; then
     echo "I: stopping, disabling, masking dhcpcd -- feel free to purge the package" >&2
     systemctl stop --now dhcpcd || true
     systemctl mask dhcpcd || true
+
+    # Stopping dhcpcd is very likely to deconfigure wlan0. Make sure it's still
+    # usable until the next reboot, without relying on ifupdown tools (ifdown's
+    # and ifup's internal state might make this hard).
+    echo "I: make sure the interface is still configured" >&2
+    ip address add 10.8.0.1/24 dev wlan0 || true
   fi
 
   # Write the target configuration in any case:

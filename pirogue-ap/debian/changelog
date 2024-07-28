@@ -10,7 +10,8 @@ pirogue-ap (1.1.2) UNRELEASED; urgency=medium
   * Stop tweaking dhcpcd.conf during postinst accordingly.
   * Adjust /etc/network/interfaces.d/wlan0:
      - If upgrading, from a version strictly before 1.1.2, archive it
-       under /root, then stop, disable, mask dhcpcd.
+       under /root, then stop, disable, mask dhcpcd. Make sure wlan0 is
+       still configured with 10.8.0.1/24 afterwards.
      - In any case, write the static configuration: IPv4 = 10.8.0.1/24.
 
  -- Cyril Brulebois <cyril@debamax.com>  Fri, 26 Jul 2024 14:56:55 +0200
