@@ -1,4 +1,4 @@
-pirogue-ap (1.1.2) UNRELEASED; urgency=medium
+pirogue-ap (1.1.2) bookworm; urgency=medium
 
   * Remove dhcpcd5 from Depends: it's a transitional package for dhcpcd
     in the first place, can trigger conflicts with raspberrypi-sys-mods
@@ -14,7 +14,7 @@ pirogue-ap (1.1.2) UNRELEASED; urgency=medium
        still configured with 10.8.0.1/24 afterwards.
      - In any case, write the static configuration: IPv4 = 10.8.0.1/24.
 
- -- Cyril Brulebois <cyril@debamax.com>  Fri, 26 Jul 2024 14:56:55 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 28 Jul 2024 18:36:24 +0200
 
 pirogue-ap (1.1.1) bookworm; urgency=medium
 
