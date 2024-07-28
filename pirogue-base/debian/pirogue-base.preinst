@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+# The PTS project is using a product-based approach, and we want to make
+# everything as easy as possible to users. Altering debconf settings for other
+# packages would usually be a no-no in the Debian world, that seems acceptable
+# in our specific case.
+#
+# See https://github.com/PiRogueToolSuite/deb-packages/issues/32
+
+# Only during first installation:
+if [ "$1" = install ] && [ -z "$2" ]; then
+  echo "I: pre-answering debconf prompts for some dependencies" >&2
+
+  . /usr/share/debconf/confmodule
+
+  # Based on iptables-persistent.postinst in Debian 12, two approaches would be
+  # equivalent:
+  #  - pretend autosave happened (via iptables-persistent/autosave_done);
+  #  - or disable both iptables-persistent/autosave_{v4,v6}.
+  #
+  # Since user-visible prompts depend on the latter ones, go for them.
+  db_set  iptables-persistent/autosave_v4 false
+  db_fset iptables-persistent/autosave_v4 seen true
+  db_set  iptables-persistent/autosave_v6 false
+  db_fset iptables-persistent/autosave_v6 seen true
+
+  # Single prompt in wireshark-common:
+  db_set  wireshark-common/install-setuid true
+  db_fset wireshark-common/install-setuid seen true
+fi
