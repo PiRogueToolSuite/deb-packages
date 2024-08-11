@@ -1,0 +1,16 @@
+Source: pirogue-archive-keyring
+Priority: optional
+Section: utils
+Maintainer: U+039b <hello@pts-project.org>
+Uploaders: Cyril Brulebois <cyril@debamax.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ gnupg,
+Standards-Version: 3.9.2.0
+
+Package: pirogue-archive-keyring
+Architecture: all
+Depends: ${misc:Depends}
+Description: GnuPG archive keys for the PiRogue repository
+ The PiRogue repository is digitally signed, and the corresponding public keys,
+ required by APT, are available in this package.

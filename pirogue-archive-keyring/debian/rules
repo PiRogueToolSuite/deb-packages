@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+KEYRING=pirogue-archive-keyring.gpg
+
+%:
+	dh $@
+
+$(KEYRING): $(wildcard *.asc)
+	gpg --homedir $(CURDIR) --no-default-keyring --keyring $(CURDIR)/$@.tmp --import $^
+	gpg --homedir $(CURDIR) --no-default-keyring --keyring $(CURDIR)/$@.tmp --export > $(CURDIR)/$@
+
+override_dh_auto_build: $(KEYRING)
+
+override_dh_auto_clean:
+	rm -rf *.gpg *.gpg~ private-keys-v1.d/ *.tmp
