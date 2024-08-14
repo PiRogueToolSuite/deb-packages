@@ -6,6 +6,8 @@ pirogue-base (1.1.2) UNRELEASED; urgency=medium
   * Add pirogue-admin to dependencies, it's the central component managing
     the configuration (including autodetecting settings, applying config
     changes, etc.).
+  * Add postinst to bootstrap the configuration during the very first
+    installation.
 
  -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:52:57 +0200
 

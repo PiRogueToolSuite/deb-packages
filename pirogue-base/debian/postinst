@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+# Only run autodetection once, during the very first installation:
+CONFIG=/root/pirogue-admin-autodetect.yml
+if [ "$1" = configure ] && [ -z "$2" ]; then
+   pirogue-admin --autodetect | tee $CONFIG
+   pirogue-admin --apply $CONFIG --from-scratch --commit
+fi
