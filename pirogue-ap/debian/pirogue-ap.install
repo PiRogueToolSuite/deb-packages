@@ -1,7 +1,0 @@
-src/dnsmasq.conf usr/share/pirogue/ap
-src/hostapd.conf usr/share/pirogue/ap
-src/rules.v4 usr/share/pirogue/ap
-src/rules.v6 usr/share/pirogue/ap
-src/nftables-pirogue.conf usr/share/pirogue/ap
-src/routed-ap.conf etc/sysctl.d
-src/pirogue-rfkill.service lib/systemd/system
