@@ -1,0 +1,11 @@
+files:
+  - src: suricata.yaml
+    dst: /etc/suricata/suricata.yaml
+    variables:
+      - name: ISOLATED_NETWORK
+        type: cidr_network
+      - name: ISOLATED_NETWORK_IFACE
+    actions:
+      # FIXME: Check what happens when it's conditionally-skipped.
+      #        Also, try-restart exists.
+      - systemctl restart suricata

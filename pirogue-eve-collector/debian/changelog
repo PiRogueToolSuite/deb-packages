@@ -1,3 +1,16 @@
+pirogue-eve-collector (1.1.1) UNRELEASED; urgency=medium
+
+  * Tweak postinst script, letting pirogue-admin deal with autodetection,
+    and with configuring the various services based on the templates.
+  * Turn suricata configuration file into a template shipped into a
+    subdirectory of /usr/share/pirogue-admin/. Where to draw the line
+    between postinst and (re)configuration actions remains to be
+    investigated.
+  * Instead of duplicating the memory-related check for suricata, check
+    for suricata.service's ConditionResult=yes.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:50:57 +0200
+
 pirogue-eve-collector (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.
