@@ -1,3 +1,12 @@
+pirogue-flow-inspector (1.1.1) UNRELEASED; urgency=medium
+
+  * Delete postinst script, letting pirogue-admin deal with autodetection,
+    and with configuring the various services based on the templates.
+  * This means deploying a shell wrapper that ensures that only the
+    service unit matching the isolated interface is enabled and started.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:51:22 +0200
+
 pirogue-flow-inspector (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.

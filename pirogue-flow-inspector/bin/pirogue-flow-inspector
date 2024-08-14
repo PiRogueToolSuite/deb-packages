@@ -93,4 +93,3 @@ if __name__ == '__main__':
             print(e)
 
     systemd.daemon.notify('STOPPING=1')
-    
