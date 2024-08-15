@@ -1,0 +1,11 @@
+Format: http://dep.debian.net/deps/dep5/
+Upstream-Name: pirogue-archive-keyring
+Upstream-Contact: Cyril Brulebois <cyril@debamax.com>
+
+Files: *
+Copyright: ® 2024 U+039b <hello@pts-project.org>
+           © 2024 Cyril Brulebois <cyril@debamax.com>
+License: GPL-2+
+ On Debian systems the full text of the GNU General Public
+ License can be found in the `/usr/share/common-licenses/GPL-2'
+ file.

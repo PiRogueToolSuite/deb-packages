@@ -1,0 +1,9 @@
+pirogue-archive-keyring (0.1) bookworm; urgency=low
+
+  * Initial release.
+  * Ship 0x6D49D146B9D61919B96044C43A5B3B14BD040926 key:
+     - PiRogue Tool Suite (For Debian packaging) <hello@pts-project.org>
+  * Ship 0x1E8BAD92EA1ACDED506B273B959A6C9927869B61 key:
+     - Cyril Brulebois <cyril@debamax.com>
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 11 Aug 2024 03:58:03 +0200
