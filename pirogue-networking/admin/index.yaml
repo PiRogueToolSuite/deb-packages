@@ -88,7 +88,6 @@ files:
     actions:
       - systemctl daemon-reload
 
-# FIXME: This might be installed but not enabled yet.
   - src: nftables-pirogue.conf
     dst: /etc/nftables-pirogue.conf
     variables:
@@ -96,7 +95,7 @@ files:
       - name: ISOLATED_NETWORK_IFACE
       - name: EXTERNAL_NETWORK_IFACE
     actions:
-      - systemctl try-restart nftables
+      - systemctl enable nftables
+      - systemctl restart nftables
     actions_else: []
-    # Mainly for symmetry with the iptables case but probably unneeded:
     condition: NFTABLES_MODE
