@@ -12,6 +12,11 @@ files:
     actions:
       - systemctl restart systemd-sysctl
 
+  - src: dnsmasq-service-override.conf
+    dst: /etc/systemd/system/dnsmasq.service.d/pirogue.conf
+    actions:
+      - systemctl daemon-reload
+
   - src: dnsmasq.conf
     dst: /etc/dnsmasq.d/pirogue.conf
     variables:
