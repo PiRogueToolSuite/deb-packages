@@ -23,19 +23,19 @@ files:
       # Trick: we declare ISOLATED_NETWORK and ISOLATED_NETWORK_ADDR separately
       # to keep all variables-related code simple (parsing, validating required
       # variables are set, etc.), but they really go together here. See the
-      # format_dhcp_range_network() implementation in pirogue-admin for details.
+      # format_dhcp_range_line() implementation in pirogue-admin for details.
+      # Ditto for ENABLE_DHCP.
       - name: ISOLATED_NETWORK_IFACE
       - name: ISOLATED_NETWORK
-        type: dhcp_range_network
-        token: '@DHCP_RANGE@'
+        type: dhcp_range_line
+        token: '@DHCP_RANGE_LINE@'
       - name: ISOLATED_NETWORK_ADDR
+      - name: ENABLE_DHCP
+        type: bool
     actions:
       - systemctl unmask dnsmasq
       - systemctl enable dnsmasq
       - systemctl restart dnsmasq
-    actions_else:
-      - systemctl disable --now dnsmasq
-    condition: DNSMASQ_NEEDED
 
   - src: hostapd.conf
     dst: /etc/hostapd/hostapd.conf
