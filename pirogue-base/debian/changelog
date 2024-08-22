@@ -1,4 +1,4 @@
-pirogue-base (1.1.2) UNRELEASED; urgency=medium
+pirogue-base (1.2.0) bookworm; urgency=medium
 
   * Switch from pirogue-ap to pirogue-networking. This package already
     supports the “access point” mode but will also support the “appliance”
@@ -9,7 +9,7 @@ pirogue-base (1.1.2) UNRELEASED; urgency=medium
   * Add postinst to bootstrap the configuration during the very first
     installation.
 
- -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:52:57 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 23 Aug 2024 01:53:46 +0200
 
 pirogue-base (1.1.1) bookworm; urgency=medium
 
