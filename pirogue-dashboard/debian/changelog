@@ -1,11 +1,11 @@
-pirogue-dashboard (1.1.2) UNRELEASED; urgency=medium
+pirogue-dashboard (1.2.0) bookworm; urgency=medium
 
   * Delete postinst script, letting pirogue-admin deal with configuring
     grafana based on the templates, and with managing its service unit.
   * Turn all configuration files and related actions into templates
     shipped into a subdirectory of /usr/share/pirogue-admin/.
 
- -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:20:33 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 23 Aug 2024 01:55:17 +0200
 
 pirogue-dashboard (1.1.1) bookworm; urgency=medium
 
