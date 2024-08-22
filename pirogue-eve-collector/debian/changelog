@@ -1,4 +1,4 @@
-pirogue-eve-collector (1.1.1) UNRELEASED; urgency=medium
+pirogue-eve-collector (1.2.0) bookworm; urgency=medium
 
   * Tweak postinst script, letting pirogue-admin deal with autodetection,
     and with configuring the various services based on the templates.
@@ -9,7 +9,7 @@ pirogue-eve-collector (1.1.1) UNRELEASED; urgency=medium
   * Instead of duplicating the memory-related check for suricata, check
     for suricata.service's ConditionResult=yes.
 
- -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 13:50:57 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 23 Aug 2024 01:55:51 +0200
 
 pirogue-eve-collector (1.1.0) bookworm; urgency=medium
 
