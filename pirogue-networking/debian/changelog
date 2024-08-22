@@ -21,6 +21,17 @@ pirogue-networking (1.1.3) UNRELEASED; urgency=medium
     Therefore, mask the unit when the package gets installed initially,
     until pirogue-admin kicks in, and uses the template which restricts
     the interfaces the daemon listens on, avoiding the conflict.
+  * Make sure dnsmasq doesn't get confused by resolvconf bits shipped by
+    systemd-resolved, by forcing RESOLV_CONF=/etc/resolv.conf through
+    a systemd unit override.
+  * When the NFTABLES_MODE condition is met, make sure nftables.service is
+    enabled and restarted.
+  * Replace the initial @DHCP_RANGE@ implementation with a more generic
+    @DHCP_RANGE_LINE@, making it possible to keep dnsmasq enabled for all
+    modes, while also making it possible to disable DHCP support (e.g. to
+    avoid a rogue DHCP server in APPLIANCE mode, depending on the network
+    setup). Replace the DNSMASQ_NEEDED condition with an ENABLE_DHCP
+    variable accordingly.
 
  -- Cyril Brulebois <cyril@debamax.com>  Mon, 12 Aug 2024 12:11:01 +0200
 
