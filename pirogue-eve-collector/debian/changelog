@@ -1,3 +1,9 @@
+pirogue-eve-collector (1.1.1) bookworm; urgency=medium
+
+  * Disable Suricata on devices with less than 2.5GB of RAM
+
+ -- U+039b <hello@pts-project.org>  Thu, 22 Aug 2024 18:25:42 +0200
+
 pirogue-eve-collector (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.

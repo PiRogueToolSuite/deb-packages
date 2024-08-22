@@ -35,7 +35,7 @@ then
 fi
 
 phymem=$(awk '/MemTotal/{print $2}' /proc/meminfo) # in kB
-minmem=1500000
+minmem=2500000
 
 cat /usr/share/pirogue/suricata/suricata.yaml > /etc/suricata/suricata.yaml
 sed -i "s/ETH_IFACE/${ETH_IFACE}/g" /etc/suricata/suricata.yaml
