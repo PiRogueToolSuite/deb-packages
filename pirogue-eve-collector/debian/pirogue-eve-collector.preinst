@@ -2,11 +2,11 @@
 
 set -e
 
-# Disable Suricata features if the installed RAM is lower than 1500000000 bytes (1.5GB)
+# Disable Suricata features if the installed RAM is lower than 2500000000 bytes (2.5GB)
 # Set the override only during the first installation of the package
 if [[ "$1" = "install" && "$2" = "" ]]; then
    mkdir -p /etc/systemd/system/suricata.service.d
-   echo -e "[Unit]\nConditionMemory=>1500000000" > /etc/systemd/system/suricata.service.d/override.conf
+   echo -e "[Unit]\nConditionMemory=>2500000000" > /etc/systemd/system/suricata.service.d/override.conf
    mkdir -p /etc/systemd/system/pirogue-eve-collector.service.d
-   echo -e "[Unit]\nConditionMemory=>1500000000" > /etc/systemd/system/pirogue-eve-collector.service.d/override.conf
+   echo -e "[Unit]\nConditionMemory=>2500000000" > /etc/systemd/system/pirogue-eve-collector.service.d/override.conf
 fi
