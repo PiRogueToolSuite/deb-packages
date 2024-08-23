@@ -1,0 +1,5 @@
+#!/bin/sh
+# Renew installed certificates
+# Ideally invoked by cron-job
+# daily or weekly
+/usr/bin/certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"

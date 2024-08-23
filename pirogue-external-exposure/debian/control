@@ -1,0 +1,18 @@
+Source: pirogue-external-exposure
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-external-exposure
+Architecture: all
+Depends: ${misc:Depends},
+ nginx,
+ certbot,
+ pirogue-admin,
+ pirogue-dashboard,
+# pirogue-admin (>= 1.4.4),
+Description: Configure remote access and management of the PiRogue

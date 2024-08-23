@@ -1,0 +1,6 @@
+[Unit]
+Description=Renew installed certificates
+
+[Service]
+ExecStart=/usr/sbin/renew-certificate
+Type=oneshot

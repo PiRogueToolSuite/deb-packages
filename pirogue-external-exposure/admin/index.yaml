@@ -1,0 +1,13 @@
+files:
+  - src: default-pirogue
+    dst: /etc/nginx/sites-enabled/default
+    variables:
+      - name: EXTERNAL_ADDRESS
+    actions:
+      - service nginx restart
+  - src: 10-dashboard
+    dst: /etc/nginx/sites-enabled/10-dashboard
+    variables:
+      - name: EXTERNAL_ADDRESS
+    actions:
+      - service nginx restart
