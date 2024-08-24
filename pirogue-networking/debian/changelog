@@ -1,4 +1,4 @@
-pirogue-networking (1.2.1) UNRELEASED; urgency=medium
+pirogue-networking (1.2.1) bookworm; urgency=medium
 
   * Make sure dnsmasq.service doesn't exit immediately on startup when the
     VPN mode is used: if the interface is missing (which is the case for
@@ -12,7 +12,7 @@ pirogue-networking (1.2.1) UNRELEASED; urgency=medium
        limit anyway (5 attempts in 10 seconds).
      - Add `Restart=on-failure`, otherwise we only get one only chance.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Aug 2024 04:39:08 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Aug 2024 04:46:43 +0200
 
 pirogue-networking (1.2.0) bookworm; urgency=medium
 
