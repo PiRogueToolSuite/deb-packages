@@ -1,11 +1,11 @@
-pirogue-networking (1.2.2) UNRELEASED; urgency=medium
+pirogue-networking (1.2.2) bookworm; urgency=medium
 
   * Improve dnsmasq.service override, using RestartSec=5 instead of the
     ExecStartPre= mess in the previous version.
   * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
   * Add pirogue-admin to Depends accordingly.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 00:47:58 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 01:14:00 +0200
 
 pirogue-networking (1.2.1) bookworm; urgency=medium
 
