@@ -1,3 +1,19 @@
+pirogue-networking (1.2.1) UNRELEASED; urgency=medium
+
+  * Make sure dnsmasq.service doesn't exit immediately on startup when the
+    VPN mode is used: if the interface is missing (which is the case for
+    wg0 during early boot), the service exits immediately and doesn't even
+    try to start a few times. Trying to adjust ordering or dependencies
+    would be tricky as wg-quick@.service lists nss-lookup.target in After=
+    and Wants= while dnsmasq.service lists it in Wants= and Before=.
+    Therefore implement the following:
+     - Insert a `sleep 5` delay before the existing ExecStartPre action
+       (that checks the configuration), otherwise we would hit the burst
+       limit anyway (5 attempts in 10 seconds).
+     - Add `Restart=on-failure`, otherwise we only get one only chance.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Aug 2024 04:39:08 +0200
+
 pirogue-networking (1.2.0) bookworm; urgency=medium
 
   * Rename source and binary package from pirogue-ap to a more generic
