@@ -17,4 +17,5 @@ Depends: ${misc:Depends},
  rfkill,
  nftables,
  wireguard-tools,
+ pirogue-admin (>= 1.2.3),
 Description: Configure networking components for the PiRogue
