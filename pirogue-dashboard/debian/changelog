@@ -1,9 +1,9 @@
-pirogue-dashboard (1.2.1) UNRELEASED; urgency=medium
+pirogue-dashboard (1.2.1) bookworm; urgency=medium
 
   * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
   * Add pirogue-admin to Depends accordingly.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:25:46 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:28:15 +0200
 
 pirogue-dashboard (1.2.0) bookworm; urgency=medium
 
