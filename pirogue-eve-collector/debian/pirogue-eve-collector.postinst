@@ -4,26 +4,19 @@ set -e
 
 #DEBHELPER#
 
+# All of the following are needed once, during the initial installation, and
+# that can happen before our own suricata.yaml is deployed by pirogue-admin:
+if [ "$1" = configure ] && [ -z "$2" ]; then
+  if systemctl show suricata.service | grep -qs ^ConditionResult=yes$; then
+    echo "I: performing suricata configuration (initial installation)" >&2
+    suricata-update --no-check-certificate update-sources
+    suricata-update --no-check-certificate enable-source et/open || true
+    suricata-update --no-check-certificate enable-source oisf/trafficid || true
+    suricata-update --no-check-certificate enable-source sslbl/ssl-fp-blacklist || true
+    suricata-update add-source PTS https://piroguetoolsuite.github.io/suricata-rules/suricata.rules || true
 
-# NOTE/FIXME: suricata is only getting configured (suricata.yaml) when
-# pirogue-admin kicks in.
-#
-# TODO: Clarify whether those should be done in all cases (those probably don't
-# make sense if suricata is conditionally skipped?), and if that should only be
-# done once or every time.
-#
-# Clarifications:
-#  - The condition applies to all instructions, they should only be called once,
-#    during the first installation/configuration.
-#  - TO TEST: Does that depend on having configured suricata.yaml beforehand? In
-#    which case we might need some callback, once pirogue-admin has done its work.
-
-if systemctl show suricata.service | grep -qs ^ConditionResult=yes$; then
-  suricata-update --no-check-certificate update-sources
-  suricata-update --no-check-certificate enable-source et/open || true
-  suricata-update --no-check-certificate enable-source oisf/trafficid || true
-  suricata-update --no-check-certificate enable-source sslbl/ssl-fp-blacklist || true
-  suricata-update add-source PTS https://piroguetoolsuite.github.io/suricata-rules/suricata.rules || true
-
-  suricata-update --no-check-certificate
+    suricata-update --no-check-certificate
+  else
+    echo "I: skipping suricata configuration (initial installation, condition failed)" >&2
+  fi
 fi
