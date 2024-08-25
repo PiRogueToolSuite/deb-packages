@@ -4,7 +4,7 @@ files:
     variables:
       - name: ISOLATED_NETWORK
         type: cidr_network
-      - name: ISOLATED_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
     actions:
       # FIXME: Check what happens when it's conditionally-skipped.
       #        Also, try-restart exists.
