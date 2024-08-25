@@ -19,5 +19,5 @@ Depends: ${misc:Depends},
  chronograf,
  python3-influxdb,
  python3-systemd,
- pirogue-admin (>= 1.2.3),
+ pirogue-admin (>= 1.3.0),
 Description: Provision PiRogue Suricata alarm collector
