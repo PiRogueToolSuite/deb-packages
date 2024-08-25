@@ -1,3 +1,9 @@
+pirogue-dashboard (1.2.1) UNRELEASED; urgency=medium
+
+  * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:25:46 +0200
+
 pirogue-dashboard (1.2.0) bookworm; urgency=medium
 
   * Delete postinst script, letting pirogue-admin deal with configuring
