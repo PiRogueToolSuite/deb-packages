@@ -7,6 +7,8 @@ pirogue-eve-collector (1.2.1) UNRELEASED; urgency=medium
     is only pulled by suricata via Recommends.
   * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
   * Add pirogue-admin to Depends accordingly.
+  * Sync ConditionMemory bump (1.5GB → 2.5GB) from the debian-12 branch,
+    as published in pirogue-eve-collector 1.1.1.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:32:01 +0200
 
