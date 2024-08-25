@@ -8,4 +8,5 @@ files:
     actions:
       # FIXME: Check what happens when it's conditionally-skipped.
       #        Also, try-restart exists.
+      # https://github.com/PiRogueToolSuite/pirogue-admin/issues/17
       - systemctl restart suricata
