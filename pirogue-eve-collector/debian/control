@@ -14,6 +14,7 @@ Architecture: all
 Depends: ${misc:Depends},
  ${python3:Depends},
  suricata,
+ suricata-update,
  influxdb,
  chronograf,
  python3-influxdb,

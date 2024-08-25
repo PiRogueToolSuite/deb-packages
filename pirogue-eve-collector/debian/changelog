@@ -3,6 +3,8 @@ pirogue-eve-collector (1.2.1) UNRELEASED; urgency=medium
   * Restrict suricata-update calls (when the suricata.service isn't
     condition-skipped) to the initial installation.
   * Delete --no-check-certificate option.
+  * Add suricata-update to Depends explicitly: it's used in postinst and
+    is only pulled by suricata via Recommends.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:32:01 +0200
 
