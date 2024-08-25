@@ -2,6 +2,7 @@ pirogue-flow-inspector (1.3.0) UNRELEASED; urgency=medium
 
   * Adjust variable names
     (https://github.com/PiRogueToolSuite/pirogue-admin/issues/18).
+  * Bump pirogue-admin dependency accordingly.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 05:10:13 +0200
 
