@@ -26,7 +26,7 @@ files:
       - name: ISOLATED_NETWORK
         type: grafana_re_positive_match_network
         token: '@MATCHING_ISOLATED_NETWORK@'
-      - name: ISOLATED_NETWORK_ADDR
+      - name: ISOLATED_ADDRESS
         type: grafana_re_negative_match_address
         token: '@NOT_MATCHING_ISOLATED_ADDRESS@'
     actions:
