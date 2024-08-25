@@ -20,16 +20,16 @@ files:
   - src: dnsmasq.conf
     dst: /etc/dnsmasq.d/pirogue.conf
     variables:
-      # Trick: we declare ISOLATED_NETWORK and ISOLATED_NETWORK_ADDR separately
+      # Trick: we declare ISOLATED_NETWORK and ISOLATED_ADDRESS separately
       # to keep all variables-related code simple (parsing, validating required
       # variables are set, etc.), but they really go together here. See the
       # format_dhcp_range_line() implementation in pirogue-admin for details.
       # Ditto for ENABLE_DHCP.
-      - name: ISOLATED_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
       - name: ISOLATED_NETWORK
         type: dhcp_range_line
         token: '@DHCP_RANGE_LINE@'
-      - name: ISOLATED_NETWORK_ADDR
+      - name: ISOLATED_ADDRESS
       - name: ENABLE_DHCP
         type: bool
     actions:
@@ -40,7 +40,7 @@ files:
   - src: hostapd.conf
     dst: /etc/hostapd/hostapd.conf
     variables:
-      - name: ISOLATED_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
       - name: WIFI_COUNTRY_CODE
       - name: WIFI_SSID
       - name: WIFI_PASSPHRASE
@@ -61,8 +61,8 @@ files:
   - src: rules.v4
     dst: /etc/iptables/rules.v4
     variables:
-      - name: ISOLATED_NETWORK_IFACE
-      - name: EXTERNAL_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
+      - name: EXTERNAL_INTERFACE
     actions:
       - iptables-restore /etc/iptables/rules.v4
     actions_else: []
@@ -71,8 +71,8 @@ files:
   - src: rules.v6
     dst: /etc/iptables/rules.v6
     variables:
-      - name: ISOLATED_NETWORK_IFACE
-      - name: EXTERNAL_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
+      - name: EXTERNAL_INTERFACE
     actions:
       - ip6tables-restore /etc/iptables/rules.v6
     actions_else: []
@@ -92,8 +92,8 @@ files:
     dst: /etc/nftables-pirogue.conf
     variables:
       # FIXME: The defines in the config file should be renamed accordingly.
-      - name: ISOLATED_NETWORK_IFACE
-      - name: EXTERNAL_NETWORK_IFACE
+      - name: ISOLATED_INTERFACE
+      - name: EXTERNAL_INTERFACE
     actions:
       - systemctl enable nftables
       - systemctl restart nftables
