@@ -1,6 +1,7 @@
 pirogue-dashboard (1.2.1) UNRELEASED; urgency=medium
 
   * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
+  * Add pirogue-admin to Depends accordingly.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:25:46 +0200
 

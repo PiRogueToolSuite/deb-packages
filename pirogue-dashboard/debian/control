@@ -12,4 +12,5 @@ Architecture: all
 Depends: ${misc:Depends},
  grafana,
  influxdb,
+ pirogue-admin (>= 1.2.3),
 Description: Provision PiRogue dashboards
