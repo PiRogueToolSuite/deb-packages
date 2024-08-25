@@ -20,3 +20,8 @@ if [ "$1" = configure ] && [ -z "$2" ]; then
     echo "I: skipping suricata configuration (initial installation, condition failed)" >&2
   fi
 fi
+
+# Poke pirogue-admin, only when upgrading:
+if [ "$1" = "configure" ] && [ -n "$2" ]; then
+  pirogue-admin --redeploy --commit
+fi

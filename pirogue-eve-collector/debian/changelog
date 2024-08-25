@@ -5,6 +5,7 @@ pirogue-eve-collector (1.2.1) UNRELEASED; urgency=medium
   * Delete --no-check-certificate option.
   * Add suricata-update to Depends explicitly: it's used in postinst and
     is only pulled by suricata via Recommends.
+  * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
 
  -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:32:01 +0200
 
