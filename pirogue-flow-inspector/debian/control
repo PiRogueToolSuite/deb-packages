@@ -21,4 +21,5 @@ Depends: ${misc:Depends},
  python3-geoip2 (>= 4.5.0),
  python3-systemd,
  python3-netifaces,
+ pirogue-admin (>= 1.2.3),
 Description: Provision PiRogue DPI
