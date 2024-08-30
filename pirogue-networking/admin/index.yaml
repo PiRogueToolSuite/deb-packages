@@ -94,6 +94,8 @@ files:
       # FIXME: The defines in the config file should be renamed accordingly.
       - name: ISOLATED_INTERFACE
       - name: EXTERNAL_INTERFACE
+      - name: EXTERNAL_NETWORKS
+        type: nftables_list_of_networks
     actions:
       - systemctl enable nftables
       - systemctl restart nftables
