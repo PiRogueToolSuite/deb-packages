@@ -1,4 +1,4 @@
-pirogue-networking (1.3.1) UNRELEASED; urgency=medium
+pirogue-networking (1.3.1) bookworm; urgency=medium
 
   * Update comment regarding the 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
     reject in the filter/forward chain. Stick to mentioning “external
@@ -9,7 +9,7 @@ pirogue-networking (1.3.1) UNRELEASED; urgency=medium
     associated variable type.
   * Bump pirogue-admin dependency accordingly.
 
- -- Cyril Brulebois <cyril@debamax.com>  Fri, 30 Aug 2024 07:52:59 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 30 Aug 2024 11:59:12 +0200
 
 pirogue-networking (1.3.0) bookworm; urgency=medium
 
