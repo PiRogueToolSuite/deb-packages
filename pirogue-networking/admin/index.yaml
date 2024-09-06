@@ -50,6 +50,7 @@ files:
       - systemctl restart hostapd
     actions_else:
       - systemctl disable --now hostapd
+      - systemctl mask hostapd
     condition: HOSTAPD_NEEDED
 
 # Note: It shouldn't hurt to write both nftables and iptables rules, without
