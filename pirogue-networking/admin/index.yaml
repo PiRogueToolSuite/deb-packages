@@ -12,6 +12,22 @@ files:
     actions:
       - systemctl restart systemd-sysctl
 
+  - src: hostapd.conf
+    dst: /etc/hostapd/hostapd.conf
+    variables:
+      - name: ISOLATED_INTERFACE
+      - name: WIFI_COUNTRY_CODE
+      - name: WIFI_SSID
+      - name: WIFI_PASSPHRASE
+    actions:
+      - systemctl unmask hostapd
+      - systemctl enable hostapd
+      - systemctl restart hostapd
+    actions_else:
+      - systemctl disable --now hostapd
+      - systemctl mask hostapd
+    condition: HOSTAPD_NEEDED
+
   - src: dnsmasq-service-override.conf
     dst: /etc/systemd/system/dnsmasq.service.d/pirogue.conf
     actions:
@@ -36,22 +52,6 @@ files:
       - systemctl unmask dnsmasq
       - systemctl enable dnsmasq
       - systemctl restart dnsmasq
-
-  - src: hostapd.conf
-    dst: /etc/hostapd/hostapd.conf
-    variables:
-      - name: ISOLATED_INTERFACE
-      - name: WIFI_COUNTRY_CODE
-      - name: WIFI_SSID
-      - name: WIFI_PASSPHRASE
-    actions:
-      - systemctl unmask hostapd
-      - systemctl enable hostapd
-      - systemctl restart hostapd
-    actions_else:
-      - systemctl disable --now hostapd
-      - systemctl mask hostapd
-    condition: HOSTAPD_NEEDED
 
 # Note: It shouldn't hurt to write both nftables and iptables rules, without
 # a runtime check. It might even help in case the admin switches. Reloading the
