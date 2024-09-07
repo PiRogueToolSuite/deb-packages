@@ -3,9 +3,10 @@ set -e
 
 #DEBHELPER#
 
-# Only during the very first installation, see deb-preinst(5): mask the dnsmasq
-# unit. Otherwise it would try to start, which cannot work if systemd-networkd
-# and systemd-resolved are running already (e.g. in cloud images).
+# Only during the very first installation, see deb-preinst(5):
 if [ "$1" = "install" ] && [ -z "$2" ]; then
+  # Mask the dnsmasq unit. Otherwise it would try to start, which cannot work if
+  # systemd-networkd and systemd-resolved are running already (e.g. in cloud
+  # images).
   systemctl mask dnsmasq
 fi
