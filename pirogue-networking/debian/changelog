@@ -1,3 +1,31 @@
+pirogue-networking (1.3.5) UNRELEASED; urgency=medium
+
+  * Focus on nftables, which is found in almost all setups that were
+    tested, which has been in Depends from the start (at least since
+    pirogue-ap became pirogue-networking), and which is the default
+    firewall management tool in Debian anyway:
+     - Delete iptables-persistent from Depends, which in turn stops
+       pulling iptables, even if it might be already installed for other
+       reasons. That means both prompts about saving IPv4 and IPv6 rules
+       are going away.
+     - Delete nftables-persistent from Depends, which was probably added
+       for symmetry with iptables-persistent: we provide a complete
+       configuration file for nftables (and point the systemd unit at it
+       through an override), so nftables rules are already persistent.
+     - Make postinst script force all iptables alternatives to auto mode
+       (e.g. nft, not legacy), if iptables is installed. We're not trying
+       to reset the live configuration as (1) it's complicated, and (2)
+       it would probably come back after a reboot. But since none of the
+       tested setups resulted in having firewall rules set up, there
+       should be no need for that. If we end up with problems/reports down
+       the line, we can always document how to troubleshoot that, and/or
+       add code to pirogue-admin to help users investigate what's going
+       on.
+     - Drop support for /etc/iptables/rules.{v4,v6} entirely.
+     - Stop using NFTABLES_MODE and IPTABLES_MODE conditions accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 20:00:16 +0200
+
 pirogue-networking (1.3.4) bookworm; urgency=medium
 
   * Add pirogue-ap to Conflicts/Replaces, as a prerequisite to supporting
