@@ -9,8 +9,8 @@ Rules-Requires-Root: no
 
 Package: pirogue-networking
 Architecture: all
-Depends: ${misc:Depends}, 
- netfilter-persistent, 
+Depends: ${misc:Depends},
+ netfilter-persistent,
  iptables-persistent,
  hostapd,
  dnsmasq,
