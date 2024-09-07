@@ -1,8 +1,8 @@
-pirogue-base (1.2.1) UNRELEASED; urgency=medium
+pirogue-base (1.2.1) bookworm; urgency=medium
 
   * Add pirogue-archive-keyring to Depends.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sun, 11 Aug 2024 03:53:56 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 12:50:53 +0200
 
 pirogue-base (1.2.0) bookworm; urgency=medium
 
