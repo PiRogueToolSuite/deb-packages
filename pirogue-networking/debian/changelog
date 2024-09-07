@@ -1,4 +1,4 @@
-pirogue-networking (1.3.5) UNRELEASED; urgency=medium
+pirogue-networking (1.3.5) bookworm; urgency=medium
 
   * Focus on nftables, which is found in almost all setups that were
     tested, which has been in Depends from the start (at least since
@@ -24,7 +24,7 @@ pirogue-networking (1.3.5) UNRELEASED; urgency=medium
      - Drop support for /etc/iptables/rules.{v4,v6} entirely.
      - Stop using NFTABLES_MODE and IPTABLES_MODE conditions accordingly.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 20:00:16 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 20:12:58 +0200
 
 pirogue-networking (1.3.4) bookworm; urgency=medium
 
