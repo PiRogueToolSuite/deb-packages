@@ -53,17 +53,6 @@ files:
       - systemctl enable dnsmasq
       - systemctl restart dnsmasq
 
-# Note: It shouldn't hurt to write both nftables and iptables rules, without
-# a runtime check. It might even help in case the admin switches. Reloading the
-# nftables ones should be easy via the service unit. Less so for iptables, where
-# we probably need to check `update-alternatives` or something else linked to
-# the runtime, e.g. `lsmod|grep nf_tables`?
-
-# BEWARE: iptables rules and nftables rules are not equivalent, as the nftables
-# ones have specific filtering for "Reject access to LAN from Wi-Fi", based on
-# some CIDR masks. Not sure whether those are a good idea in the first place; if
-# that ought to be kept, surely that should be configurable in some way?
-
   - src: nftables-service-override.conf
     dst: /etc/systemd/system/nftables.service.d/pirogue.conf
     actions:
