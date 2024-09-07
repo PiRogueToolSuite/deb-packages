@@ -80,5 +80,3 @@ files:
     actions:
       - systemctl enable nftables
       - systemctl restart nftables
-    actions_else: []
-    condition: NFTABLES_MODE
