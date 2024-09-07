@@ -59,26 +59,6 @@ files:
 # we probably need to check `update-alternatives` or something else linked to
 # the runtime, e.g. `lsmod|grep nf_tables`?
 
-  - src: rules.v4
-    dst: /etc/iptables/rules.v4
-    variables:
-      - name: ISOLATED_INTERFACE
-      - name: EXTERNAL_INTERFACE
-    actions:
-      - iptables-restore /etc/iptables/rules.v4
-    actions_else: []
-    condition: IPTABLES_MODE
-
-  - src: rules.v6
-    dst: /etc/iptables/rules.v6
-    variables:
-      - name: ISOLATED_INTERFACE
-      - name: EXTERNAL_INTERFACE
-    actions:
-      - ip6tables-restore /etc/iptables/rules.v6
-    actions_else: []
-    condition: IPTABLES_MODE
-
 # BEWARE: iptables rules and nftables rules are not equivalent, as the nftables
 # ones have specific filtering for "Reject access to LAN from Wi-Fi", based on
 # some CIDR masks. Not sure whether those are a good idea in the first place; if
