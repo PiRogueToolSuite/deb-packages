@@ -43,6 +43,7 @@ files:
       - name: DASHBOARD_PASSWORD
     actions:
       - name: restart-grafana
+      - /usr/sbin/grafana-cli admin reset-admin-password @DASHBOARD_PASSWORD@
 
 actions:
   restart-grafana:
