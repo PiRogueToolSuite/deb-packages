@@ -1,3 +1,9 @@
+pirogue-base (1.2.3) UNRELEASED; urgency=medium
+
+  * Introduce pirogue-external-exposure.
+
+ -- Christophe Andral <christophe@andral.fr>  Mon, 14 Oct 2024 16:02:45 +0200
+
 pirogue-base (1.2.2) bookworm; urgency=medium
 
   * Run the autodetection not only when performing a fresh install, but

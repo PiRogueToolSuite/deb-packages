@@ -1,4 +1,4 @@
 bin/issue-certificate  usr/sbin
 bin/revew-certificates usr/sbin
-admin/*                usr/share/pirogue-admin/pirogue-public-exposure/
-src/htdocs/*           var/www/html/
+admin/*                usr/share/pirogue-admin/pirogue-external-exposure/
+src/htdocs/*           usr/share/pirogue-external-exposure/htdocs/

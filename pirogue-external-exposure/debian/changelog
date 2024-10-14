@@ -1,0 +1,5 @@
+pirogue-external-exposure (1.2.0) UNRELEASED; urgency=medium
+
+  * Expose PiRogue services to external interface.
+
+ -- Christophe Andral <christophe@andral.fr>  Sat, 07 Sep 2024 15:58:50 +0200

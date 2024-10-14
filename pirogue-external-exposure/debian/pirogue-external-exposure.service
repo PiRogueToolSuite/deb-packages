@@ -2,5 +2,5 @@
 Description=Renew installed certificates
 
 [Service]
-ExecStart=/usr/sbin/renew-certificate
+ExecStart=/usr/sbin/renew-certificates
 Type=oneshot

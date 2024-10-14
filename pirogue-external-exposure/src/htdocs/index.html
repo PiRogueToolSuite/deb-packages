@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'/>
+        <title>PiRogue</title>
+        <style>
+            :root {
+                --fg-color: rgb(29, 45, 53);
+                --main-color: rgb(113, 34, 220);
+                --width: 800px;
+            }
+            body {
+                font-family: sans-serif;
+                color: var(--fg-color);
+            }
+            h1, h2, h3, h4, h5, h6
+            {
+                margin-bottom: 0.15em;
+            }
+            a
+            {
+                color: var(--main-color);
+                text-decoration: none;
+            }
+            a:hover
+            {
+                text-decoration: underline;
+            }
+
+            .main-wrapper
+            {
+                max-width: var(--width);
+                margin: auto;
+            }
+            .main-crapper > *
+            {
+                width: 100%;
+            }
+            .header
+            {
+                border: solid var(--main-color);
+                border-width: 0 0 2px 0;
+            }
+            .header h1
+            {
+                font-size: 3em;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="main-wrapper">
+            <div class="header">
+                <h1>PiRogue</h1>
+            </div>
+            <h1>Status</h1>
+            <p>PiRogue instance up'n running: &check;</p>
+            <h1>Documentation</h1>
+            <p>Check <a href="https://pts-project.org/docs/pirogue/overview/">the PiRogue documentation (online)</a> for more information.</p>
+        </div>
+    </body>
+</html>

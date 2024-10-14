@@ -12,7 +12,8 @@ Architecture: all
 Depends: ${misc:Depends},
  nginx,
  certbot,
+ openssl,
  pirogue-admin,
  pirogue-dashboard,
-# pirogue-admin (>= 1.4.4),
-Description: Configure remote access and management of the PiRogue
+Description: Expose remote access and services
+ Bind services with TLS support on external interface.
