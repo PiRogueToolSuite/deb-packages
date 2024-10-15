@@ -1,3 +1,9 @@
+pirogue-base (2.0.1) bookworm; urgency=medium
+
+  * Add pirogue-admin-client to Depends
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 14:21:22 +0200
+
 pirogue-base (2.0.0) bookworm; urgency=medium
 
   [ Christophe Andral ]
