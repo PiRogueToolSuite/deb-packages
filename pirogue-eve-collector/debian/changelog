@@ -1,3 +1,10 @@
+pirogue-eve-collector (2.0.0) bookworm; urgency=medium
+
+  * Delete the dependency on chronograph
+  * Bump to v2.0.0
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:41:10 +0200
+
 pirogue-eve-collector (1.3.0) bookworm; urgency=medium
 
   * Adjust variable names

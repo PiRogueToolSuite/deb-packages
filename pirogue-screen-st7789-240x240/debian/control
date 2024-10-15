@@ -16,6 +16,7 @@ Conflicts: pirogue-screen
 Replaces: pirogue-screen
 Depends: ${misc:Depends},
  ${python3:Depends},
+ pirogue-admin-client,
  influxdb,
  net-tools,
  python3-influxdb,

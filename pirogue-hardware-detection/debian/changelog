@@ -1,3 +1,9 @@
+pirogue-hardware-detection (2.0.0) bookworm; urgency=medium
+
+  * Bump to v2.0.0
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 12:08:57 +0200
+
 pirogue-hardware-detection (1.1.1) bookworm; urgency=medium
 
   * Fix DTB support: deploy the z51-pirogue-hardware-detection hook not

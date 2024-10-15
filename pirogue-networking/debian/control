@@ -15,7 +15,7 @@ Depends: ${misc:Depends},
  rfkill,
  nftables,
  wireguard-tools,
- pirogue-admin (>= 1.3.3),
+ pirogue-admin (>= 2.0.0),
 Conflicts:
  pirogue-ap,
 Replaces:

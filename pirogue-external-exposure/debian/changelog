@@ -1,5 +1,9 @@
-pirogue-external-exposure (1.2.0) UNRELEASED; urgency=medium
+pirogue-external-exposure (2.0.0) bookworm; urgency=medium
 
-  * Expose PiRogue services to external interface.
+  [ Christophe Andral ]
+  * Expose PiRogue services on the external interface.
 
- -- Christophe Andral <christophe@andral.fr>  Sat, 07 Sep 2024 15:58:50 +0200
+  [ U+039b ]
+  * Bump to v2.0.0
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:43:29 +0200
