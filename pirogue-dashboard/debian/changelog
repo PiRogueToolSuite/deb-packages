@@ -1,3 +1,9 @@
+pirogue-dashboard (2.0.1) bookworm; urgency=medium
+
+  * Make sure Grafana can write in /var/lib/grafana
+
+ -- U+039b <hello@pts-project.org>  Wed, 16 Oct 2024 12:09:00 +0200
+
 pirogue-dashboard (2.0.0) bookworm; urgency=medium
 
   [ Christophe Andral ]

@@ -3,6 +3,16 @@ variables:
     default: PiRogue
 
 files:
+  - src: grafana.ini
+    dst: /etc/grafana/
+    # Things we might want to make customizable in there: instance_name
+    # (PiRogue), http_port (3000), admin_user (admin), admin_password (PiRogue).
+    variables:
+      - name: DASHBOARD_PASSWORD
+    actions:
+      - /usr/sbin/grafana-cli admin reset-admin-password @DASHBOARD_PASSWORD@
+      - name: fix-grafana-permissions
+      - name: restart-grafana
   - src: datasources.yml
     dst: /etc/grafana/provisioning/datasources/
     actions:
@@ -35,17 +45,14 @@ files:
     dst: /var/lib/grafana/dashboards/
     actions:
       - name: restart-grafana
-  - src: grafana.ini
-    dst: /etc/grafana/
-    # Things we might want to make customizable in there: instance_name
-    # (PiRogue), http_port (3000), admin_user (admin), admin_password (PiRogue).
-    variables:
-      - name: DASHBOARD_PASSWORD
-    actions:
-      - name: restart-grafana
-      - /usr/sbin/grafana-cli admin reset-admin-password @DASHBOARD_PASSWORD@
 
 actions:
+  fix-grafana-permissions:
+    # make sure Grafana has the right permissions
+    - mkdir -p /var/log/grafana/
+    - mkdir -p /var/lib/grafana/
+    - chown -R grafana:grafana /var/log/grafana/
+    - chown -R grafana:grafana /var/lib/grafana/
   restart-grafana:
     # grafana.postinst doesn't auto-enable/start the service:
     - systemctl enable grafana-server
