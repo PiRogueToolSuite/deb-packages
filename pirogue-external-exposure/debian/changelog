@@ -1,3 +1,9 @@
+pirogue-external-exposure (2.0.1) bookworm; urgency=medium
+
+  * Invoke pirogue-admin in the postinst
+
+ -- U+039b <hello@pts-project.org>  Wed, 16 Oct 2024 12:22:27 +0200
+
 pirogue-external-exposure (2.0.0) bookworm; urgency=medium
 
   [ Christophe Andral ]

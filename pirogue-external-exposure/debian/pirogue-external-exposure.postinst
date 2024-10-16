@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+# Poke pirogue-admin, only when upgrading:
+if [ "$1" = "configure" ] && [ -n "$2" ]; then
+  pirogue-admin --redeploy --commit
+fi
