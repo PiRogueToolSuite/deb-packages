@@ -1,3 +1,9 @@
+pirogue-networking (2.0.2) bookworm; urgency=medium
+
+  * Filter the incoming traffic on the external interface
+
+ -- U+039b <hello@pts-project.org>  Tue, 22 Oct 2024 22:18:37 +0200
+
 pirogue-networking (2.0.1) bookworm; urgency=medium
 
   * Add a nftables chain managed by pirogue-admin
