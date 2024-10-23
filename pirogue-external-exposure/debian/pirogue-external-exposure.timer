@@ -2,7 +2,7 @@
 Description=Run PiRogue installed certificates renewal
 
 [Timer]
-OnCalendar=daily
+OnCalendar=weekly
 Persistent=true
 
 [Install]
