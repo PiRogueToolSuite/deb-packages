@@ -28,8 +28,8 @@ then
     --pre-hook "systemctl stop nginx" \
     --post-hook "systemctl start nginx" \
     --standalone \
-    -d $DOMAIN \
-    -m $EMAIL \
+    -d "$DOMAIN" \
+    -m "$EMAIL" \
     --agree-tos -n
 elif test "${PUBLIC_ACCESS}" = 'False'
 then
