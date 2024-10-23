@@ -12,17 +12,18 @@ Architecture: all
 Depends: ${misc:Depends},
  python3-pip,
  python3-systemd,
- pirogue-cli, 
- pirogue-tools, 
- pirogue-ap, 
- pirogue-hat, 
- pirogue-dashboard, 
- pirogue-eve-collector, 
- pirogue-flow-inspector, 
- pirogue-maintenance, 
+ pirogue-admin,
+ pirogue-admin-client,
+ pirogue-external-exposure,
+ pirogue-tools,
+ pirogue-networking,
+ pirogue-hat,
+ pirogue-dashboard,
+ pirogue-eve-collector,
+ pirogue-flow-inspector,
+ pirogue-maintenance,
  pirogue-screen-st7789-240x240 | pirogue-screen,
  pirogue-archive-keyring,
 Recommends:
  pirogue-telemetry
 Description: Install all PiRogue packages
-

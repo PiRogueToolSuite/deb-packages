@@ -1,0 +1,45 @@
+#!/bin/sh
+
+usage()
+{
+  echo "usage: $0 DOMAIN EMAIL"
+  echo "       PUBLIC_ACCESS: True | False : enable public access"
+  echo "                      e.g: True"
+  echo "              DOMAIN: full qualified domain name of the issued certificate"
+  echo "                      e.g: my-machine.my-domain.net"
+  echo "               EMAIL: a valid email address to issue a new certificate"
+  echo "                      e.g: john.doe@mail.net"
+  exit 1
+}
+
+if test $# -ne 3
+then
+  usage
+fi
+
+PUBLIC_ACCESS="${1}"
+DOMAIN="${2}"
+EMAIL="${3}"
+SELF_SIGNED_CERT_DEST=/var/lib/pirogue/admin/pirogue-external-exposure
+
+if test "${PUBLIC_ACCESS}" = 'True'
+then
+  /usr/bin/certbot certonly \
+    --pre-hook "systemctl stop nginx" \
+    --post-hook "systemctl start nginx" \
+    --standalone \
+    -d "$DOMAIN" \
+    -m "$EMAIL" \
+    --agree-tos -n
+elif test "${PUBLIC_ACCESS}" = 'False'
+then
+  mkdir -p "${SELF_SIGNED_CERT_DEST}" && \
+  openssl req -x509 -newkey rsa:4096 \
+    -nodes -days 365 \
+    -keyout "${SELF_SIGNED_CERT_DEST}/privkey.pem" \
+    -out "${SELF_SIGNED_CERT_DEST}/fullchain.pem" \
+    -subj "/CN=${DOMAIN}" 2> /dev/null
+else
+  >&2 echo "invalid parameter '${PUBLIC_ACCESS}'"
+  usage
+fi

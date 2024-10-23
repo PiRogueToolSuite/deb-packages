@@ -1,5 +1,4 @@
-src/pirogue-eve-collector usr/sbin
-src/suricata.yaml usr/share/pirogue/suricata
-
+bin/pirogue-eve-collector usr/sbin
+admin/*                   usr/share/pirogue-admin/pirogue-eve-collector
 
 # src/influxdb-overrides/autorestart.conf /etc/systemd/system/influxdb.service.d/autorestart.conf

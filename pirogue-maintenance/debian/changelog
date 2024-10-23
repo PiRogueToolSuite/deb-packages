@@ -1,3 +1,16 @@
+pirogue-maintenance (2.0.1) bookworm; urgency=medium
+
+  * Sync ConditionMemory= with pirogue-eve-collector's, bumping it from
+    1.5GB to 2.5GB.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:23:48 +0200
+
+pirogue-maintenance (2.0.0) bookworm; urgency=medium
+
+  * Bump to v2.0.0
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 12:00:52 +0200
+
 pirogue-maintenance (1.1.0) bookworm; urgency=medium
 
   * New upstream release, targeting Debian 12.

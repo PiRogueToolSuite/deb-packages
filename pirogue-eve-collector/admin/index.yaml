@@ -1,0 +1,12 @@
+files:
+  - src: suricata.yaml
+    dst: /etc/suricata/suricata.yaml
+    variables:
+      - name: ISOLATED_NETWORK
+        type: cidr_network
+      - name: ISOLATED_INTERFACE
+    actions:
+      # FIXME: Check what happens when it's conditionally-skipped.
+      #        Also, try-restart exists.
+      # https://github.com/PiRogueToolSuite/pirogue-admin/issues/17
+      - systemctl restart suricata

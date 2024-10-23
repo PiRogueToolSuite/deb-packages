@@ -1,0 +1,203 @@
+pirogue-networking (2.0.2) bookworm; urgency=medium
+
+  * Filter the incoming traffic on the external interface
+
+ -- U+039b <hello@pts-project.org>  Tue, 22 Oct 2024 22:18:37 +0200
+
+pirogue-networking (2.0.1) bookworm; urgency=medium
+
+  * Add a nftables chain managed by pirogue-admin
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 12:54:03 +0200
+
+pirogue-networking (2.0.0) bookworm; urgency=medium
+
+  * Bump to v2.0.0
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:48:29 +0200
+
+pirogue-networking (1.3.5) bookworm; urgency=medium
+
+  * Focus on nftables, which is found in almost all setups that were
+    tested, which has been in Depends from the start (at least since
+    pirogue-ap became pirogue-networking), and which is the default
+    firewall management tool in Debian anyway:
+     - Delete iptables-persistent from Depends, which in turn stops
+       pulling iptables, even if it might be already installed for other
+       reasons. That means both prompts about saving IPv4 and IPv6 rules
+       are going away.
+     - Delete nftables-persistent from Depends, which was probably added
+       for symmetry with iptables-persistent: we provide a complete
+       configuration file for nftables (and point the systemd unit at it
+       through an override), so nftables rules are already persistent.
+     - Make postinst script force all iptables alternatives to auto mode
+       (e.g. nft, not legacy), if iptables is installed. We're not trying
+       to reset the live configuration as (1) it's complicated, and (2)
+       it would probably come back after a reboot. But since none of the
+       tested setups resulted in having firewall rules set up, there
+       should be no need for that. If we end up with problems/reports down
+       the line, we can always document how to troubleshoot that, and/or
+       add code to pirogue-admin to help users investigate what's going
+       on.
+     - Drop support for /etc/iptables/rules.{v4,v6} entirely.
+     - Stop using NFTABLES_MODE and IPTABLES_MODE conditions accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 20:12:58 +0200
+
+pirogue-networking (1.3.4) bookworm; urgency=medium
+
+  * Add pirogue-ap to Conflicts/Replaces, as a prerequisite to supporting
+    upgrades on existing systems (without pirogue-admin integration).
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 14:49:04 +0200
+
+pirogue-networking (1.3.3) bookworm; urgency=medium
+
+  * Move hostapd before dnsmasq: in the systemd+networkd case, in AP mode,
+    dnsmasq might fail to manage the wireless interface, which `networkctl
+    status` reports with `no-carrier` and `configuring`.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 06 Sep 2024 18:47:58 +0200
+
+pirogue-networking (1.3.2) bookworm; urgency=medium
+
+  * Mask hostapd.service if the condition is failed.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 06 Sep 2024 09:17:54 +0200
+
+pirogue-networking (1.3.1) bookworm; urgency=medium
+
+  * Update comment regarding the 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16
+    reject in the filter/forward chain. Stick to mentioning “external
+    network” (singular) even if we're about to support blocking several
+    external networks.
+  * Replace the hardcoded 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 with
+    an @EXTERNAL_NETWORKS@ token, using nftables_list_of_networks as the
+    associated variable type.
+  * Bump pirogue-admin dependency accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 30 Aug 2024 11:59:12 +0200
+
+pirogue-networking (1.3.0) bookworm; urgency=medium
+
+  * Adjust variable names
+    (https://github.com/PiRogueToolSuite/pirogue-admin/issues/18).
+  * Bump pirogue-admin dependency accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 05:18:56 +0200
+
+pirogue-networking (1.2.2) bookworm; urgency=medium
+
+  * Improve dnsmasq.service override, using RestartSec=5 instead of the
+    ExecStartPre= mess in the previous version.
+  * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
+  * Add pirogue-admin to Depends accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 01:14:00 +0200
+
+pirogue-networking (1.2.1) bookworm; urgency=medium
+
+  * Make sure dnsmasq.service doesn't exit immediately on startup when the
+    VPN mode is used: if the interface is missing (which is the case for
+    wg0 during early boot), the service exits immediately and doesn't even
+    try to start a few times. Trying to adjust ordering or dependencies
+    would be tricky as wg-quick@.service lists nss-lookup.target in After=
+    and Wants= while dnsmasq.service lists it in Wants= and Before=.
+    Therefore implement the following:
+     - Insert a `sleep 5` delay before the existing ExecStartPre action
+       (that checks the configuration), otherwise we would hit the burst
+       limit anyway (5 attempts in 10 seconds).
+     - Add `Restart=on-failure`, otherwise we only get one only chance.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 24 Aug 2024 04:46:43 +0200
+
+pirogue-networking (1.2.0) bookworm; urgency=medium
+
+  * Rename source and binary package from pirogue-ap to a more generic
+    pirogue-networking, as we're adding support for more use cases, while
+    retaining the main building blocks at the network configuration level.
+  * Delete postinst script, letting pirogue-admin deal with autodetection,
+    and with configuring the various services based on the templates.
+  * Turn all configuration files and related actions into templates
+    shipped into a subdirectory of /usr/share/pirogue-admin/.
+  * Drop Provides/Conflicts on pirogue-network-routing: it's much easier
+    to have a single package managing the network than having several
+    packages providing this feature through a virtual package.
+  * Add nftables to Depends, as a first step towards supporting only one
+    way to express firewall rules: supporting both nftables and iptables
+    means duplicating rules, and focusing on one of them should be enough.
+  * Add wireguard-tools to Depends, as a first step towards supporting the
+    VPN use case.
+  * Mask dnsmasq.service in preinst: Debian-provided cloud images include
+    systemd-networkd and systemd-resolved, and the latter prevents dnsmasq
+    from getting installed successfully with its default configuration.
+    Therefore, mask the unit when the package gets installed initially,
+    until pirogue-admin kicks in, and uses the template which restricts
+    the interfaces the daemon listens on, avoiding the conflict.
+  * Make sure dnsmasq doesn't get confused by resolvconf bits shipped by
+    systemd-resolved, by forcing RESOLV_CONF=/etc/resolv.conf through
+    a systemd unit override.
+  * When the NFTABLES_MODE condition is met, make sure nftables.service is
+    enabled and restarted.
+  * Replace the initial @DHCP_RANGE@ implementation with a more generic
+    @DHCP_RANGE_LINE@, making it possible to keep dnsmasq enabled for all
+    modes, while also making it possible to disable DHCP support (e.g. to
+    avoid a rogue DHCP server in APPLIANCE mode, depending on the network
+    setup). Replace the DNSMASQ_NEEDED condition with an ENABLE_DHCP
+    variable accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Thu, 22 Aug 2024 05:17:36 +0200
+
+pirogue-ap (1.1.2) bookworm; urgency=medium
+
+  * Remove dhcpcd5 from Depends: it's a transitional package for dhcpcd
+    in the first place, can trigger conflicts with raspberrypi-sys-mods
+    in Raspberry OS (which some users attempted to use until we added
+    experimental support for Raspberry Pi 5), and is likely responsible
+    for some reported connection losses, possibly by racing against
+    dhclient.
+  * Stop shipping dhcpcd.conf accordingly.
+  * Stop tweaking dhcpcd.conf during postinst accordingly.
+  * Adjust /etc/network/interfaces.d/wlan0:
+     - If upgrading, from a version strictly before 1.1.2, archive it
+       under /root, then stop, disable, mask dhcpcd. Make sure wlan0 is
+       still configured with 10.8.0.1/24 afterwards.
+     - In any case, write the static configuration: IPv4 = 10.8.0.1/24.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 28 Jul 2024 18:36:24 +0200
+
+pirogue-ap (1.1.1) bookworm; urgency=medium
+
+  * Improve firewalling by blocking traffic from the Wi-Fi network to the LAN network.
+
+ -- U+039b <hello@pts-project.org>  Sun, 31 Dec 2023 11:28:48 +0100
+
+pirogue-ap (1.1.0) bookworm; urgency=medium
+
+  * New upstream release, targeting Debian 12.
+
+ -- U+039b <hello@pts-project.org>  Tue, 29 Aug 2023 13:08:23 +0200
+
+pirogue-ap (1.0.3) unstable; urgency=medium
+
+  * Improve wi-fi performance and stability
+
+ -- U+039b <hello@pts-project.org>  Mon, 15 Aug 2022 23:55:13 +0200
+
+pirogue-ap (1.0.2) unstable; urgency=medium
+
+  * Load configuration either from pirogue-ctl or the configuration file to prevent losing current configuration
+
+ -- U+039b <hello@pts-project.org>  Thu, 11 Aug 2022 15:36:45 +0200
+
+pirogue-ap (1.0.1) unstable; urgency=medium
+
+  * Automatically detect network interfaces
+
+ -- U+039b <hello@pts-project.org>  Mon, 04 Jul 2022 19:27:00 +0200
+
+pirogue-ap (1.0.0) unstable; urgency=medium
+
+  * Initial commit.
+
+ -- U+039b <hello@pts-project.org>  Sun, 17 Apr 2022 21:01:19 +0200

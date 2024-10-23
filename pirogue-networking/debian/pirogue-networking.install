@@ -1,0 +1,2 @@
+admin/*                          usr/share/pirogue-admin/pirogue-networking/
+src/pirogue-rfkill.service       lib/systemd/system

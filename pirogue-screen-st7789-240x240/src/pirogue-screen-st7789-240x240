@@ -115,6 +115,7 @@ if __name__ == '__main__':
         draw.text((194, 13), get_temperature(), font=font, fill=(21, 21, 21))
 
         # eth0 IP  
+        # ToDo: Call pirogue-admin to get the name of the network interfaces. See #39
         eth0_ip = get_iface_ip_address('eth0') 
         draw.text((35, 43), eth0_ip, font=font, fill=(21, 21, 21))
 

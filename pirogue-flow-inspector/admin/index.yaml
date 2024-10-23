@@ -1,0 +1,8 @@
+files:
+  - src: reconfigure-pirogue-flow-inspector
+    dst: /usr/local/sbin/
+    variables:
+      - name: ISOLATED_INTERFACE
+    actions:
+      - chmod +x /usr/local/sbin/reconfigure-pirogue-flow-inspector
+      - /usr/local/sbin/reconfigure-pirogue-flow-inspector

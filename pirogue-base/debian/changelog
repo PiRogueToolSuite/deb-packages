@@ -1,8 +1,61 @@
-pirogue-base (1.1.2) bookworm; urgency=medium
+pirogue-base (2.0.3) bookworm; urgency=medium
+
+  * Bump the transition version from 1.2.0 (versioning scheme picked
+    initially) to 2.0.3:
+     - This makes it clear to anyone that what matters for that transition
+       is moving from 1.x versions to 2.x versions.
+     - This also ensures autodetection runs again for developers using the
+       current ViRogue PPA, generating secrets (per pirogue-admin 2.0.4)
+       instead of sticking to static values for: DASHBOARD_PASSWORD and
+       WIFI_PASSPHRASE.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:33:22 +0200
+
+pirogue-base (2.0.2) bookworm; urgency=medium
+
+  * Add pirogue-external-exposure to Depends
+
+ -- U+039b <hello@pts-project.org>  Wed, 16 Oct 2024 12:23:19 +0200
+
+pirogue-base (2.0.1) bookworm; urgency=medium
+
+  * Add pirogue-admin-client to Depends
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 14:21:22 +0200
+
+pirogue-base (2.0.0) bookworm; urgency=medium
+
+  * Delete the dependency on pirogue-cli
+
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:37:50 +0200
+
+pirogue-base (1.2.2) bookworm; urgency=medium
+
+  * Run the autodetection not only when performing a fresh install, but
+    when upgrading existing systems (without pirogue-admin integration)
+    as well. Use the old-version parameter of the postinst to determine
+    when that should happen.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 15:58:50 +0200
+
+pirogue-base (1.2.1) bookworm; urgency=medium
 
   * Add pirogue-archive-keyring to Depends.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sun, 11 Aug 2024 03:53:56 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 07 Sep 2024 12:50:53 +0200
+
+pirogue-base (1.2.0) bookworm; urgency=medium
+
+  * Switch from pirogue-ap to pirogue-networking. This package already
+    supports the “access point” mode but will also support the “appliance”
+    and “vpn” ones in the near future.
+  * Add pirogue-admin to dependencies, it's the central component managing
+    the configuration (including autodetecting settings, applying config
+    changes, etc.).
+  * Add postinst to bootstrap the configuration during the very first
+    installation.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 23 Aug 2024 01:53:46 +0200
 
 pirogue-base (1.1.1) bookworm; urgency=medium
 

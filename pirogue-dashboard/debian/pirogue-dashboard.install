@@ -1,5 +1,1 @@
-src/datasources.yml etc/grafana/provisioning/datasources
-src/grafana_dashboards.yml etc/grafana/provisioning/dashboards
-src/pirogue-dashboard.json var/lib/grafana/dashboards
-src/pirogue-flow-details-dashboard.json	var/lib/grafana/dashboards
-src/grafana.ini usr/share/pirogue/grafana
+admin/* usr/share/pirogue-admin/pirogue-dashboard/

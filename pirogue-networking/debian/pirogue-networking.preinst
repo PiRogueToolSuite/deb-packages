@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+# Only during the very first installation, see deb-preinst(5):
+if [ "$1" = "install" ] && [ -z "$2" ]; then
+  # Mask the dnsmasq unit. Otherwise it would try to start, which cannot work if
+  # systemd-networkd and systemd-resolved are running already (e.g. in cloud
+  # images).
+  systemctl mask dnsmasq
+
+  # If iptables is installed, make sure it uses the default implementation
+  # (nft), rather than the legacy one. Some tools (e.g. ferm) might still prefer
+  # using legacy tools, but at least things should be a little more consistent
+  # (even if iptables-nft and nft have slightly different ways of doing things).
+  if update-alternatives --query iptables >/dev/null 2>&1; then
+    echo "I: Forcing auto mode for all iptables-provided alternatives (nft)" >&2
+    for tool in iptables ip6tables arptables ebtables; do
+      update-alternatives --auto $tool
+    done
+  fi
+fi

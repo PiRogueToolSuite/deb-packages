@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+#DEBHELPER#
+
+CONFIG=/root/pirogue-admin-autodetect.yml
+if [ "$1" = configure ]; then
+  # Only run autodetection once, during the very first installation, or when
+  # upgrading an existing system (without pirogue-admin integration):
+  if [ -z "$2" ] || dpkg --compare-versions "$2" '<<' 2.0.3; then
+    pirogue-admin --autodetect | tee $CONFIG
+    pirogue-admin --apply $CONFIG --from-scratch --commit
+  fi
+fi

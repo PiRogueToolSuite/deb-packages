@@ -14,8 +14,9 @@ Architecture: all
 Depends: ${misc:Depends},
  ${python3:Depends},
  suricata,
+ suricata-update,
  influxdb,
- chronograf,
  python3-influxdb,
  python3-systemd,
+ pirogue-admin (>= 2.0.0),
 Description: Provision PiRogue Suricata alarm collector

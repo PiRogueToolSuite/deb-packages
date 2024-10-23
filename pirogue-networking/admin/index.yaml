@@ -1,0 +1,71 @@
+variables:
+  - name: WIFI_SSID
+    default: PiRogue1
+  - name: WIFI_PASSPHRASE
+    default: superlongkey
+  - name: WIFI_COUNTRY_CODE
+    default: FR
+
+files:
+  - src: 10-pirogue-networking.conf
+    dst: /etc/sysctl.d/
+    actions:
+      - systemctl restart systemd-sysctl
+
+  - src: hostapd.conf
+    dst: /etc/hostapd/hostapd.conf
+    variables:
+      - name: ISOLATED_INTERFACE
+      - name: WIFI_COUNTRY_CODE
+      - name: WIFI_SSID
+      - name: WIFI_PASSPHRASE
+    actions:
+      - systemctl unmask hostapd
+      - systemctl enable hostapd
+      - systemctl restart hostapd
+    actions_else:
+      - systemctl disable --now hostapd
+      - systemctl mask hostapd
+    condition: HOSTAPD_NEEDED
+
+  - src: dnsmasq-service-override.conf
+    dst: /etc/systemd/system/dnsmasq.service.d/pirogue.conf
+    actions:
+      - systemctl daemon-reload
+
+  - src: dnsmasq.conf
+    dst: /etc/dnsmasq.d/pirogue.conf
+    variables:
+      # Trick: we declare ISOLATED_NETWORK and ISOLATED_ADDRESS separately
+      # to keep all variables-related code simple (parsing, validating required
+      # variables are set, etc.), but they really go together here. See the
+      # format_dhcp_range_line() implementation in pirogue-admin for details.
+      # Ditto for ENABLE_DHCP.
+      - name: ISOLATED_INTERFACE
+      - name: ISOLATED_NETWORK
+        type: dhcp_range_line
+        token: '@DHCP_RANGE_LINE@'
+      - name: ISOLATED_ADDRESS
+      - name: ENABLE_DHCP
+        type: bool
+    actions:
+      - systemctl unmask dnsmasq
+      - systemctl enable dnsmasq
+      - systemctl restart dnsmasq
+
+  - src: nftables-service-override.conf
+    dst: /etc/systemd/system/nftables.service.d/pirogue.conf
+    actions:
+      - systemctl daemon-reload
+
+  - src: nftables-pirogue.conf
+    dst: /etc/nftables-pirogue.conf
+    variables:
+      # FIXME: The defines in the config file should be renamed accordingly.
+      - name: ISOLATED_INTERFACE
+      - name: EXTERNAL_INTERFACE
+      - name: EXTERNAL_NETWORKS
+        type: nftables_list_of_networks
+    actions:
+      - systemctl enable nftables
+      - systemctl restart nftables

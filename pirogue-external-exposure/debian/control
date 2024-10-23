@@ -1,0 +1,19 @@
+Source: pirogue-external-exposure
+Section: misc
+Priority: optional
+Maintainer: U+039b <hello@pts-project.org>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.5.1
+Homepage: https://github.com/PiRogueToolSuite/deb-packages
+Rules-Requires-Root: no
+
+Package: pirogue-external-exposure
+Architecture: all
+Depends: ${misc:Depends},
+ nginx,
+ certbot,
+ openssl,
+ pirogue-admin (>= 2.0.5),
+ pirogue-dashboard,
+Description: Expose remote access and services
+ Bind services with TLS support on external interface.

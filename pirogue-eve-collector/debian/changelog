@@ -1,8 +1,44 @@
-pirogue-eve-collector (1.1.1) bookworm; urgency=medium
+pirogue-eve-collector (2.0.0) bookworm; urgency=medium
 
-  * Disable Suricata on devices with less than 2.5GB of RAM
+  * Delete the dependency on chronograph
+  * Bump to v2.0.0
 
- -- U+039b <hello@pts-project.org>  Thu, 22 Aug 2024 18:25:42 +0200
+ -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:41:10 +0200
+
+pirogue-eve-collector (1.3.0) bookworm; urgency=medium
+
+  * Adjust variable names
+    (https://github.com/PiRogueToolSuite/pirogue-admin/issues/18).
+  * Bump pirogue-admin dependency accordingly.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 05:17:59 +0200
+
+pirogue-eve-collector (1.2.1) bookworm; urgency=medium
+
+  * Restrict suricata-update calls (when the suricata.service isn't
+    condition-skipped) to the initial installation.
+  * Delete --no-check-certificate option.
+  * Add suricata-update to Depends explicitly: it's used in postinst and
+    is only pulled by suricata via Recommends.
+  * Call `pirogue-admin --redeploy --commit` from postinst when upgrading.
+  * Add pirogue-admin to Depends accordingly.
+  * Sync ConditionMemory bump (1.5GB → 2.5GB) from the debian-12 branch,
+    as published in pirogue-eve-collector 1.1.1.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sun, 25 Aug 2024 02:45:15 +0200
+
+pirogue-eve-collector (1.2.0) bookworm; urgency=medium
+
+  * Tweak postinst script, letting pirogue-admin deal with autodetection,
+    and with configuring the various services based on the templates.
+  * Turn suricata configuration file into a template shipped into a
+    subdirectory of /usr/share/pirogue-admin/. Where to draw the line
+    between postinst and (re)configuration actions remains to be
+    investigated.
+  * Instead of duplicating the memory-related check for suricata, check
+    for suricata.service's ConditionResult=yes.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Fri, 23 Aug 2024 01:55:51 +0200
 
 pirogue-eve-collector (1.1.0) bookworm; urgency=medium
 

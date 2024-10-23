@@ -1,2 +1,3 @@
-src/pirogue-flow-inspector usr/sbin
-src/GeoLite2-City.mmdb usr/share/pirogue
+bin/pirogue-flow-inspector usr/sbin
+admin/*                    usr/share/pirogue-admin/pirogue-flow-inspector/
+data/GeoLite2-City.mmdb    usr/share/pirogue/

@@ -1,0 +1,27 @@
+files:
+  - src: default-pirogue
+    dst: /etc/nginx/sites-enabled/default
+    variables:
+      - name: EXTERNAL_ADDRESS
+      # Hardening: We depend here on variables we know we use in actions
+      - name: PUBLIC_DOMAIN_NAME
+      - name: PUBLIC_CONTACT_EMAIL
+      # Generate custom derivated values
+      # Depending on ENABLE_PUBLIC_ACCESS variable
+      # and others
+      - name: ENABLE_PUBLIC_ACCESS
+        type: certificate_path_prefix
+        token: '@CERTIFICATE_PATH@'
+      - name: ENABLE_PUBLIC_ACCESS
+        type: lan_accessibility_nginx_boolean
+        token: '@LAN_ACCESSIBILITY@'
+      - name: ENABLE_PUBLIC_ACCESS
+        type: wan_accessibility_nginx_boolean
+        token: '@WAN_ACCESSIBILITY@'
+      - name: ENABLE_PUBLIC_ACCESS
+        type: force_secure_redirection_nginx_boolean
+        token: '@FORCE_SECURE@'
+
+    actions:
+      - /usr/sbin/issue-certificate @ENABLE_PUBLIC_ACCESS@ @PUBLIC_DOMAIN_NAME@ @PUBLIC_CONTACT_EMAIL@
+      - systemctl restart nginx

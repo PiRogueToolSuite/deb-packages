@@ -1,0 +1,59 @@
+variables:
+  - name: DASHBOARD_PASSWORD
+    default: PiRogue
+
+files:
+  - src: grafana.ini
+    dst: /etc/grafana/
+    # Things we might want to make customizable in there: instance_name
+    # (PiRogue), http_port (3000), admin_user (admin), admin_password (PiRogue).
+    variables:
+      - name: DASHBOARD_PASSWORD
+    actions:
+      - /usr/sbin/grafana-cli admin reset-admin-password @DASHBOARD_PASSWORD@
+      - name: fix-grafana-permissions
+      - name: restart-grafana
+  - src: datasources.yml
+    dst: /etc/grafana/provisioning/datasources/
+    actions:
+      - name: restart-grafana
+  - src: grafana_dashboards.yml
+    dst: /etc/grafana/provisioning/dashboards/
+    actions:
+      - name: restart-grafana
+  - src: pirogue-dashboard.json
+    dst: /var/lib/grafana/dashboards/
+    # Things we need to make customizable in there: src_ip filter in Grafana's
+    # regex language to match IPs on the isolated network, src_ip filter to
+    # exclude-match the isolated IP. Respectively:
+    #  - (\"src_ip\" =~ /10.8.0.*/)
+    #  - (\"src_ip\" !~ /10.8.0.1$/)
+    #
+    # Note: it's probably easier if we stick to /24 subnets. But maybe we don't
+    # have a say on this (e.g. “appliance mode” where something external
+    # dictates network settings on the isolated network).
+    variables:
+      - name: ISOLATED_NETWORK
+        type: grafana_re_positive_match_network
+        token: '@MATCHING_ISOLATED_NETWORK@'
+      - name: ISOLATED_ADDRESS
+        type: grafana_re_negative_match_address
+        token: '@NOT_MATCHING_ISOLATED_ADDRESS@'
+    actions:
+      - name: restart-grafana
+  - src: pirogue-flow-details-dashboard.json
+    dst: /var/lib/grafana/dashboards/
+    actions:
+      - name: restart-grafana
+
+actions:
+  fix-grafana-permissions:
+    # make sure Grafana has the right permissions
+    - mkdir -p /var/log/grafana/
+    - mkdir -p /var/lib/grafana/
+    - chown -R grafana:grafana /var/log/grafana/
+    - chown -R grafana:grafana /var/lib/grafana/
+  restart-grafana:
+    # grafana.postinst doesn't auto-enable/start the service:
+    - systemctl enable grafana-server
+    - systemctl restart grafana-server

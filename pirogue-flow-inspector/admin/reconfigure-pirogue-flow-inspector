@@ -1,0 +1,16 @@
+#!/bin/sh
+
+UNIT=pirogue-flow-inspector
+
+# This is provisioned via pirogue-admin:
+IFACE=@ISOLATED_INTERFACE@
+
+# Make sure to stop/disable any units that might exist, for a different interface:
+for unit in $(systemctl --quiet list-units "$UNIT@*" | awk '{print $1}'); do
+  if [ "$unit" != "$UNIT@$IFACE" ]; then
+    systemctl disable --now "$unit"
+  fi
+done
+
+# Make sure to enable/start the right unit:
+systemctl enable --now "$UNIT@$IFACE"
