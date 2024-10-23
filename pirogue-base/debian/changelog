@@ -12,10 +12,6 @@ pirogue-base (2.0.1) bookworm; urgency=medium
 
 pirogue-base (2.0.0) bookworm; urgency=medium
 
-  [ Christophe Andral ]
-  * Introduce pirogue-external-exposure.
-
-  [ U+039b ]
   * Delete the dependency on pirogue-cli
 
  -- U+039b <hello@pts-project.org>  Tue, 15 Oct 2024 11:37:50 +0200
