@@ -1,4 +1,4 @@
-pirogue-base (2.0.3) UNRELEASED; urgency=medium
+pirogue-base (2.0.3) bookworm; urgency=medium
 
   * Bump the transition version from 1.2.0 (versioning scheme picked
     initially) to 2.0.3:
@@ -9,7 +9,7 @@ pirogue-base (2.0.3) UNRELEASED; urgency=medium
        instead of sticking to static values for: DASHBOARD_PASSWORD and
        WIFI_PASSPHRASE.
 
- -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:29:12 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:33:22 +0200
 
 pirogue-base (2.0.2) bookworm; urgency=medium
 
