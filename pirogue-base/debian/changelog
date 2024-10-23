@@ -1,3 +1,9 @@
+pirogue-base (2.0.4) bookworm; urgency=medium
+
+  * Add the evidence collector and the Colander connector in Depends
+
+ -- U+039b <hello@pts-project.org>  Wed, 23 Oct 2024 22:39:09 +0200
+
 pirogue-base (2.0.3) bookworm; urgency=medium
 
   * Bump the transition version from 1.2.0 (versioning scheme picked
