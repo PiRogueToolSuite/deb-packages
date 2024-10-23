@@ -13,7 +13,7 @@ Depends: ${misc:Depends},
  nginx,
  certbot,
  openssl,
- pirogue-admin,
+ pirogue-admin (>= 2.0.5),
  pirogue-dashboard,
 Description: Expose remote access and services
  Bind services with TLS support on external interface.

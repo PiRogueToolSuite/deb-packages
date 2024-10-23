@@ -33,14 +33,12 @@ then
     --agree-tos -n
 elif test "${PUBLIC_ACCESS}" = 'False'
 then
-  # CN does not matter very mush since it is fixed
-  # and known by pirogue-admin-client impl
   mkdir -p "${SELF_SIGNED_CERT_DEST}" && \
   openssl req -x509 -newkey rsa:4096 \
     -nodes -days 365 \
     -keyout "${SELF_SIGNED_CERT_DEST}/privkey.pem" \
     -out "${SELF_SIGNED_CERT_DEST}/fullchain.pem" \
-    -subj "/CN=pirogue.local" 2> /dev/null
+    -subj "/CN=${DOMAIN}" 2> /dev/null
 else
   >&2 echo "invalid parameter '${PUBLIC_ACCESS}'"
   usage
