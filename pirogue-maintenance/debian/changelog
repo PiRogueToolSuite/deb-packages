@@ -1,9 +1,9 @@
-pirogue-maintenance (2.0.1) UNRELEASED; urgency=medium
+pirogue-maintenance (2.0.1) bookworm; urgency=medium
 
   * Sync ConditionMemory= with pirogue-eve-collector's, bumping it from
     1.5GB to 2.5GB.
 
- -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:18:07 +0200
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:23:48 +0200
 
 pirogue-maintenance (2.0.0) bookworm; urgency=medium
 
