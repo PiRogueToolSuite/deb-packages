@@ -1,3 +1,16 @@
+pirogue-base (2.0.3) UNRELEASED; urgency=medium
+
+  * Bump the transition version from 1.2.0 (versioning scheme picked
+    initially) to 2.0.3:
+     - This makes it clear to anyone that what matters for that transition
+       is moving from 1.x versions to 2.x versions.
+     - This also ensures autodetection runs again for developers using the
+       current ViRogue PPA, generating secrets (per pirogue-admin 2.0.4)
+       instead of sticking to static values for: DASHBOARD_PASSWORD and
+       WIFI_PASSPHRASE.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Wed, 23 Oct 2024 04:29:12 +0200
+
 pirogue-base (2.0.2) bookworm; urgency=medium
 
   * Add pirogue-external-exposure to Depends
