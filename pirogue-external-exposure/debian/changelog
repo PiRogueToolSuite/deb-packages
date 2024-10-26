@@ -1,4 +1,4 @@
-pirogue-external-exposure (2.0.3) UNRELEASED; urgency=medium
+pirogue-external-exposure (2.0.3) bookworm; urgency=medium
 
   * Removed hardcoded CN field for self-signed certificate generation
   * Supports more complex network configuration when exposed or not to 
