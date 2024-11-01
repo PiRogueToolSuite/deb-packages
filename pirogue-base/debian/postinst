@@ -11,4 +11,14 @@ if [ "$1" = configure ]; then
     pirogue-admin --autodetect | tee $CONFIG
     pirogue-admin --apply $CONFIG --from-scratch --commit
   fi
+
+  # Fixup for the wrong repository's being listed in pirogue.list for a week
+  # (see 71a751e1dfc58fa9aacdaef651441c37c7095241 in debian-12.git):
+  SOURCES=/etc/apt/sources.list.d/pirogue.list
+  WRONG_URL=https://pts-project.org/debian-12-virogue/
+  GOOD_URL=https://pts-project.org/debian-12/
+  if grep -qs $WRONG_URL $SOURCES; then
+    echo "I: fixing wrong URL in $SOURCES: $WRONG_URL -> $GOOD_URL" >&2
+    sed "s,$WRONG_URL,$GOOD_URL," -i $SOURCES
+  fi
 fi
