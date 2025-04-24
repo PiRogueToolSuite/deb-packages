@@ -1,5 +1,41 @@
 #!/bin/sh
 # Renew installed certificates
 # Ideally invoked by cron-job
-# daily or weekly
+# weekly
+
+# 'public' certificate (if exists)
+# --------------------------------
 /usr/bin/certbot renew --pre-hook "service nginx stop" --post-hook "service nginx start"
+
+# 'self-signed' certificate
+# --------------------------------
+SELF_SIGNED_CERT_DEST=/var/lib/pirogue/admin/pirogue-external-exposure
+self_signed_cert_file="${SELF_SIGNED_CERT_DEST}/fullchain.pem"
+
+if ! test -f "${self_signed_cert_file}"
+then
+  echo "Can't renew self-signed certificate: ${self_signed_cert_file} does not exist" >&2
+  exit 1
+fi
+
+expire_in_a_week_date=$(date -d 'now + 1 week' +%s)
+expire_not_after_entry=$(openssl x509 -enddate -noout -in "${self_signed_cert_file}" | cut -d'=' -f 2)
+expire_effective_date=$(date -d "${expire_not_after_entry}" +%s)
+
+if test ${expire_in_a_week_date} -ge ${expire_effective_date}
+then
+  echo "Renewing self-signed certificate ..."
+  if test -f /var/lib/pirogue/admin/config.yaml
+  then
+    SYSTEM_HOSTNAME=$(grep SYSTEM_HOSTNAME /var/lib/pirogue/admin/config.yaml | cut -d':' -f 2 | xargs)
+    DOMAIN="${SYSTEM_HOSTNAME}.local"
+    EMAIL="root@${DOMAIN}"
+    /usr/sbin/issue-certificate 'False' "${DOMAIN}" "${EMAIL}" && systemctl reload nginx
+  else
+    echo "Can't renew self-signed certificate: config.yaml does not exist" >&2
+    exit 1
+  fi
+else
+  echo "Self-signed certificate is still valid until: ${expire_not_after_entry}"
+fi
+

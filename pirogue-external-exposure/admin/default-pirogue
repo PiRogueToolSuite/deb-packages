@@ -70,7 +70,9 @@ server {
   # Generated for domain: @PUBLIC_DOMAIN_NAME@
 
   set $accessible @LAN_ACCESSIBILITY@;
-  set $force_secure @FORCE_SECURE@;
+  # Always for secure now, even in local setup
+  # set $force_secure @FORCE_SECURE@;
+  set $force_secure true;
 
   if ($accessible = false) {
     return 403;
@@ -112,7 +114,9 @@ server {
 
   # Do not remove this comment:
   # Generated for domain: @PUBLIC_DOMAIN_NAME@
-  set $accessible @WAN_ACCESSIBILITY@;
+  # Always accept 'secure' connection, even in local setup
+  # set $accessible @WAN_ACCESSIBILITY@;
+  set $accessible true;
 
   if ($accessible = false) {
     return 403;

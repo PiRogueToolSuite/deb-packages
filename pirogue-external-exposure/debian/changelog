@@ -1,3 +1,13 @@
+pirogue-external-exposure (2.0.4) bookworm; urgency=medium
+
+  * Address security audit remediation:
+    'Vulnerability 2.4: Dashboard Access Limited to HTTP Only'
+  * Enable nginx https (force) redirection in all network mode
+  * Fix issue: https://github.com/PiRogueToolSuite/deb-packages/issues/43
+  * Enable certificate renewal for 'self-signed' certificate
+
+ -- Christophe Andral <christophe@andral.fr>  Thu, 24 Apr 2025 12:07:02 +0200
+
 pirogue-external-exposure (2.0.3) bookworm; urgency=medium
 
   * Removed hardcoded CN field for self-signed certificate generation
