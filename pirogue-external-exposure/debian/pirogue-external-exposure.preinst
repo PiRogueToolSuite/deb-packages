@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+# Nginx starting too early sometimes but we need to bind explicitly to $EXTERNAL_ADDRESS (ipv4)
+if [ "$1" = "install" ] || [ "$1" = "upgrade" ]; then
+   mkdir -p /etc/systemd/system/nginx.service.d
+   printf "[Unit]\nStartLimitBurst=5\n" > /etc/systemd/system/nginx.service.d/override.conf
+   printf "[Service]\nRestart=on-failure\nRestartSec=30\n" >> /etc/systemd/system/nginx.service.d/override.conf
+fi
