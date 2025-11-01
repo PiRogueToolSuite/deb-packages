@@ -35,8 +35,11 @@ if [ "$1" = configure ]; then
   # featuring a default password and no obligation to change it on the first
   # connection.
   #
-  # Perform that check only once, when upgrading, from pre-2.0.6 versions:
-  if [ -n "$2" ] && dpkg --compare-versions "$2" '<<' 2.0.6; then
+  # Perform that check in two cases (which should mean exactly once per
+  # installed system):
+  #  - when installing for the first time (in case an old image is used);
+  #  - when upgrading from a version prior to the one introducing the check.
+  if [ -z "$2" ] || dpkg --compare-versions "$2" '<<' 2.0.6; then
     # Be careful about the pi user, which might not even exist (Pi installed
     # manually and PTS deployed afterwards, or ViRogue-like setups).
     pi_shadow=$(grep ^pi: /etc/shadow 2>/dev/null || true)
