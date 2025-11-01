@@ -1,3 +1,14 @@
+pirogue-base (2.0.6) UNRELEASED; urgency=medium
+
+  * Expire the 'pi' password under some conditions (#45):
+     - If there's a 'pi' user with a /etc/shadow entry that matches one of
+       the reference ones (as found in the arm64_v2.0.0, arm64_v2.1.0, or
+       arm64_v2.2.0 images).
+     - Then we expire it so that it needs to be updated the next time it's
+       used.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 01 Nov 2025 01:38:50 +0100
+
 pirogue-base (2.0.5) bookworm; urgency=medium
 
   * Fix URL in /etc/apt/sources.list.d/pirogue.list if the staging
