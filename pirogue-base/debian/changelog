@@ -1,3 +1,9 @@
+pirogue-base (2.0.6) UNRELEASED; urgency=medium
+
+  * WIP.
+
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 01 Nov 2025 01:38:50 +0100
+
 pirogue-base (2.0.5) bookworm; urgency=medium
 
   * Fix URL in /etc/apt/sources.list.d/pirogue.list if the staging

@@ -3,6 +3,15 @@ set -e
 
 #DEBHELPER#
 
+# shellcheck disable=SC2016
+OLD_IMAGES='\
+PiRogue-OS-12-Pi3_and_Pi4-2023-10-20.img.xz      arm64_v2.0.0 pi:$y$j9T$f.ITAVftG2k0Z63OTWeSR1$2ifXRPZnTjLpJQypS/eWL90txMCAeBdhB8XvS7DsQ11:19650:0:99999:7:::
+PiRogue-OS-12-Pi3_and_Pi4-2024-07-22.img.xz      arm64_v2.1.0 pi:$y$j9T$1O/35HON1nNxwmtJTlGKu.$IUbLmrbIR4mDcg4scBfI7vwlHC7qqMGn1nz/adCfhC5:19926:0:99999:7:::
+PiRogue-OS-12-Pi3_and_Pi4-2024-09-26.img.xz      arm64_v2.2.0 pi:$y$j9T$RS0vr35tIJrcBDcJuliwy/$aE5H0dRqYGS4LDZkufmFjQGxZk7807Vy2RHC94Ihxm0:19991:0:99999:7:::
+PiRogue-OS-12-Pi5-Experimental-2024-07-22.img.xz arm64_v2.1.0 pi:$y$j9T$uoiFZJLMHNyg6OsAVBHrf1$NJhRC1viwKG4A1tqGtoIqsS6TgZXB8mKisQ9itsF.uC:19926:0:99999:7:::
+PiRogue-OS-12-Pi5-Experimental-2024-09-26.img.xz arm64_v2.2.0 pi:$y$j9T$vT8WJ.ril1om3XEleK17E.$oq6QrQ9boFkJS7HNY91RYSICjfZBoHwXqYmaRPxi864:19991:0:99999:7:::
+'
+
 CONFIG=/root/pirogue-admin-autodetect.yml
 if [ "$1" = configure ]; then
   # Only run autodetection once, during the very first installation, or when
@@ -20,5 +29,38 @@ if [ "$1" = configure ]; then
   if grep -qs $WRONG_URL $SOURCES; then
     echo "I: fixing wrong URL in $SOURCES: $WRONG_URL -> $GOOD_URL" >&2
     sed "s,$WRONG_URL,$GOOD_URL," -i $SOURCES
+  fi
+
+  # Force a password change for systems that were deployed via old images,
+  # featuring a default password and no obligation to change it on the first
+  # connection.
+  #
+  # Perform that check only once, when upgrading, from pre-2.0.6 versions:
+  if [ -n "$2" ] && dpkg --compare-versions "$2" '<<' 2.0.6; then
+    # Be careful about the pi user, which might not even exist (Pi installed
+    # manually and PTS deployed afterwards, or ViRogue-like setups).
+    pi_shadow=$(grep ^pi: /etc/shadow 2>/dev/null || true)
+    if [ -n "$pi_shadow" ]; then
+      printf '%s' "$OLD_IMAGES" | while read -r image release reference_shadow; do
+        if [ "$pi_shadow" = "$reference_shadow" ]; then
+
+          cat >&2 <<EOF
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                        WARNING: SECURITY INFORMATION!                        ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+This system seems to have been deployed from the following:
+ - Image:   $image
+ - Release: $release
+
+At the time, there was no obligation to update the password when logging in for
+the first time. Since this isn't ideal security-wise, this upgrade makes it
+mandatory to set a different password the next time you authenticate as the 'pi'
+user (this includes using 'sudo').
+EOF
+          chage -d0 pi
+        fi
+      done
+    fi
   fi
 fi
