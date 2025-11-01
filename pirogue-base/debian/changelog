@@ -1,4 +1,4 @@
-pirogue-base (2.0.6) UNRELEASED; urgency=medium
+pirogue-base (2.0.6) bookworm; urgency=medium
 
   * Expire the 'pi' password under some conditions (#45):
      - If there's a 'pi' user with a /etc/shadow entry that matches one of
@@ -7,7 +7,7 @@ pirogue-base (2.0.6) UNRELEASED; urgency=medium
      - Then we expire it so that it needs to be updated the next time it's
        used.
 
- -- Cyril Brulebois <cyril@debamax.com>  Sat, 01 Nov 2025 01:38:50 +0100
+ -- Cyril Brulebois <cyril@debamax.com>  Sat, 01 Nov 2025 18:49:29 +0100
 
 pirogue-base (2.0.5) bookworm; urgency=medium
 
