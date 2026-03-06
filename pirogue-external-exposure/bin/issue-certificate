@@ -2,7 +2,7 @@
 
 usage()
 {
-  echo "usage: $0 DOMAIN EMAIL"
+  echo "usage: $0 PUBLIC_ACCESS DOMAIN EMAIL"
   echo "       PUBLIC_ACCESS: True | False : enable public access"
   echo "                      e.g: True"
   echo "              DOMAIN: full qualified domain name of the issued certificate"
