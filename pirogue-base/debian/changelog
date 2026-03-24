@@ -1,3 +1,11 @@
+pirogue-base (2.0.7) UNRELEASED; urgency=medium
+
+  * Drop the support of the HAT
+  * Add the support of mongoose
+  * Replace the eve-collector and flow inspector with mongoose
+
+ -- U+039b <hello@pts-project.org>  Tue, 24 Mar 2026 15:40:00 +0200
+
 pirogue-base (2.0.6) bookworm; urgency=medium
 
   * Expire the 'pi' password under some conditions (#45):
