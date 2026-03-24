@@ -21,312 +21,10 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1658497665274,
+  "id": 4,
+  "iteration": 1774360837488,
   "links": [],
   "panels": [
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 0,
-        "y": 0
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "count"
-          ],
-          "fields": "/^value$/",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"value\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/) AND $timeFilter",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "community_id_b64",
-              "operator": "=~",
-              "value": "/^$community_id$/"
-            }
-          ]
-        }
-      ],
-      "title": "Flows",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 4,
-        "y": 0
-      },
-      "id": 6,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "/^bidirectional_bytes$/",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"bidirectional_bytes\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "bidirectional_bytes"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "community_id_b64",
-              "operator": "=~",
-              "value": "/^$community_id$/"
-            }
-          ]
-        }
-      ],
-      "title": "I/O bytes",
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 8,
-        "y": 0
-      },
-      "id": 10,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "/^flow\\.bidirectional_duration_ms$/",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"bidirectional_duration_ms\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "bidirectional_duration_ms"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "community_id_b64",
-              "operator": "=~",
-              "value": "/^$community_id$/"
-            }
-          ]
-        }
-      ],
-      "title": "Duration",
-      "type": "stat"
-    },
-    {
-      "datasource": "InfluxDB - Suricata",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "purple",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 12,
-        "y": 0
-      },
-      "id": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "count"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "alert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"value\" FROM \"alert\" WHERE (\"community_id_b64\" =~ /^$community_id$/) AND $timeFilter AND \"alert_severity\" < 3",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "community_id_b64",
-              "operator": "=~",
-              "value": "/^$community_id$/"
-            }
-          ]
-        }
-      ],
-      "title": "Alerts",
-      "type": "stat"
-    },
     {
       "datasource": null,
       "fieldConfig": {
@@ -349,8 +47,8 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 8,
-        "x": 16,
+        "w": 5,
+        "x": 0,
         "y": 0
       },
       "id": 14,
@@ -370,25 +68,29 @@
           {
             "config": {
               "color": {
-                "fixed": "purple"
+                "fixed": "semi-dark-red"
               },
               "fillOpacity": 0.4,
-              "shape": "triangle",
-              "showLegend": false,
+              "shape": "square",
+              "showLegend": true,
               "size": {
                 "fixed": 5,
                 "max": 15,
                 "min": 2
               }
             },
+            "location": {
+              "lookup": "country",
+              "mode": "lookup"
+            },
             "type": "markers"
           }
         ],
         "view": {
           "id": "coords",
-          "lat": 14.604847,
-          "lon": -2.109375,
-          "zoom": 1
+          "lat": 25.024856,
+          "lon": -12.686115,
+          "zoom": 0.74
         }
       },
       "targets": [
@@ -398,7 +100,10 @@
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT \"latitude\", \"longitude\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)  AND latitude!=0",
+          "queryText": "SELECT \nCOUNT(id) as c,\njson_extract(enrichment, '$.geoip.country_name') as country\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nAND length(country)>1\nGROUP BY country\nORDER BY timestamp DESC;",
+          "queryType": "table",
           "rawQuery": false,
+          "rawQueryText": "SELECT \nCOUNT(id) as c,\njson_extract(enrichment, '$.geoip.country_name') as country\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nAND length(country)>1\nGROUP BY country\nORDER BY timestamp DESC;",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -425,10 +130,303 @@
               "operator": "=~",
               "value": "/^$community_id$/"
             }
+          ],
+          "timeColumns": [
+            "time",
+            "ts"
           ]
         }
       ],
+      "transparent": true,
       "type": "geomap"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 6,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT COUNT(id) as c\nFROM network_alert\nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryType": "table",
+          "rawQueryText": "SELECT COUNT(id) as c\nFROM network_alert\nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Alerts",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryType": "table",
+          "rawQueryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "refId": "A",
+          "timeColumns": []
+        }
+      ],
+      "title": "Flows",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "flow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"bidirectional_duration_ms\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)",
+          "queryText": "SELECT SUM(bidirectional_duration_ms) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryType": "table",
+          "rawQuery": false,
+          "rawQueryText": "SELECT SUM(bidirectional_duration_ms) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "bidirectional_duration_ms"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "community_id_b64",
+              "operator": "=~",
+              "value": "/^$community_id$/"
+            }
+          ],
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Duration",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "flow",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"bidirectional_bytes\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)",
+          "queryText": "SELECT SUM(bidirectional_bytes) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryType": "table",
+          "rawQuery": false,
+          "rawQueryText": "SELECT SUM(bidirectional_bytes) as c\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "refId": "A",
+          "resultFormat": "table",
+          "select": [
+            [
+              {
+                "params": [
+                  "bidirectional_bytes"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "community_id_b64",
+              "operator": "=~",
+              "value": "/^$community_id$/"
+            }
+          ],
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "I/O",
+      "transparent": true,
+      "type": "stat"
     },
     {
       "collapsed": false,
@@ -445,7 +443,7 @@
       "type": "row"
     },
     {
-      "datasource": "InfluxDB - Suricata",
+      "datasource": null,
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -578,7 +576,7 @@
         ]
       },
       "gridPos": {
-        "h": 5,
+        "h": 11,
         "w": 24,
         "x": 0,
         "y": 5
@@ -591,135 +589,11 @@
       "pluginVersion": "8.1.5",
       "targets": [
         {
-          "groupBy": [],
-          "measurement": "alert",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT \"alert_category\" AS \"Category\", \"alert_signature\" AS \"Rule\", \"alert_severity\" AS \"Sev.\", \"app_proto\" AS \"Proto\", \"src_ip\" AS \"Source IP\", \"src_port\" AS \"port\", \"dest_ip\" AS \"Destination IP\", \"dest_port\" AS \"port\" FROM \"alert\" WHERE (\"community_id\" =~ /^$community_id$/) ",
-          "rawQuery": false,
+          "queryText": "SELECT \ntime as Time,\ncategory as Category,\nseverity as Severity,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nsignature as Signature\nFROM network_alert \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "queryType": "table",
+          "rawQueryText": "SELECT \ntime as Time,\ncategory as Category,\nseverity as Severity,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nsignature as Signature\nFROM network_alert \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "alert_category"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Category"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "alert_signature"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Rule"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "alert_severity"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Sev."
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "app_proto"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Proto"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "src_ip"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Source IP"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "src_port"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "port"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "dest_ip"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "Destination IP"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "dest_port"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [
-                  "port"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "community_id_b64",
-              "operator": "=~",
-              "value": "/^$community_id$/"
-            }
-          ]
+          "timeColumns": []
         }
       ],
       "type": "table"
@@ -731,7 +605,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 16
       },
       "id": 4,
       "panels": [],
@@ -776,6 +650,18 @@
                 "value": 152
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "I/O"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
           }
         ]
       },
@@ -783,7 +669,7 @@
         "h": 15,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 17
       },
       "id": 2,
       "options": {
@@ -798,7 +684,10 @@
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT \"application_category_name\" as \"Category\", \"application_name\" as \"Application\", \"src_ip\" as \"Source IP\", \"dst_ip\" as \"Destination IP\", \"requested_server_name\" as \"Domain\" FROM \"flow\" WHERE (\"community_id\" =~ /^$community_id$/)",
+          "queryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nrequested_server_name as Server,\nbidirectional_bytes as \"I/O\"\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "queryType": "table",
           "rawQuery": false,
+          "rawQueryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nrequested_server_name as Server,\nbidirectional_bytes as \"I/O\"\nFROM network_dpi \nWHERE \ncommunity_id_b64==${community_id:singlequote}\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -907,6 +796,10 @@
               "operator": "=~",
               "value": "/^$community_id$/"
             }
+          ],
+          "timeColumns": [
+            "time",
+            "ts"
           ]
         }
       ],
@@ -932,7 +825,7 @@
       "type": "table"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -942,20 +835,20 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "MTpnck5qZ2xidTVuZkVsRWJLVFpsTXVRWlkwNWc9",
-          "value": "MTpnck5qZ2xidTVuZkVsRWJLVFpsTXVRWlkwNWc9"
+          "text": "MTpGVGhLY2YxTFBHdzY2YlVFQ0tVTll0ek5xUjA9",
+          "value": "MTpGVGhLY2YxTFBHdzY2YlVFQ0tVTll0ek5xUjA9"
         },
         "datasource": null,
-        "definition": "SELECT \"community_id_b64\", \"bidirectional_bytes\" FROM \"flow\"",
+        "definition": "SELECT community_id_b64 FROM network_dpi",
         "description": null,
         "error": null,
-        "hide": 2,
+        "hide": 1,
         "includeAll": false,
         "label": null,
         "multi": false,
         "name": "community_id",
         "options": [],
-        "query": "SELECT \"community_id_b64\", \"bidirectional_bytes\" FROM \"flow\"",
+        "query": "SELECT community_id_b64 FROM network_dpi",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -965,12 +858,12 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Flow details",
-  "uid": "dbmZaoZgk",
-  "version": 1
+  "title": "Details",
+  "uid": "yCsXhx5Dk",
+  "version": 21
 }

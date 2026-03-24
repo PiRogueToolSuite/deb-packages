@@ -7,3 +7,6 @@ set -e
 if [ "$1" = "configure" ] && [ -n "$2" ]; then
   pirogue-admin --redeploy --commit
 fi
+
+grafana-cli plugins install frser-sqlite-datasource
+systemctl restart grafana-server.service
