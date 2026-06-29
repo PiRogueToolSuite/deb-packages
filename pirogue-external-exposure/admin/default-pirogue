@@ -60,6 +60,8 @@ server {
     rewrite  ^/dashboard/(.*)  /$1 break;
     proxy_pass http://grafana;
   }
+
+  include  /usr/share/pirogue-external-exposure/services.conf.d/*.conf;
 }
 
 server {
@@ -106,6 +108,8 @@ server {
     rewrite  ^/dashboard/(.*)  /$1 break;
     proxy_pass http://grafana;
   }
+
+  include  /usr/share/pirogue-external-exposure/services.conf.d/*.conf;
 }
 
 server {
@@ -148,6 +152,8 @@ server {
     rewrite  ^/dashboard/(.*)  /$1 break;
     proxy_pass http://grafana;
   }
+
+  include  /usr/share/pirogue-external-exposure/services.conf.d/*.conf;
 }
 
 upstream pirogue-admin-daemon {

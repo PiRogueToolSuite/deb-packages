@@ -2,3 +2,4 @@ bin/issue-certificate  usr/sbin
 bin/renew-certificates usr/sbin
 admin/*                usr/share/pirogue-admin/pirogue-external-exposure/
 src/htdocs/*           usr/share/pirogue-external-exposure/htdocs/
+src/services.conf.d/*  usr/share/pirogue-external-exposure/services.conf.d/

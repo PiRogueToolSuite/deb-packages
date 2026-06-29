@@ -1,3 +1,10 @@
+pirogue-external-exposure (2.0.5) bookworm; urgency=medium
+
+  * Add support for multiple sub-service (pirogue-external-exposure/services.conf.d)
+  * Fix minor usage typo
+
+ -- Christophe Andral <christophe@andral.fr>  Wed, 24 Jun 2026 16:11:02 +0200
+
 pirogue-external-exposure (2.0.4) bookworm; urgency=medium
 
   * Address security audit remediation:
