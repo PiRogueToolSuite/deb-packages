@@ -1,4 +1,10 @@
-pirogue-base (2.0.7) UNRELEASED; urgency=medium
+pirogue-base (2.0.8) bookworm; urgency=medium
+
+  * Add pirogue-admin-web to default installation
+
+ -- Christophe Andral <christophe@andral.fr>  Fri, 26 Jun 2026 16:52:40 +0200
+
+pirogue-base (2.0.7) bookworm; urgency=medium
 
   * Drop the support of the HAT
   * Add the support of mongoose
