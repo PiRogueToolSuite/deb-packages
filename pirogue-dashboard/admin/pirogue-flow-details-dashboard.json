@@ -55,7 +55,7 @@
       "options": {
         "basemap": {
           "config": {},
-          "type": "default"
+          "type": "osm-standard"
         },
         "controls": {
           "mouseWheelZoom": true,

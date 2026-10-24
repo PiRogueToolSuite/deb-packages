@@ -21,10 +21,272 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
-  "iteration": 1774360770974,
+  "id": 7,
+  "iteration": 1792844752734,
   "links": [],
   "panels": [
+    {
+      "datasource": null,
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "options": {
+        "content": "# PiRogue Activity",
+        "mode": "markdown"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "\n    SELECT CAST(strftime('%s', 'now', '-1 minute') as INTEGER) as time, 4 as value\n    WHERE time >= 1234 and time < 134567\n  ",
+          "queryType": "table",
+          "rawQueryText": "SELECT CAST(strftime('%s', 'now', '-1 minute') as INTEGER) as time, 4 as value \nWHERE time >= $__from / 1000 and time < $__to / 1000",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT COUNT(DISTINCT(src_ip)) FROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nAND json_extract(enrichment, '$.direction') IN ('outbound')",
+          "queryType": "table",
+          "rawQueryText": "SELECT COUNT(DISTINCT(src_ip)) FROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nAND json_extract(enrichment, '$.direction') IN ('outbound')",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Devices",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "From Suricata",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT COUNT(*) as Alerts\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND (\n      '__ALL__' IN (${country_name:singlequote})\n      OR\n      json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n    )\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n\n\n-- SELECT *\n-- FROM network_alert\n-- WHERE \n-- (\n--   src_ip IN (${client_ip:singlequote})\n--   OR\n--   dst_ip IN (${client_ip:singlequote})\n-- )\n-- AND json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n-- AND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "queryType": "table",
+          "rawQueryText": "SELECT COUNT(*) as Alerts\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND (\n      '__ALL__' IN (${country_name:singlequote})\n      OR\n      json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n    )\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n\n\n-- SELECT *\n-- FROM network_alert\n-- WHERE \n-- (\n--   src_ip IN (${client_ip:singlequote})\n--   OR\n--   dst_ip IN (${client_ip:singlequote})\n-- )\n-- AND json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n-- AND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Suricata Alerts",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "description": "Data from network-dpi tables vs alerts table.\n- grabbing risk levels from network dpi table is ok?\n- note how alert severity 2 and 3 are rolled into risk 1",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 2
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Normal"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Suspicious"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Critical"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 2
+      },
+      "id": 22,
+      "options": {
+        "displayMode": "basic",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showUnfilled": true,
+        "text": {}
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT\n  SUM(CASE WHEN risk = 0 THEN 1 ELSE 0 END) AS Normal,\n  SUM(CASE WHEN risk = 1 THEN 1 ELSE 0 END) AS Suspicious,\n  SUM(CASE WHEN risk = 2 THEN 1 ELSE 0 END) AS Critical\nFROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
+          "queryType": "table",
+          "rawQueryText": "SELECT\n  SUM(CASE WHEN risk = 0 THEN 1 ELSE 0 END) AS Normal,\n  SUM(CASE WHEN risk = 1 THEN 1 ELSE 0 END) AS Suspicious,\n  SUM(CASE WHEN risk = 2 THEN 1 ELSE 0 END) AS Critical\nFROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
+          "refId": "A",
+          "timeColumns": []
+        }
+      ],
+      "title": "Risk Overview",
+      "type": "bargauge"
+    },
     {
       "datasource": null,
       "fieldConfig": {
@@ -32,149 +294,84 @@
           "color": {
             "mode": "continuous-GrYlRd"
           },
-          "decimals": 4,
-          "displayName": "I/O",
           "mappings": [],
           "max": 100,
           "min": 0,
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "#EAB839",
-                "value": 25
-              },
-              {
-                "color": "#EF843C",
-                "value": 50
-              },
-              {
-                "color": "#E24D42",
-                "value": 80
-              },
-              {
-                "color": "dark-red",
-                "value": 90
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 0
+        "h": 12,
+        "w": 12,
+        "x": 12,
+        "y": 2
       },
-      "id": 2,
+      "id": 10,
       "options": {
         "basemap": {
           "config": {},
-          "type": "default"
+          "type": "osm-standard"
         },
         "controls": {
           "mouseWheelZoom": true,
           "showAttribution": true,
           "showDebug": false,
           "showScale": false,
-          "showZoom": false
+          "showZoom": true
         },
         "layers": [
           {
             "config": {
-              "blur": 5,
-              "radius": 10,
-              "weight": {
-                "field": "weight",
-                "fixed": 1,
-                "max": 1,
-                "min": 0
+              "color": {
+                "field": "% of bytes",
+                "fixed": "dark-green"
+              },
+              "fillOpacity": 0.4,
+              "shape": "circle",
+              "showLegend": true,
+              "size": {
+                "field": "% of bytes",
+                "fixed": 5,
+                "max": 15,
+                "min": 5
               }
             },
             "location": {
-              "gazetteer": "public/gazetteer/countries.json",
               "lookup": "country",
               "mode": "lookup"
             },
-            "type": "heatmap"
+            "type": "markers"
           }
         ],
         "view": {
           "id": "coords",
-          "lat": 30.27027,
-          "lon": -2.130474,
-          "zoom": 1.29
+          "lat": 25.804244,
+          "lon": 15.911015,
+          "zoom": 1.78
         }
       },
       "targets": [
         {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "flows_5d",
-          "query": "SELECT \"latitude\", \"longitude\" FROM \"flows_5d\".\"flow\" WHERE (\"src_ip\" =~ /^$client_ip$/ OR \"dst_ip\" =~ /^$client_ip$/) AND $timeFilter AND latitude!=0",
-          "queryText": "SELECT \n100.0*SUM(bidirectional_bytes)/(\n  SELECT 1.0*SUM(bidirectional_bytes)\n  FROM network_dpi \n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND length(json_extract(enrichment, '$.geoip.country_name'))>0\n  AND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n  ) as weight,\njson_extract(enrichment, '$.geoip.country_name') as country\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND length(country)>1\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nGROUP BY country",
+          "queryText": "WITH filtered AS (\n  SELECT\n    bidirectional_bytes,\n    risk,\n    json_extract(enrichment, '$.geoip.country')      AS country,\n    json_extract(enrichment, '$.geoip.country_name') AS country_name\n  FROM network_dpi\n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND \n  (\n    '__ALL__' IN (${country_name:singlequote})\n    OR\n    json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n  )\n  AND\n  (\n    '__ALL__' IN (${application_name:singlequote}) \n    OR \n    application_name IN (${application_name:singlequote})\n  )\n  AND risk IN (${risk:raw})\n  AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n),\ngeo AS (\n  SELECT * FROM filtered WHERE length(country_name) > 0\n)\nSELECT\n  country,\n  country_name,\n  100.0 * SUM(bidirectional_bytes) / (SELECT SUM(bidirectional_bytes) FROM geo) AS \"% of bytes\"\nFROM geo\nGROUP BY country, country_name\nORDER BY \"% of bytes\" DESC",
           "queryType": "table",
-          "rawQuery": true,
-          "rawQueryText": "SELECT \n100.0*SUM(bidirectional_bytes)/(\n  SELECT 1.0*SUM(bidirectional_bytes)\n  FROM network_dpi \n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND length(json_extract(enrichment, '$.geoip.country_name'))>0\n  AND timestamp >= $__from / 1000 and timestamp < $__to / 1000\n  ) as weight,\njson_extract(enrichment, '$.geoip.country_name') as country\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND length(country)>1\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nGROUP BY country",
+          "rawQueryText": "WITH filtered AS (\n  SELECT\n    bidirectional_bytes,\n    risk,\n    json_extract(enrichment, '$.geoip.country')      AS country,\n    json_extract(enrichment, '$.geoip.country_name') AS country_name\n  FROM network_dpi\n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND \n  (\n    '__ALL__' IN (${country_name:singlequote})\n    OR\n    json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n  )\n  AND\n  (\n    '__ALL__' IN (${application_name:singlequote}) \n    OR \n    application_name IN (${application_name:singlequote})\n  )\n  AND risk IN (${risk:raw})\n  AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n),\ngeo AS (\n  SELECT * FROM filtered WHERE length(country_name) > 0\n)\nSELECT\n  country,\n  country_name,\n  100.0 * SUM(bidirectional_bytes) / (SELECT SUM(bidirectional_bytes) FROM geo) AS \"% of bytes\"\nFROM geo\nGROUP BY country, country_name\nORDER BY \"% of bytes\" DESC",
           "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "latitude"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "longitude"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "src_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            },
-            {
-              "condition": "OR",
-              "key": "dst_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            }
-          ],
-          "timeColumns": []
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
         }
       ],
-      "transformations": [],
-      "transparent": true,
+      "title": "Top Countries Contacted",
       "type": "geomap"
     },
     {
@@ -182,21 +379,16 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "#E02F44",
-            "mode": "thresholds"
+            "fixedColor": "purple",
+            "mode": "fixed"
           },
           "mappings": [],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 1
               }
             ]
           }
@@ -205,9 +397,9 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 4,
-        "x": 8,
-        "y": 0
+        "w": 6,
+        "x": 0,
+        "y": 6
       },
       "id": 16,
       "options": {
@@ -219,7 +411,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^c$/",
+          "fields": "",
           "values": false
         },
         "text": {},
@@ -228,9 +420,9 @@
       "pluginVersion": "8.1.5",
       "targets": [
         {
-          "queryText": "SELECT COUNT(id) as c\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
           "queryType": "table",
-          "rawQueryText": "SELECT COUNT(id) as c\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "rawQueryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
           "refId": "A",
           "timeColumns": [
             "time",
@@ -238,8 +430,7 @@
           ]
         }
       ],
-      "title": "Alerts",
-      "transparent": true,
+      "title": "Flows",
       "type": "stat"
     },
     {
@@ -247,31 +438,27 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "purple",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          }
+          },
+          "unit": "decbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 12,
-        "y": 0
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 6
       },
       "id": 14,
       "options": {
@@ -292,322 +479,10 @@
       "pluginVersion": "8.1.5",
       "targets": [
         {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT count(distinct(\"src_ip\")) FROM \"flow\" WHERE (\"application_name\" =~ /^DNS/) AND $timeFilter",
-          "queryText": "SELECT COUNT(DISTINCT(src_ip)) FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "queryText": "SELECT \nSUM(bidirectional_bytes) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
           "queryType": "table",
-          "rawQuery": true,
-          "rawQueryText": "SELECT COUNT(DISTINCT(src_ip)) FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+          "rawQueryText": "SELECT \nSUM(bidirectional_bytes) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "src_ip"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              },
-              {
-                "params": [],
-                "type": "count"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "application_name",
-              "operator": "=~",
-              "value": "/^DNS/"
-            }
-          ],
-          "timeColumns": []
-        }
-      ],
-      "title": "Devices",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 15,
-        "y": 0
-      },
-      "id": 20,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^c$/",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "queryType": "table",
-          "rawQueryText": "SELECT COUNT(id) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "bidirectional_duration_ms"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "src_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            },
-            {
-              "condition": "OR",
-              "key": "dst_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            }
-          ],
-          "timeColumns": []
-        }
-      ],
-      "title": "Flows",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 18,
-        "y": 0
-      },
-      "id": 22,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "/^c$/",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryText": "SELECT COUNT(DISTINCT(requested_server_name)) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "queryType": "table",
-          "rawQueryText": "SELECT COUNT(DISTINCT(requested_server_name)) as c\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "refId": "A",
-          "resultFormat": "table",
-          "select": [
-            [
-              {
-                "params": [
-                  "requested_server_name"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "distinct"
-              },
-              {
-                "params": [],
-                "type": "count"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "src_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            },
-            {
-              "condition": "OR",
-              "key": "dst_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            }
-          ],
-          "timeColumns": [
-            "time",
-            "ts"
-          ]
-        }
-      ],
-      "title": "Domains",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 21,
-        "y": 0
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "sum"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "8.1.5",
-      "targets": [
-        {
-          "groupBy": [],
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryText": "SELECT \nSUM(bidirectional_bytes) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "queryType": "table",
-          "rawQueryText": "SELECT \nSUM(bidirectional_bytes) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "bidirectional_bytes"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "src_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            },
-            {
-              "condition": "OR",
-              "key": "dst_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            }
-          ],
           "timeColumns": [
             "time",
             "ts"
@@ -615,43 +490,37 @@
         }
       ],
       "title": "I/O",
-      "transparent": true,
       "type": "stat"
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "dark-purple",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
           "mappings": [],
-          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "purple",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 1024
               }
             ]
           },
-          "unit": "binBps"
+          "unit": "Bps"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 3,
         "w": 12,
-        "x": 12,
-        "y": 4
+        "x": 0,
+        "y": 11
       },
-      "id": 12,
+      "id": 20,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -659,7 +528,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "lastNotNull"
+            "firstNotNull"
           ],
           "fields": "",
           "values": false
@@ -670,65 +539,214 @@
       "pluginVersion": "8.1.5",
       "targets": [
         {
-          "groupBy": [
-            {
-              "params": [
-                "1s"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "hide": false,
-          "measurement": "flow",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryText": "SELECT \ntime,\n(bidirectional_bytes/((bidirectional_duration_ms+1)/1000.0)) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "queryText": "SELECT \ntime,\n(bidirectional_bytes/((bidirectional_duration_ms+1)/1000.0)) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "queryType": "table",
-          "rawQueryText": "SELECT \ntime,\n(bidirectional_bytes/((bidirectional_duration_ms+1)/1000.0)) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "rawQueryText": "SELECT \ntime,\n(bidirectional_bytes/((bidirectional_duration_ms+1)/1000.0)) as \"I/O\"\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "bidirectional_bytes"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "sum"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "src_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            },
-            {
-              "condition": "OR",
-              "key": "dst_ip",
-              "operator": "=~",
-              "value": "/^$client_ip$/"
-            }
-          ],
           "timeColumns": []
         }
       ],
-      "title": "I/O",
-      "transparent": true,
+      "title": " I/O Rate",
       "type": "stat"
     },
     {
       "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "I/O"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Flows"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Risky Flow Counts"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 12,
+        "x": 0,
+        "y": 14
+      },
+      "id": 2,
+      "options": {
+        "barWidth": 1,
+        "groupWidth": 0.84,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "hide": false,
+          "queryText": "-- SELECT CASE\n--          WHEN instr(application_name, '.') > 0\n--          THEN substr(application_name, instr(application_name, '.') + 1)\n--          ELSE application_name\n--        END AS app,\n--        SUM(bidirectional_bytes) AS total_bytes\n-- FROM network_dpi\n-- WHERE \n-- (\n--   src_ip IN (${client_ip:singlequote})\n--   OR\n--   dst_ip IN (${client_ip:singlequote})\n-- )\n-- AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n-- GROUP BY app\n-- ORDER BY total_bytes DESC\n-- LIMIT 10\n\n-- ungrouped\nSELECT application_name                       AS \"Application\",\n       COUNT(*)                               AS \"Flows\",\n       SUM(bidirectional_bytes)               AS \"I/O\",\n       SUM(CASE WHEN risk > 0 THEN 1 ELSE 0 END) AS \"Risky Flow Counts\"\nFROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nGROUP BY application_name\nORDER BY \"Flows\" DESC\nLIMIT 10\n\n\n",
+          "queryType": "table",
+          "rawQueryText": "-- SELECT CASE\n--          WHEN instr(application_name, '.') > 0\n--          THEN substr(application_name, instr(application_name, '.') + 1)\n--          ELSE application_name\n--        END AS app,\n--        SUM(bidirectional_bytes) AS total_bytes\n-- FROM network_dpi\n-- WHERE \n-- (\n--   src_ip IN (${client_ip:singlequote})\n--   OR\n--   dst_ip IN (${client_ip:singlequote})\n-- )\n-- AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n-- GROUP BY app\n-- ORDER BY total_bytes DESC\n-- LIMIT 10\n\n-- ungrouped\nSELECT application_name                       AS \"Application\",\n       COUNT(*)                               AS \"Flows\",\n       SUM(bidirectional_bytes)               AS \"I/O\",\n       SUM(CASE WHEN risk > 0 THEN 1 ELSE 0 END) AS \"Risky Flow Counts\"\nFROM network_dpi\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nGROUP BY application_name\nORDER BY \"Flows\" DESC\nLIMIT 10\n\n\n",
+          "refId": "A",
+          "timeColumns": [
+            "time",
+            "ts"
+          ]
+        }
+      ],
+      "title": "Top Active Applications",
+      "type": "barchart"
+    },
+    {
+      "datasource": null,
+      "description": "Flow count and I/O is visualised by server names.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "I/O"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "decbytes"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 12,
+        "x": 12,
+        "y": 14
+      },
+      "id": 4,
+      "options": {
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {},
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "WITH dpi AS (\n  SELECT\n    CASE WHEN requested_server_name IS NULL OR requested_server_name = '' OR requested_server_name = 'unknown'\n         THEN 'unknown' ELSE requested_server_name END AS host,\n    bidirectional_bytes AS io,\n    risk\n  FROM network_dpi\n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND \n  (\n    '__ALL__' IN (${country_name:singlequote})\n    OR\n    json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n  )\n  AND\n  (\n    '__ALL__' IN (${application_name:singlequote}) \n    OR \n    application_name IN (${application_name:singlequote})\n  )\n  AND risk IN (${risk:raw})\n  AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n)\nSELECT\n  CASE WHEN t.last_dot = 0 THEN t.host\n       ELSE substr(t.host, t.second_last_dot + 1)\n  END AS \"Domain\",\n  COUNT(*)                                        AS \"Flows\",\n  SUM(t.io)                                       AS \"I/O\",\n  SUM(CASE WHEN t.risk > 0 THEN 1 ELSE 0 END)     AS \"Risky Flow Counts\"\nFROM (\n  SELECT\n    host, io, risk,\n    length(rtrim(host, replace(host, '.', ''))) AS last_dot,\n    length(rtrim(\n      substr(host, 1, length(rtrim(host, replace(host, '.', ''))) - 1),\n      replace(substr(host, 1, length(rtrim(host, replace(host, '.', ''))) - 1), '.', ''))) AS second_last_dot\n  FROM dpi\n) t\nGROUP BY 1\nORDER BY \"Flows\" DESC\nLIMIT 10\n\n-- SELECT\n--   requested_server_name      AS \"Domain\",\n--   COUNT(*)                   AS \"Flows\",\n--   SUM(bidirectional_bytes)   AS \"I/O\"\n-- FROM network_dpi\n-- WHERE\n--   requested_server_name IS NOT NULL\n--   AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n-- GROUP BY requested_server_name\n-- ORDER BY \"Flows\" DESC\n-- LIMIT 10",
+          "queryType": "table",
+          "rawQueryText": "WITH dpi AS (\n  SELECT\n    CASE WHEN requested_server_name IS NULL OR requested_server_name = '' OR requested_server_name = 'unknown'\n         THEN 'unknown' ELSE requested_server_name END AS host,\n    bidirectional_bytes AS io,\n    risk\n  FROM network_dpi\n  WHERE \n  (\n    src_ip IN (${client_ip:singlequote})\n    OR\n    dst_ip IN (${client_ip:singlequote})\n  )\n  AND \n  (\n    '__ALL__' IN (${country_name:singlequote})\n    OR\n    json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n  )\n  AND\n  (\n    '__ALL__' IN (${application_name:singlequote}) \n    OR \n    application_name IN (${application_name:singlequote})\n  )\n  AND risk IN (${risk:raw})\n  AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n)\nSELECT\n  CASE WHEN t.last_dot = 0 THEN t.host\n       ELSE substr(t.host, t.second_last_dot + 1)\n  END AS \"Domain\",\n  COUNT(*)                                        AS \"Flows\",\n  SUM(t.io)                                       AS \"I/O\",\n  SUM(CASE WHEN t.risk > 0 THEN 1 ELSE 0 END)     AS \"Risky Flow Counts\"\nFROM (\n  SELECT\n    host, io, risk,\n    length(rtrim(host, replace(host, '.', ''))) AS last_dot,\n    length(rtrim(\n      substr(host, 1, length(rtrim(host, replace(host, '.', ''))) - 1),\n      replace(substr(host, 1, length(rtrim(host, replace(host, '.', ''))) - 1), '.', ''))) AS second_last_dot\n  FROM dpi\n) t\nGROUP BY 1\nORDER BY \"Flows\" DESC\nLIMIT 10\n\n-- SELECT\n--   requested_server_name      AS \"Domain\",\n--   COUNT(*)                   AS \"Flows\",\n--   SUM(bidirectional_bytes)   AS \"I/O\"\n-- FROM network_dpi\n-- WHERE\n--   requested_server_name IS NOT NULL\n--   AND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n-- GROUP BY requested_server_name\n-- ORDER BY \"Flows\" DESC\n-- LIMIT 10",
+          "refId": "A",
+          "timeColumns": []
+        }
+      ],
+      "title": "Top Domains Contacted",
+      "type": "barchart"
+    },
+    {
+      "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -736,28 +754,19 @@
           },
           "custom": {
             "align": "auto",
-            "displayMode": "auto",
-            "filterable": true
+            "displayMode": "auto"
           },
-          "links": [],
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "purple",
                 "value": null
-              },
-              {
-                "color": "dark-red",
-                "value": 1
-              },
-              {
-                "color": "#EAB839",
-                "value": 2
               }
             ]
-          }
+          },
+          "unit": "none"
         },
         "overrides": [
           {
@@ -767,80 +776,35 @@
             },
             "properties": [
               {
-                "id": "custom.width",
-                "value": 87
-              },
-              {
                 "id": "custom.displayMode",
                 "value": "color-text"
               },
               {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": null
-                    },
-                    {
-                      "color": "red",
-                      "value": 1
-                    },
-                    {
-                      "color": "orange",
-                      "value": 2
-                    },
-                    {
-                      "color": "yellow",
-                      "value": 3
-                    },
-                    {
-                      "color": "blue",
-                      "value": 4
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
                 "id": "custom.width",
-                "value": 176
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Category"
-            },
-            "properties": [
+                "value": 68
+              },
               {
-                "id": "custom.width",
-                "value": 111
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time"
-            },
-            "properties": [
-              {
-                "id": "links",
+                "id": "mappings",
                 "value": [
                   {
-                    "targetBlank": true,
-                    "title": "Details",
-                    "url": "d/yCsXhx5Dk/details?orgId=1&from=${__from}&to=${__to}&var-community_id=${__data.fields.CID}"
+                    "options": {
+                      "1": {
+                        "color": "red",
+                        "index": 0,
+                        "text": "Critical"
+                      },
+                      "2": {
+                        "color": "orange",
+                        "index": 1,
+                        "text": "Suspicious"
+                      },
+                      "3": {
+                        "color": "orange",
+                        "index": 2,
+                        "text": "Suspicious"
+                      }
+                    },
+                    "type": "value"
                   }
                 ]
               }
@@ -849,102 +813,48 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Source"
+              "options": "Count"
             },
             "properties": [
               {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Details",
-                    "url": "d/HffRpAcDz/pirogue?orgId=1&var-client_ip=${__data.fields[\"Source\"]}&from=${__from}&to=${__to}"
-                  }
-                ]
+                "id": "custom.displayMode",
+                "value": "gradient-gauge"
               },
               {
                 "id": "custom.width",
-                "value": 150
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Destination"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Details",
-                    "url": "d/HffRpAcDz/pirogue?orgId=1&var-client_ip=${__data.fields[\"Destination\"]}&from=${__from}&to=${__to}"
-                  }
-                ]
-              },
-              {
-                "id": "custom.width",
-                "value": 150
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CID"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 1
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Country"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 89
+                "value": 130
               }
             ]
           }
         ]
       },
       "gridPos": {
-        "h": 8,
-        "w": 24,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 7
+        "y": 33
       },
-      "id": 4,
+      "id": 26,
       "options": {
-        "frameIndex": 1,
         "showHeader": true,
         "sortBy": []
       },
       "pluginVersion": "8.1.5",
       "targets": [
         {
-          "queryText": "SELECT \ntime as Time,\ncategory as Category,\nseverity as Severity,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nsignature as Signature,\ncommunity_id_b64 as CID\nFROM network_alert \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "queryText": "SELECT\n  signature AS \"Signature\",\n  MIN(severity) AS \"Severity\",\n  COUNT(*) AS \"Count\"\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nGROUP BY signature\nORDER BY \"Severity\" ASC, \"Count\" DESC",
           "queryType": "table",
-          "rawQueryText": "SELECT \ntime as Time,\ncategory as Category,\nseverity as Severity,\njson_extract(enrichment, '$.geoip.country') as Country,\nsrc_ip as Source,\ndst_ip as Destination, \nsignature as Signature,\ncommunity_id_b64 as CID\nFROM network_alert \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "rawQueryText": "SELECT\n  signature AS \"Signature\",\n  MIN(severity) AS \"Severity\",\n  COUNT(*) AS \"Count\"\nFROM network_alert\nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nGROUP BY signature\nORDER BY \"Severity\" ASC, \"Count\" DESC",
           "refId": "A",
           "timeColumns": []
         }
       ],
-      "title": "Security alerts",
-      "transformations": [],
-      "transparent": true,
+      "title": "Suricata Alert Signatures",
       "type": "table"
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -993,7 +903,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 185
+                "value": null
               }
             ]
           },
@@ -1081,19 +991,19 @@
                   {
                     "options": {
                       "0": {
-                        "color": "semi-dark-green",
+                        "color": "blue",
                         "index": 0,
-                        "text": "Low"
+                        "text": "Normal"
                       },
                       "1": {
-                        "color": "dark-orange",
+                        "color": "orange",
                         "index": 1,
                         "text": "Suspicious"
                       },
                       "2": {
-                        "color": "semi-dark-red",
+                        "color": "red",
                         "index": 2,
-                        "text": "Concerning"
+                        "text": "Critical"
                       }
                     },
                     "type": "value"
@@ -1173,12 +1083,12 @@
         ]
       },
       "gridPos": {
-        "h": 18,
+        "h": 19,
         "w": 24,
         "x": 0,
-        "y": 15
+        "y": 42
       },
-      "id": 8,
+      "id": 12,
       "options": {
         "showHeader": true,
         "sortBy": []
@@ -1191,10 +1101,10 @@
           "orderByTime": "DESC",
           "policy": "default",
           "query": "SELECT \"application_category_name\" AS \"Category\", \"application_name\" AS \"Application\", \"requested_server_name\" AS \"Domain\", \"src_ip\" AS \"Source IP\", \"dst_ip\" AS \"Destination IP\", \"country_iso\" AS \"Country\", \"bidirectional_bytes\" AS \"I/O\", \"community_id_b64\" FROM \"flow\" WHERE (\"src_ip\" =~ /^$client_ip$/ OR \"dst_ip\" =~ /^$client_ip$/) AND $timeFilter ORDER BY time DESC",
-          "queryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.src_hostname') as \"Src hostname\",\nsrc_ip as Source,\njson_extract(enrichment, '$.dst_hostname') as \"Dst hostname\",\ndst_ip as Destination, \nrequested_server_name as Request,\nbidirectional_bytes as \"I/O\",\ncommunity_id_b64 as CID\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "queryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.src_hostname') as \"Src hostname\",\nsrc_ip as Source,\njson_extract(enrichment, '$.dst_hostname') as \"Dst hostname\",\ndst_ip as Destination, \nrequested_server_name as Request,\nbidirectional_bytes as \"I/O\",\ncommunity_id_b64 as CID\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "queryType": "table",
           "rawQuery": true,
-          "rawQueryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.src_hostname') as \"Src hostname\",\nsrc_ip as Source,\njson_extract(enrichment, '$.dst_hostname') as \"Dst hostname\",\ndst_ip as Destination, \nrequested_server_name as Request,\nbidirectional_bytes as \"I/O\",\ncommunity_id_b64 as CID\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND timestamp >= $__from / 1000 and timestamp < $__to / 1000\nORDER BY timestamp DESC;",
+          "rawQueryText": "SELECT \ntime as Time,\napplication_category_name as Category,\napplication_name as Application,\nrisk as Risk,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.src_hostname') as \"Src hostname\",\nsrc_ip as Source,\njson_extract(enrichment, '$.dst_hostname') as \"Dst hostname\",\ndst_ip as Destination, \nrequested_server_name as Request,\nbidirectional_bytes as \"I/O\",\ncommunity_id_b64 as CID\nFROM network_dpi \nWHERE \n(\n  src_ip IN (${client_ip:singlequote})\n  OR\n  dst_ip IN (${client_ip:singlequote})\n)\nAND \n(\n  '__ALL__' IN (${country_name:singlequote})\n  OR\n  json_extract(enrichment, '$.geoip.country_name') IN (${country_name:singlequote})\n)\nAND\n(\n  '__ALL__' IN (${application_name:singlequote}) \n  OR \n  application_name IN (${application_name:singlequote})\n)\nAND risk IN (${risk:raw})\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY timestamp DESC;",
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -1283,9 +1193,157 @@
       "transformations": [],
       "transparent": true,
       "type": "table"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "json_extract(enrichment, '$.geoip.country')"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 181
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 61
+      },
+      "id": 24,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT \njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.direction') as Direction,\nrisk,\napplication_name,\nsrc_ip,\ndst_ip\nFROM network_dpi\nWHERE timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "queryType": "table",
+          "rawQueryText": "SELECT \njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.direction') as Direction,\nrisk,\napplication_name,\nsrc_ip,\ndst_ip\nFROM network_dpi\nWHERE timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "refId": "A",
+          "timeColumns": [
+            "timestamp"
+          ]
+        }
+      ],
+      "title": "Flow Debug",
+      "type": "table"
+    },
+    {
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "json_extract(enrichment, '$.geoip.country')"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 181
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rule"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 2075
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 61
+      },
+      "id": 25,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.1.5",
+      "targets": [
+        {
+          "queryText": "SELECT \nsignature,\nseverity,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.direction') as Direction,\nsrc_ip,\ndst_ip\nFROM network_alert\nWHERE timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "queryType": "table",
+          "rawQueryText": "SELECT \nsignature,\nseverity,\njson_extract(enrichment, '$.geoip.country') as Country,\njson_extract(enrichment, '$.direction') as Direction,\nsrc_ip,\ndst_ip\nFROM network_alert\nWHERE timestamp >= $__from / 1000 and timestamp < $__to / 1000\n",
+          "refId": "A",
+          "timeColumns": [
+            "timestamp"
+          ]
+        }
+      ],
+      "title": "Alert Debug",
+      "type": "table"
     }
   ],
-  "refresh": "10s",
+  "refresh": "30s",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
@@ -1303,7 +1361,7 @@
           ]
         },
         "datasource": null,
-        "definition": "SELECT DISTINCT(src_ip) as device FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+        "definition": "SELECT DISTINCT src_ip AS device \nFROM network_dpi \nWHERE json_extract(enrichment, '$.direction') IN ('outbound')\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n\n-- SELECT DISTINCT(src_ip) as device FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1312,22 +1370,123 @@
         "multi": true,
         "name": "client_ip",
         "options": [],
-        "query": "SELECT DISTINCT(src_ip) as device FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
-        "refresh": 1,
+        "query": "SELECT DISTINCT src_ip AS device \nFROM network_dpi \nWHERE json_extract(enrichment, '$.direction') IN ('outbound')\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\n\n-- SELECT DISTINCT(src_ip) as device FROM network_dpi WHERE application_name==\"DNS\" AND timestamp >= $__from / 1000 and timestamp < $__to / 1000",
+        "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
-        "sort": 4,
+        "sort": 0,
         "type": "query"
+      },
+      {
+        "allValue": "'__ALL__'",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "SELECT DISTINCT json_extract(enrichment, '$.geoip.country_name') AS country_name\nFROM network_dpi\nWHERE timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nAND length(json_extract(enrichment, '$.geoip.country_name')) > 0",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Country",
+        "multi": true,
+        "name": "country_name",
+        "options": [],
+        "query": "SELECT DISTINCT json_extract(enrichment, '$.geoip.country_name') AS country_name\nFROM network_dpi\nWHERE timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nAND length(json_extract(enrichment, '$.geoip.country_name')) > 0",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "'__ALL__'",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": null,
+        "definition": "SELECT DISTINCT application_name AS application\nFROM network_dpi\nWHERE length(application_name) > 0\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY application_name",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Application",
+        "multi": true,
+        "name": "application_name",
+        "options": [],
+        "query": "SELECT DISTINCT application_name AS application\nFROM network_dpi\nWHERE length(application_name) > 0\nAND timestamp >= $__from / 1000 AND timestamp < $__to / 1000\nORDER BY application_name",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "0,1,2",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "Risk",
+        "multi": true,
+        "name": "risk",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "Normal",
+            "value": "0"
+          },
+          {
+            "selected": false,
+            "text": "Suspicious",
+            "value": "1"
+          },
+          {
+            "selected": false,
+            "text": "Critical",
+            "value": "2"
+          }
+        ],
+        "query": "Normal : 0, Suspicious : 1, Critical : 2",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "browser",
+  "timezone": "",
   "title": "PiRogue",
   "uid": "HffRpAcDz",
-  "version": 44
+  "version": 45
 }
