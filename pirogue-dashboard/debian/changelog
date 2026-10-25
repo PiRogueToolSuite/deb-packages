@@ -1,3 +1,9 @@
+pirogue-dashboard (3.0.0) trixie; urgency=medium
+
+  * Add the support of Debian 13 
+
+ -- U+039b <hello@pts-project.org>  Sun, 25 Oct 2026 13:40:18 +0000
+
 pirogue-dashboard (2.0.3) bookworm; urgency=medium
 
   * Complete rework of the dashboard for better usability

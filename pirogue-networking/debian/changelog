@@ -1,3 +1,9 @@
+pirogue-networking (3.0.0) trixie; urgency=medium
+
+  * Add the support of Debian 13 
+
+ -- U+039b <hello@pts-project.org>  Sun, 25 Oct 2026 13:42:58 +0000
+
 pirogue-networking (2.0.2) bookworm; urgency=medium
 
   * Filter the incoming traffic on the external interface

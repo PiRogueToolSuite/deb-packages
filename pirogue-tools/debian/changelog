@@ -1,3 +1,10 @@
+pirogue-tools (3.0.0) trixie; urgency=medium
+
+  * Add the support of Debian 13
+  * Remove unecessary extra tools
+
+ -- U+039b <hello@pts-project.org>  Sun, 25 Oct 2026 13:36:30 +0000
+
 pirogue-tools (2.0.0) bookworm; urgency=medium
 
   * Bump to v2.0.0

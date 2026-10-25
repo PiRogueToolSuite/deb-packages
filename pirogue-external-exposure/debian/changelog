@@ -1,3 +1,9 @@
+pirogue-external-exposure (3.0.0) trixie; urgency=medium
+
+  * Add the support of Debian 13 
+
+ -- U+039b <hello@pts-project.org>  Sun, 25 Oct 2026 13:41:36 +0000
+
 pirogue-external-exposure (2.0.5) bookworm; urgency=medium
 
   * Add support for multiple sub-service (pirogue-external-exposure/services.conf.d)
