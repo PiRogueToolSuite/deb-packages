@@ -1,2 +1,0 @@
-ACTION=="add", SUBSYSTEM=="spi", KERNEL=="spi0.0", \
-  RUN+="/bin/sh -c 'echo spidev > /sys/bus/spi/devices/spi0.0/driver_override && echo spi0.0 > /sys/bus/spi/drivers/spidev/bind'"
