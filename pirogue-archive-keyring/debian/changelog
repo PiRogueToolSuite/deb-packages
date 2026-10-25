@@ -1,3 +1,10 @@
+pirogue-archive-keyring (0.2) trixie; urgency=medium
+
+  * Refresh 0x1E8BAD92EA1ACDED506B273B959A6C9927869B61 key:
+     - Cyril Brulebois <cyril@debamax.com>
+
+ -- Cyril Brulebois <cyril@debamax.com>  Thu, 16 Apr 2026 14:05:02 +0200
+
 pirogue-archive-keyring (0.1) bookworm; urgency=low
 
   * Initial release.
